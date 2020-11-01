@@ -20,6 +20,11 @@ class SpecRun(models.Model):
     protein_concentration = models.DecimalField("Protein Concentration", max_digits=10, decimal_places=5)
     pathlength = models.DecimalField("Curvette Pathlength", max_digits=10, decimal_places=5)
     number_of_amino_acids = models.DecimalField("Number of amino acids", max_digits=10, decimal_places=5)
+    
+    x_index = models.IntegerField("X Index", null=True)
+    degrees_index = models.IntegerField("Degrees Index", null=True)
+    absorbance_index = models.IntegerField("Absorbance Index", null=True)
+    voltage_index = models.IntegerField("Voltage Index", null=True)
 
     def __str__(self):
         return self.run_title + "[" + str(self.pk) + "]"
