@@ -1,0 +1,9 @@
+{% if latest_runs %}
+    <ul>
+    {% for run in latest_runs %}
+        <li>{{ run.run_title }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No runs are available.</p>
+{% endif %}

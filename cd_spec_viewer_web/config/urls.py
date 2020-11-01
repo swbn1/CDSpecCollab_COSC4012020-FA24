@@ -16,6 +16,8 @@ urlpatterns = [
     path("users/", include("cd_spec_viewer_web.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
+    path('cdspec/', include('cdspec.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
