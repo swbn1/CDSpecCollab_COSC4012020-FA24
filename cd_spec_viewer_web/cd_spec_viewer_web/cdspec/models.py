@@ -17,10 +17,12 @@ class SpecRun(models.Model):
     visible_public = models.BooleanField("Visible to Public", default=False)
     source_file = models.FileField(upload_to='cdspecruns')
 
+    #Calculation variables
     protein_concentration = models.DecimalField("Protein Concentration", max_digits=10, decimal_places=5)
     pathlength = models.DecimalField("Curvette Pathlength", max_digits=10, decimal_places=5)
     number_of_amino_acids = models.DecimalField("Number of amino acids", max_digits=10, decimal_places=5)
     
+    #Index within the "data" objects for each data point
     x_index = models.IntegerField("X Index", null=True)
     degrees_index = models.IntegerField("Degrees Index", null=True)
     absorbance_index = models.IntegerField("Absorbance Index", null=True)

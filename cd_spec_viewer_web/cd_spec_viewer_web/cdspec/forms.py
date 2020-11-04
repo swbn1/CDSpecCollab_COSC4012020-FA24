@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from cd_spec_viewer_web.cdspec.models import SpecRun
 
+
 class CreateForm(ModelForm):
     class Meta:
         model = SpecRun
