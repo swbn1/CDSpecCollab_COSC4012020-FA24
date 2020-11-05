@@ -2,6 +2,7 @@ from django.forms import ModelForm
 from cd_spec_viewer_web.cdspec.models import SpecRun
 
 
+#Upload form, model specifies which database table to use and fields specify the fields included in the form.
 class CreateForm(ModelForm):
     class Meta:
         model = SpecRun
