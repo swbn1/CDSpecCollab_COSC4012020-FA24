@@ -72,6 +72,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "cd_spec_viewer_web.users.apps.UsersConfig",
+    "cd_spec_viewer_web.cdspec.apps.CdspecConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
