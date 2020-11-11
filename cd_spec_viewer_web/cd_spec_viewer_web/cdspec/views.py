@@ -63,18 +63,22 @@ def create(request):
             #Then save the model to the db, here we can return a different view, maybe redirect.
             model.save()
             return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
-
     else:
         form = CreateForm()
     return render(request, 'cdspec/create.html', {'form': form,})
 
 #Singular View w/ graph
-class DetailView(generic.DetailView):
-    model = SpecRun
-    template_name = 'cdspec/detail.html'
+def detail(request, pk):
+    model = get_object_or_404(SpecRun, pk=pk)
+    return render(request, 'cdspec/detail.html', {'specrun': model})
 
 
 
+#Multi View
+def multi(request, pks):
+    proteins = []
+    for pk in pks.split('/')[:-1]:
+        proteins.append(get_object_or_404(SpecRun, pk=pk))
+    return HttpResponse(proteins)
 
-#Graph View
 

@@ -17,6 +17,10 @@ class Units(str, Enum):
 #     return data
 
 
+def graph_format(data, xindex, yindex):
+    return [{"x": point[xindex], "y": point[yindex]} for point in data]
+
+
 def handle_file_upload(file):
     #Read and decode the csv, this is somewhat dangerous because if the file is
     #really large it can overwhelm memory, we can limit upload size though to preven this.
