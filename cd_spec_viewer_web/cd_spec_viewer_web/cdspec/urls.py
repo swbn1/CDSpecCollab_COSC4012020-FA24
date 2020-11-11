@@ -2,6 +2,9 @@ from django.urls import path
 
 from cd_spec_viewer_web.cdspec import views
 
+
+app_name = 'cdspec'
+
 urlpatterns = [
     # /cdspec/
     path('', views.IndexView.as_view(), name='index'),

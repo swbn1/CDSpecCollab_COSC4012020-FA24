@@ -3,7 +3,7 @@
 {% if latest_runs %}
     <ul>
     {% for run in latest_runs %}
-        <li>{{ run.run_title }}</li>
+        <li><a href="{% url 'cdspec:detail' run.id %}">{{ run.run_title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
