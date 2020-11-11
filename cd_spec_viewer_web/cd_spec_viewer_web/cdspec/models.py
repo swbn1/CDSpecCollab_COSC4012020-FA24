@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+from django.core.validators import FileExtensionValidator
 
 #from cd_spec_viewer_web.users import User
 # Create your models here.
@@ -15,7 +16,7 @@ class SpecRun(models.Model):
     data_points = models.IntegerField("Data Points")
     visible_student = models.BooleanField("Visible to Students", default=False)
     visible_public = models.BooleanField("Visible to Public", default=False)
-    source_file = models.FileField(upload_to='cdspecruns')
+    source_file = models.FileField(upload_to='cdspecruns', validators=[FileExtensionValidator(allowed_extensions=['csv'])])
 
     #Calculation variables
     protein_concentration = models.DecimalField("Protein Concentration", max_digits=10, decimal_places=5)

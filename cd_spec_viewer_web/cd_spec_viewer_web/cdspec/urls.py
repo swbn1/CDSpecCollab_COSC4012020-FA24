@@ -1,4 +1,3 @@
-from django.urls import path
 
 from cd_spec_viewer_web.cdspec import views
 
@@ -11,5 +10,11 @@ urlpatterns = [
     # /cdspec/create/
     path('create/', views.create, name='create'),
     # /cdspec/<pk>/
-    path('<int:pk>/', views.DetailView.as_view(), name='detail')
+    path('<int:pk>/', views.detail, name='detail'),
+    #/cdspec/<pk>/edit
+    path('<int:pk>/edit/', views.edit, name='edit'),
+
+
+
+
 ]

@@ -53,7 +53,7 @@ def handle_file_upload(file):
     #Use the npoints in the header to read in all our datapoints. 
     data = []
     for rows in islice(reader, int(headerdict['NPOINTS'])):
-        data.append(rows)
+        data.append([float(n) for n in rows])
     
     #Read the rest of the file into a dictionary, for now only temp is pertinent
     extended_dict = {}
