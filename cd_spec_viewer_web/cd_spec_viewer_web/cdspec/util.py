@@ -9,10 +9,18 @@ class Units(str, Enum):
     ABSORBANCE = "ABSORBANCE"
     DEGREES = "CD [mdeg]"
 
-def handle_file_upload(f):
+
+
+# def molar_ellipticity_calculation(data, path_length, concentration, molecular_weight, degrees_index):
+#     for array in data:
+#         array.append((float(array[degrees_index])*float(concentration)*float(path_length)*10)/float(molecular_weight))
+#     return data
+
+
+def handle_file_upload(file):
     #Read and decode the csv, this is somewhat dangerous because if the file is
     #really large it can overwhelm memory, we can limit upload size though to preven this.
-    input = f.read().decode("utf-8") 
+    input = file.read().decode("utf-8") 
     reader = csv.reader(input.splitlines(), dialect='excel')
 
     #Read all the rows until the XYDATA line into dictionary, the first column is the key, the second the definition    
@@ -39,7 +47,7 @@ def handle_file_upload(f):
     
     #Checking for the required data points
     #TODO add error checking in views.py
-    if not (Units.DEGREES in indicies and Units.VOLTAGE in indicies):
+    if not (Units.DEGREES in indicies and Units.XUNIT in indicies):
         return False
 
     #Use the npoints in the header to read in all our datapoints. 

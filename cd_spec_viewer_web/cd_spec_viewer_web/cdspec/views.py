@@ -2,7 +2,8 @@ import datetime
 
 from django.shortcuts import render
 from django.views import generic
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 
 from cd_spec_viewer_web.cdspec.models import SpecRun
 from .forms import CreateForm
@@ -34,15 +35,19 @@ def create(request):
             model.run_date = datetime.datetime.strptime(date_time_string, "%y/%m/%d %H:%M:%S")
             model.data = parsed_dictionary['data']
             model.data_points = parsed_dictionary['header']['NPOINTS']
-            #Setting all the indexes for later graphing
+            #Setting all the indexes for later graphing          
             model.x_index = parsed_dictionary['indicies'][Units.XUNIT]
             model.degrees_index = parsed_dictionary['indicies'][Units.DEGREES]
             if Units.VOLTAGE in parsed_dictionary['indicies']:
                 model.voltage_index = parsed_dictionary['indicies'][Units.VOLTAGE]
             if Units.ABSORBANCE in parsed_dictionary['indicies']:
-                model.voltage_index = parsed_dictionary['indicies'][Units.ABSORBANCE]
+                model.absorbance_index = parsed_dictionary['indicies'][Units.ABSORBANCE]
+            
+            #print(molar_ellipticity_calculation(parsed_dictionary['data'], model.pathlength, model.protein_concentration, model.number_of_amino_acids, model.degrees_index))
             #Then save the model to the db, here we can return a different view, maybe redirect.
             model.save()
+            return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
+
     else:
         form = CreateForm()
     return render(request, 'cdspec/create.html', {'form': form,})
