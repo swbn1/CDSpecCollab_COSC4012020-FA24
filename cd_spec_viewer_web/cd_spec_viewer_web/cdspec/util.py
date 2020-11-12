@@ -17,6 +17,10 @@ class Units(str, Enum):
 #     return data
 
 
+def graph_format(data, index):
+    return [point[index] for point in data]
+
+
 def handle_file_upload(file):
     #Read and decode the csv, this is somewhat dangerous because if the file is
     #really large it can overwhelm memory, we can limit upload size though to preven this.
@@ -53,7 +57,7 @@ def handle_file_upload(file):
     #Use the npoints in the header to read in all our datapoints. 
     data = []
     for rows in islice(reader, int(headerdict['NPOINTS'])):
-        data.append(rows)
+        data.append([float(n) for n in rows])
     
     #Read the rest of the file into a dictionary, for now only temp is pertinent
     extended_dict = {}

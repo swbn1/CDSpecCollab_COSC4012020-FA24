@@ -1,24 +1,40 @@
 import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 from cd_spec_viewer_web.cdspec.models import SpecRun
-from .forms import CreateForm
+from .forms import CreateForm, EditForm
 from cd_spec_viewer_web.cdspec.util import handle_file_upload, Units
 
 # Create your views here.
-#Index View
+
+#Index View, a list of last ten objects
 class IndexView(generic.ListView):
     template_name = "cdspec/index.html"
     context_object_name = 'latest_runs'
 
     def get_queryset(self):
-        return SpecRun.objects.order_by('-upload_date')[:5]
-    
-#Create View
+        return SpecRun.objects.order_by('-upload_date')[:10]
+
+#Edit view, allows the editing of existing objects
+def edit(request, pk):
+    #The post statement is the form submit handler. 
+    if request.method == 'POST':
+        #We first recreate the form object using the request objects.
+        form = EditForm(request.POST, instance=get_object_or_404(SpecRun, pk=pk))
+        #As long as the form is valid, we proceed to parsing.
+        if form.is_valid():
+            model = form.save()
+            return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
+    else:
+        form = EditForm(instance=get_object_or_404(SpecRun, pk=pk))
+    return render(request, 'cdspec/edit.html', {'form': form, 'pk':pk})
+
+
+#Create View, allows the creation of new objects
 def create(request):
     #The post statement is the form submit handler. 
     if request.method == 'POST':
@@ -47,18 +63,22 @@ def create(request):
             #Then save the model to the db, here we can return a different view, maybe redirect.
             model.save()
             return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
-
     else:
         form = CreateForm()
     return render(request, 'cdspec/create.html', {'form': form,})
 
 #Singular View w/ graph
-class DetailView(generic.DetailView):
-    model = SpecRun
-    template_name = 'cdspec/detail.html'
+def detail(request, pk):
+    model = get_object_or_404(SpecRun, pk=pk)
+    return render(request, 'cdspec/detail.html', {'specrun': model})
 
 
 
+#Multi View
+def multi(request, pks):
+    proteins = []
+    for pk in pks.split('/')[:-1]:
+        proteins.append(get_object_or_404(SpecRun, pk=pk))
+    return HttpResponse(proteins)
 
-#Graph View
 

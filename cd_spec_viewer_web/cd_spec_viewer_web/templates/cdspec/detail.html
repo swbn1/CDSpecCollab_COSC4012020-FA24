@@ -9,4 +9,5 @@
 <li>{{specrun.data_points}} Datapoints: <textarea>{{specrun.data}}</textarea><br>
 X: {{specrun.x_index}}, Degrees: {{specrun.degrees_index}}, Voltage: {{specrun.voltage_index}}, Absorbance: {{specrun.absorbance_index}}</li>
 </ul>
+<a href={% url 'cdspec:edit' specrun.id %}>Edit</a>
 {% endblock %}

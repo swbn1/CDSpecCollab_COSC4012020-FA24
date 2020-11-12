@@ -8,3 +8,8 @@ class CreateForm(ModelForm):
         model = SpecRun
         fields = ('run_title', 'run_description', 'run_user', 'visible_student', 'visible_public',
          'source_file', 'protein_concentration', 'pathlength', 'number_of_amino_acids')
+
+class EditForm(ModelForm):
+    class Meta:
+        model = SpecRun
+        fields = ('run_title', 'run_description', 'visible_student', 'visible_public')
