@@ -9,5 +9,12 @@
 <li>{{specrun.data_points}} Datapoints: <textarea>{{specrun.data}}</textarea><br>
 X: {{specrun.x_index}}, Degrees: {{specrun.degrees_index}}, Voltage: {{specrun.voltage_index}}, Absorbance: {{specrun.absorbance_index}}</li>
 </ul>
+
+<script>
+let xdata = {{x}}
+let ydata = {{y}}
+var coords = xdata.map((v,i) => ({ x: v, y: ydata[i]}))
+</script>
+
 <a href={% url 'cdspec:edit' specrun.id %}>Edit</a>
 {% endblock %}

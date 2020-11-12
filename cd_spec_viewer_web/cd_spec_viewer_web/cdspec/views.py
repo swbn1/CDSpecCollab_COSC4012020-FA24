@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from cd_spec_viewer_web.cdspec.models import SpecRun
 from .forms import CreateForm, EditForm
-from cd_spec_viewer_web.cdspec.util import handle_file_upload, Units
+from cd_spec_viewer_web.cdspec.util import handle_file_upload, Units, graph_format
 
 # Create your views here.
 
@@ -70,7 +70,11 @@ def create(request):
 #Singular View w/ graph
 def detail(request, pk):
     model = get_object_or_404(SpecRun, pk=pk)
-    return render(request, 'cdspec/detail.html', {'specrun': model})
+    x_array = graph_format(model.data, model.x_index)
+    y_array = graph_format(model.data, model.degrees_index)
+    
+    return render(request, 'cdspec/detail.html', {'specrun': model, "x": x_array, "y": y_array})
+
 
 
 
