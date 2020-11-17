@@ -5,6 +5,8 @@ from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
+from django_datatables_view.base_datatable_view import BaseDatatableView
+
 from cd_spec_viewer_web.cdspec.models import SpecRun
 from .forms import CreateForm, EditForm
 from cd_spec_viewer_web.cdspec.util import handle_file_upload, Units, graph_format
@@ -86,3 +88,7 @@ def multi(request, pks):
     return HttpResponse(proteins)
 
 
+# Table List View
+class SpecRunJson(BaseDatatableView):
+    model = SpecRun
+    
