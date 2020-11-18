@@ -4,7 +4,7 @@
 <ul>
 <li>Uploaded: {{specrun.upload_date}}</li>
 <li>Ran: {{specrun.run_date}} by {{specrun.run_user}}</li>
-<li>Filename: {{specrun.source_file}}</li>
+<li>File: <a href="{{specrun.source_file.url}}">{{specrun.source_file}}</li></a>
 <li>Description: <textarea>{{specrun.run_description}}</textarea></li>
 <li>{{specrun.data_points}} Datapoints: <textarea>{{specrun.data}}</textarea><br>
 X: {{specrun.x_index}}, Degrees: {{specrun.degrees_index}}, Voltage: {{specrun.voltage_index}}, Absorbance: {{specrun.absorbance_index}}</li>
