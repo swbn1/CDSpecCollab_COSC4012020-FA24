@@ -10,14 +10,11 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
 
-function getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+function rainbowStop(h) {
+  let f= (n,k=(n+h*12)%12) => .5-.5*Math.max(Math.min(k-3,9-k,1),-1);  
+  let rgb2hex = (r,g,b) => "#"+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,0)).join('');
+  return ( rgb2hex(f(0), f(8), f(4)) );
+} 
 
 Chart.defaults.scatter.showLines = true;
 
@@ -33,7 +30,7 @@ var chartTest = new Chart(gT, {
       pointRadius: 2,
       fill: false ,
       label: "{{protein.model.run_title|safe }}",
-      backgroundColor: getRandomColor(), // red
+      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
       data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y|safe}}[i] }) ) 
       },
 
