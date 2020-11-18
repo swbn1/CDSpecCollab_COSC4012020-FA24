@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
-
+from django.views.decorators.http import require_http_methods
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from cd_spec_viewer_web.cdspec.models import SpecRun
@@ -93,3 +93,17 @@ def multi(request, pks):
 class SpecRunJson(BaseDatatableView):
     model = SpecRun
     
+#Delete view
+@require_http_methods(["POST"])
+def delete(request, pk): 
+    # fetch the object related to passed id 
+    obj = get_object_or_404(SpecRun, id = pk) 
+  
+  
+    if request.method =="POST": 
+        # delete object 
+        obj.delete() 
+        # after deleting redirect to  
+        # home page 
+        return HttpResponseRedirect("/") 
+  
