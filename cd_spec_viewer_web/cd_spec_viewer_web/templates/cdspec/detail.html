@@ -56,9 +56,14 @@ var chartTest = new Chart(gT, {
     }
   }
 });
-
-
 </script>
 
-<a href={% url 'cdspec:edit' specrun.id %}>Edit</a>
+<form action="{% url 'cdspec:edit' specrun.id %}">
+    {% csrf_token %}
+    <input type="submit" name="edit" value="Edit" />
+</form>
+<form action="{%url 'cdspec:delete' specrun.id%}" method="post">
+    {% csrf_token %}
+    <input type="submit" name="delete" value="Delete" />
+</form>
 {% endblock %}

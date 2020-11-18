@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<form action="/cdspec/create/" enctype="multipart/form-data" method="post">
+<form action="{% url 'cdspec:create' %}" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ form.as_ul }}
     <input type="submit" value="Submit">

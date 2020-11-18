@@ -30,7 +30,7 @@ var chartTest = new Chart(gT, {
     datasets:[
     {% for protein in proteins %}
     {
-      pointRadius: 1,
+      pointRadius: 2,
       fill: false ,
       label: "{{protein.model.run_title|safe }}",
       backgroundColor: getRandomColor(), // red
