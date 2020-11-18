@@ -75,14 +75,15 @@ def detail(request, pk):
     
     return render(request, 'cdspec/detail.html', {'specrun': model, "x": x_array, "y": y_array})
 
-
-
-
 #Multi View
 def multi(request, pks):
     proteins = []
     for pk in pks.split('/')[:-1]:
         proteins.append(get_object_or_404(SpecRun, pk=pk))
-    return HttpResponse(proteins)
+    
+    output_object = [];
+    for protein in proteins:
+        output_object.append({'model' : protein, 'x' : graph_format(protein.data, protein.x_index), 'y' : graph_format(protein.data, protein.degrees_index)});
 
+    return render(request, 'cdspec/multi.html', {'proteins': output_object})
 
