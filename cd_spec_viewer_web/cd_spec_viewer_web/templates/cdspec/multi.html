@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<h>Multi Graph</h>
+<div class = "container"> 
+    <canvas id = 'graphTest' width="400" height="200">
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script>
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+Chart.defaults.scatter.showLines = true;
+
+var gT = document.getElementById('graphTest');
+
+var chartTest = new Chart(gT, {
+  type: 'scatter',
+  data: {
+    labels:['testing1'],
+    datasets:[
+    {% for protein in proteins %}
+    {
+      pointRadius: 1,
+      fill: false ,
+      label: "{{protein.model.run_title|safe }}",
+      backgroundColor: getRandomColor(), // red
+      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y|safe}}[i] }) ) 
+      },
+
+    {% endfor%}
+    ]
+  },
+  options:{
+
+    scales: {
+        xAxes: [{
+            type: 'linear',
+            position: 'bottom'
+        }]
+    }
+  }
+});
+
+
+</script>
+
+{% endblock %}
