@@ -10,41 +10,37 @@
 X: {{specrun.x_index}}, Degrees: {{specrun.degrees_index}}, Voltage: {{specrun.voltage_index}}, Absorbance: {{specrun.absorbance_index}}</li>
 </ul>
 
+<form action="{% url 'cdspec:edit' specrun.id %}">
+    {% csrf_token %}
+    <input type="submit" name="edit" value="Edit" />
+</form>
+<form action="{%url 'cdspec:delete' specrun.id%}" method="post">
+    {% csrf_token %}
+    <input type="submit" name="delete" value="Delete" />
+</form>
+
 <div class = "container"> 
-    <canvas id = 'graphTest' width="400" height="200">
+    <canvas id = 'graph' width="400" height="200">
 </div>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
-
-let xdata = {{x|safe }};
-let ydata = {{y|safe }};
-
-var coords = xdata.map( (v,i) => ({ x: v, y: ydata[i] }) )
 Chart.defaults.scatter.showLines = true;
 
-var gT = document.getElementById('graphTest');
-
-var chartTest = new Chart(gT, {
+var canvas = document.getElementById('graph');
+var chart = new Chart(graph, {
   type: 'scatter' ,
   data: {
-    labels:['testing1' ],
     datasets:[{
+      pointRadius: 0,
       fill: false ,
       label: "{{specrun.run_title|safe }}",
-      backgroundColor: 
-      "rgb(255, 0, 0)", // red
-      data:  coords  },
-      /*{
-      fill: false ,  
-      label:'set2' ,
-        backgroundColor: 
-      "rgb(0, 0, 255)" ,// blue
-      data: test2
-
-    }*/]
+      backgroundColor: "rgb(0,0,0)",
+      borderColor: "rgb(0,0,0)",
+      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y|safe}}[i] }))},
+      ]
   },
   options:{
 
@@ -57,13 +53,4 @@ var chartTest = new Chart(gT, {
   }
 });
 </script>
-
-<form action="{% url 'cdspec:edit' specrun.id %}">
-    {% csrf_token %}
-    <input type="submit" name="edit" value="Edit" />
-</form>
-<form action="{%url 'cdspec:delete' specrun.id%}" method="post">
-    {% csrf_token %}
-    <input type="submit" name="delete" value="Delete" />
-</form>
 {% endblock %}

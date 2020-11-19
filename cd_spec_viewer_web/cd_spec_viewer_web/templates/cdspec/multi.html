@@ -23,15 +23,15 @@ var gT = document.getElementById('graphTest');
 var chartTest = new Chart(gT, {
   type: 'scatter',
   data: {
-    labels:['testing1'],
     datasets:[
     {% for protein in proteins %}
     {
-      pointRadius: 2,
+      pointRadius: 0,
       fill: false ,
-      label: "{{protein.model.run_title|safe }}",
-      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
-      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y|safe}}[i] }) ) 
+      label: "{{protein.model.run_title|safe}}",
+      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}),
+      borderColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
+      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y|safe}}[i] })) 
       },
 
     {% endfor%}
