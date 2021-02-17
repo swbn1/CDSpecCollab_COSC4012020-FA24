@@ -11,7 +11,7 @@ class SpecRun(models.Model):
     run_date = models.DateTimeField("Run Date")
     run_user = models.CharField("Run by:", max_length=64)
     run_title = models.CharField("Title", max_length=64)
-    run_description = models.TextField("Description")
+    run_description = models.TextField("Description (Character Limit: 2000)", max_length=2000)
     data = JSONField("Raw Data")
     data_points = models.IntegerField("Data Points")
     visible_student = models.BooleanField("Visible to Students", default=False)
