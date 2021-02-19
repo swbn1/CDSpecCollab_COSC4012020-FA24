@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 from django_datatables_view.base_datatable_view import BaseDatatableView
 
 from cd_spec_viewer_web.cdspec.models import SpecRun
-from .forms import CreateForm, EditForm
+from .forms import CreateForm, EditForm, AxesForm
 from cd_spec_viewer_web.cdspec.util import handle_file_upload, Units, graph_format
 
 # Create your views here.
@@ -72,22 +72,50 @@ def create(request):
 #Singular View w/ graph
 def detail(request, pk):
     model = get_object_or_404(SpecRun, pk=pk)
+
+    if request.method == 'POST':
+        form = AxesForm(request.POST)
+        if form.is_valid():
+            x_axis = form.cleaned_data['x_axis']
+            y_axis = form.cleaned_data['y_axis']
+            xs = model.x_index if x_axis == 'nanometers' else model.degrees_index if x_axis == 'degrees' else model.absorbance_index if x_axis == 'absorbance' else model.voltage_index
+            ys = model.x_index if y_axis == 'nanometers' else model.degrees_index if y_axis == 'degrees' else model.absorbance_index if y_axis == 'absorbance' else model.voltage_index
+            x_array = graph_format(model.data, xs)
+            y_array = graph_format(model.data, ys)
+            return render(request, 'cdspec/detail.html', {'form': form, 'specrun': model, "x": x_array, "y": y_array, "pk": pk})
+    else:
+        form = AxesForm()
+
     x_array = graph_format(model.data, model.x_index)
     y_array = graph_format(model.data, model.degrees_index)
     
-    return render(request, 'cdspec/detail.html', {'specrun': model, "x": x_array, "y": y_array})
+    return render(request, 'cdspec/detail.html', {'form': form, 'specrun': model, "x": x_array, "y": y_array, "pk": pk})
 
 #Multi View
 def multi(request, pks):
     proteins = []
     for pk in pks.split('/')[:-1]:
         proteins.append(get_object_or_404(SpecRun, pk=pk))
-    
+
+    if request.method == 'POST':
+        form = AxesForm(request.POST)
+        if form.is_valid():
+            x_axis = form.cleaned_data['x_axis']
+            y_axis = form.cleaned_data['y_axis']
+            output_object = [];
+            for protein in proteins:
+                xs = protein.x_index if x_axis == 'nanometers' else protein.degrees_index if x_axis == 'degrees' else protein.absorbance_index if x_axis == 'absorbance' else protein.voltage_index
+                ys = protein.x_index if y_axis == 'nanometers' else protein.degrees_index if y_axis == 'degrees' else protein.absorbance_index if y_axis == 'absorbance' else protein.voltage_index
+                output_object.append({'model' : protein, 'x' : graph_format(protein.data, xs), 'y' : graph_format(protein.data, ys)});
+            return render(request, 'cdspec/multi.html', {'form': form, 'proteins': output_object, 'pks': pks})
+    else:
+        form = AxesForm()
+
     output_object = [];
     for protein in proteins:
         output_object.append({'model' : protein, 'x' : graph_format(protein.data, protein.x_index), 'y' : graph_format(protein.data, protein.degrees_index)});
 
-    return render(request, 'cdspec/multi.html', {'proteins': output_object})
+    return render(request, 'cdspec/multi.html', {'form': form, 'proteins': output_object, 'pks': pks})
 
 # Table List View
 class SpecRunJson(BaseDatatableView):
