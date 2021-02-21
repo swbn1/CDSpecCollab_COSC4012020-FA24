@@ -27,6 +27,7 @@ $darkpurple-blue: #333399;
 $gray-greenblue: #669999;
 $mid-darkcyan: #009999;
 $light-bluecyan: #33cccc;
+$light-blue: #00ccff;
 
 
 // Alert colors
@@ -48,7 +49,7 @@ $red: #b94a48;
 .alert-debug {
   background-color: $white;
   border-color: $mint-green;
-  color: $black;
+  color: $red;
 }
 
 .alert-error {
