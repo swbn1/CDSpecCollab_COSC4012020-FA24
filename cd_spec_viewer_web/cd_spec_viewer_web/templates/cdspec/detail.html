@@ -8,7 +8,6 @@
 <li>File: <a href="{{specrun.source_file.url}}">{{specrun.source_file}}</li></a>
 <li>Description: <textarea>{{specrun.run_description}}</textarea></li>
 <li>{{specrun.data_points}} Datapoints: <textarea>{{specrun.data}}</textarea><br>
-X: {{specrun.x_index}}, Degrees: {{specrun.degrees_index}}, Voltage: {{specrun.voltage_index}}, Absorbance: {{specrun.absorbance_index}}</li>
 </ul>
 
 <form action="{% url 'cdspec:edit' specrun.id %}">
@@ -25,11 +24,9 @@ X: {{specrun.x_index}}, Degrees: {{specrun.degrees_index}}, Voltage: {{specrun.v
     <canvas id = 'graph' width="400" height="200">
 </div>
 
-<form action="{% url 'cdspec:detail' pk%}" enctype="multipart/form-data" method="post">
-    {% csrf_token%}
-    {{ form }}
-    <input type="submit" class="btn btn-primary" value="Set Axes">
-</form> 
+<button onClick = "changeY()">Display {{specrun.y_units}}</button>
+<button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
+<button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -37,7 +34,7 @@ X: {{specrun.x_index}}, Degrees: {{specrun.degrees_index}}, Voltage: {{specrun.v
 Chart.defaults.scatter.showLines = true;
 
 var canvas = document.getElementById('graph');
-var chart = new Chart(graph, {
+var chart = new Chart(canvas, {
   type: 'scatter' ,
   data: {
     datasets:[{
@@ -46,18 +43,79 @@ var chart = new Chart(graph, {
       label: "{{specrun.run_title|safe }}",
       backgroundColor: "rgb(0,0,0)",
       borderColor: "rgb(0,0,0)",
-      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y|safe}}[i] }))},
-      ]
+      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y|safe}}[i] }))}]
   },
   options:{
 
     scales: {
         xAxes: [{
             type: 'linear',
-            position: 'bottom'
+            position: 'bottom',
+            scaleLabel: {
+                display: true,
+                labelString: "{{specrun.x_units}}"
+            }
+        }],
+        yAxes: [{
+            scaleLabel: {
+                display: true,
+                labelString: "{{specrun.y_units}}"
+            }
         }]
     }
   }
 });
+
+function changeY() {
+    chart.data.datasets = [{
+      pointRadius: 0,
+      fill: false ,
+      label: "{{specrun.run_title|safe }}",
+      backgroundColor: "rgb(0,0,0)",
+      borderColor: "rgb(0,0,0)",
+      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y|safe}}[i] }))}];
+    chart.options.scales.yAxes = [{
+            scaleLabel: {
+                display: true,
+                labelString: "{{specrun.y_units}}"
+            }
+        }];
+    chart.update();
+}
+
+function changeY2() {
+    chart.data.datasets = [{
+      pointRadius: 0,
+      fill: false ,
+      label: "{{specrun.run_title|safe }}",
+      backgroundColor: "rgb(0,0,0)",
+      borderColor: "rgb(0,0,0)",
+      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y2|safe}}[i] }))}];
+      chart.options.scales.yAxes = [{
+            scaleLabel: {
+                display: true,
+                labelString: "{{specrun.y2_units}}"
+            }
+        }];
+    chart.update();
+}
+
+function changeY3() {
+    chart.data.datasets = [{
+      pointRadius: 0,
+      fill: false ,
+      label: "{{specrun.run_title|safe }}",
+      backgroundColor: "rgb(0,0,0)",
+      borderColor: "rgb(0,0,0)",
+      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y3|safe}}[i] }))}];
+      chart.options.scales.yAxes = [{
+            scaleLabel: {
+                display: true,
+                labelString: "{{specrun.y3_units}}"
+            }
+        }];
+    chart.update();
+}
+
 </script>
 {% endblock %}
