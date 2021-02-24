@@ -4,7 +4,8 @@ from itertools import islice
 
 #Units enum
 class Units(str, Enum):
-    XUNIT = "NANOMETERS"
+    WAVELENGTH = "NANOMETERS"
+    TEMPERATURE = "Temperature[C]"
     VOLTAGE = "HT [V]"
     ABSORBANCE = "ABSORBANCE"
     DEGREES = "CD [mdeg]"
@@ -23,10 +24,12 @@ def graph_format(data, index):
 
 def handle_file_upload(file):
     #Read and decode the csv, this is somewhat dangerous because if the file is
-    #really large it can overwhelm memory, we can limit upload size though to preven this.
+    #really large it can overwhelm memory, we can limit upload size though to prevent this.
     try:
         input = file.read().decode("utf-8") 
         reader = csv.reader(input.splitlines(), dialect='excel')
+
+        #TODO: maybe handle the csv file with three axes?
 
         #Read all the rows until the XYDATA line into dictionary, the first column is the key, the second the definition    
         headerdict = {}
@@ -38,22 +41,8 @@ def handle_file_upload(file):
             header_count+=1
             headerdict[rows[0]] = rows[1]
         
-        #Set the indicies variables based on the headerdict.
-        indicies = {}
-        #If missing the XUNITS or YUNITS, cannot graph and the file is invalid.
-        if "XUNITS" in headerdict:
-            indicies[headerdict['XUNITS']] = 0
-        if 'YUNITS' in headerdict:
-            indicies[headerdict['YUNITS']] = 1
-        if "Y2UNITS" in headerdict:
-            indicies[headerdict['Y2UNITS']] = 2
-        if "Y3UNITS" in headerdict:
-            indicies[headerdict['Y3UNITS']] = 3
-        
         #Checking for the required data points
         #TODO add error checking in views.py
-        if not (Units.DEGREES in indicies and Units.XUNIT in indicies):
-            raise Exception("Unable to parse file, CD [mdeg] or Nanometers missing.")
 
         #Use the npoints in the header to read in all our datapoints. 
         data = []
@@ -67,6 +56,6 @@ def handle_file_upload(file):
                 extended_dict[rows[0]] = rows[1:]
         
         #Return a combined dictionary of all the subdictionaries.
-        return {"header" : headerdict, "data":data, "extended":extended_dict, "indicies":indicies}
+        return {"header" : headerdict, "data":data, "extended":extended_dict}
     except:
         raise Exception("Unable to parse file, format error.")

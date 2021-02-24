@@ -19,15 +19,15 @@ class SpecRun(models.Model):
     source_file = models.FileField(upload_to='cdspecruns', validators=[FileExtensionValidator(allowed_extensions=['csv'])])
 
     #Calculation variables
-    protein_concentration = models.DecimalField("Protein Concentration", max_digits=10, decimal_places=5)
-    pathlength = models.DecimalField("Curvette Pathlength", max_digits=10, decimal_places=5)
-    number_of_amino_acids = models.DecimalField("Number of amino acids", max_digits=10, decimal_places=5)
+    protein_concentration = models.DecimalField("Protein Concentration", max_digits=50, decimal_places=20)
+    pathlength = models.DecimalField("Curvette Pathlength", max_digits=50, decimal_places=20)
+    number_of_amino_acids = models.IntegerField("Number of amino acids")
     
-    #Index within the "data" objects for each data point
-    x_index = models.IntegerField("X Index", null=True)
-    degrees_index = models.IntegerField("Degrees Index", null=True)
-    absorbance_index = models.IntegerField("Absorbance Index", null=True)
-    voltage_index = models.IntegerField("Voltage Index", null=True)
+    #Header names for x/y units
+    x_units = models.CharField("XUNITS", null=True, max_length=64)
+    y_units = models.CharField("YUNITS", null=True, max_length=64)
+    y2_units = models.CharField("Y2UNITS", null=True, max_length=64)
+    y3_units = models.CharField("Y3UNITS", null=True, max_length=64)
 
     def __str__(self):
         return self.run_title + "[" + str(self.pk) + "]"

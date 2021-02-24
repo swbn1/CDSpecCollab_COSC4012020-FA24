@@ -5,11 +5,9 @@
     <canvas id = 'graphTest' width="400" height="200">
 </div>
 
-<form action="{% url 'cdspec:multi' pks%}" enctype="multipart/form-data" method="post">
-  {% csrf_token%}
-  {{ form }}
-  <input type="submit" class="btn btn-primary" value="Set Axes">
-</form> 
+<button onClick = "changeY()">Display {{first.y_units}}</button>
+<button onClick = "changeY2()">Display {{first.y2_units}}</button>
+<button onClick = "changeY3()">Display {{first.y3_units}}</button>
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
@@ -48,11 +46,96 @@ var chartTest = new Chart(gT, {
     scales: {
         xAxes: [{
             type: 'linear',
-            position: 'bottom'
+            position: 'bottom',
+            scaleLabel: {
+                display: true,
+                labelString: "{{first.x_units}}"
+            }
+        }],
+        yAxes: [{
+            scaleLabel: {
+                display: true,
+                labelString: "{{first.y_units}}"
+            }
         }]
     }
   }
 });
+
+function changeY() {
+  chartTest.data = {
+    datasets:[
+    {% for protein in proteins %}
+    {
+      pointRadius: 0,
+      fill: false ,
+      label: "{{protein.model.run_title|safe}}",
+      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}),
+      borderColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
+      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y|safe}}[i] })) 
+      },
+
+    {% endfor%}
+    ]
+  };
+  chartTest.options.scales.yAxes = [{
+            scaleLabel: {
+                display: true,
+                labelString: "{{first.y_units}}"
+            }
+        }];
+  chartTest.update();
+}
+
+function changeY2() {
+  chartTest.data = {
+    datasets:[
+    {% for protein in proteins %}
+    {
+      pointRadius: 0,
+      fill: false ,
+      label: "{{protein.model.run_title|safe}}",
+      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}),
+      borderColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
+      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y2|safe}}[i] })) 
+      },
+
+    {% endfor%}
+    ]
+  };
+  chartTest.options.scales.yAxes = [{
+            scaleLabel: {
+                display: true,
+                labelString: "{{first.y2_units}}"
+            }
+        }];
+  chartTest.update();
+}
+
+function changeY3() {
+  chartTest.data = {
+    datasets:[
+    {% for protein in proteins %}
+    {
+      pointRadius: 0,
+      fill: false ,
+      label: "{{protein.model.run_title|safe}}",
+      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}),
+      borderColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
+      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y3|safe}}[i] })) 
+      },
+
+    {% endfor%}
+    ]
+  };
+  chartTest.options.scales.yAxes = [{
+            scaleLabel: {
+                display: true,
+                labelString: "{{first.y3_units}}"
+            }
+        }];
+  chartTest.update();
+}
 
 
 </script>
