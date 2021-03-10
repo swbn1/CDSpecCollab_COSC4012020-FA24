@@ -20,9 +20,7 @@
     <input type="submit" name="delete" value="Delete" />
 </form>
 
-<div class = "container"> 
-    <canvas id = 'graph' width="400" height="200">
-</div>
+<div id="graph" width="400" height="200"> </div>
 
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
@@ -30,91 +28,91 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
-Chart.defaults.scatter.showLines = true;
-
 var canvas = document.getElementById('graph');
-var chart = new Chart(canvas, {
-  type: 'scatter' ,
-  data: {
-    datasets:[{
-      pointRadius: 0,
-      fill: false ,
-      label: "{{specrun.run_title|safe }}",
-      backgroundColor: "rgb(0,0,0)",
-      borderColor: "rgb(0,0,0)",
-      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y|safe}}[i] }))}]
-  },
-  options:{
 
-    scales: {
-        xAxes: [{
-            type: 'linear',
-            position: 'bottom',
-            scaleLabel: {
-                display: true,
-                labelString: "{{specrun.x_units}}"
-            }
-        }],
-        yAxes: [{
-            scaleLabel: {
-                display: true,
-                labelString: "{{specrun.y_units}}"
-            }
-        }]
+//plot (x, y) data as scatter plot
+var trace = {
+    x: {{x|safe}},
+    y: {{y|safe}},
+    mode: 'lines+markers',
+    type: 'scatter'
+};
+
+var data = [trace];
+
+var layout = {
+    showlegend: false,
+    xaxis: {
+        title: {
+            text: '{{specrun.x_units}}'
+        }
+    }, 
+    yaxis: {
+        title: {
+            text: '{{specrun.y_units}}'
+        }
     }
-  }
-});
+};
 
+Plotly.newPlot(canvas, data, layout);
+
+//change data/axes to (x, y)
 function changeY() {
-    chart.data.datasets = [{
-      pointRadius: 0,
-      fill: false ,
-      label: "{{specrun.run_title|safe }}",
-      backgroundColor: "rgb(0,0,0)",
-      borderColor: "rgb(0,0,0)",
-      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y|safe}}[i] }))}];
-    chart.options.scales.yAxes = [{
-            scaleLabel: {
-                display: true,
-                labelString: "{{specrun.y_units}}"
+    Plotly.deleteTraces(canvas, 0);
+    Plotly.addTraces(canvas, {
+        x: {{x|safe}},
+        y: {{y|safe}},
+        mode: 'lines+markers',
+        type: 'scatter'
+    });
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y_units}}'
             }
-        }];
-    chart.update();
+        }
+    };
+    Plotly.update(canvas, {}, layout_update);
 }
 
+//change data/axes to (x, y2)
 function changeY2() {
-    chart.data.datasets = [{
-      pointRadius: 0,
-      fill: false ,
-      label: "{{specrun.run_title|safe }}",
-      backgroundColor: "rgb(0,0,0)",
-      borderColor: "rgb(0,0,0)",
-      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y2|safe}}[i] }))}];
-      chart.options.scales.yAxes = [{
-            scaleLabel: {
-                display: true,
-                labelString: "{{specrun.y2_units}}"
+    Plotly.deleteTraces(canvas, 0);
+    Plotly.addTraces(canvas, {
+        x: {{x|safe}},
+        y: {{y2|safe}},
+        mode: 'lines+markers',
+        type: 'scatter'
+    });
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y2_units}}'
             }
-        }];
-    chart.update();
+        }
+    };
+    Plotly.update(canvas, {}, layout_update);
 }
 
+//change data/axes to (x, y3)
 function changeY3() {
-    chart.data.datasets = [{
-      pointRadius: 0,
-      fill: false ,
-      label: "{{specrun.run_title|safe }}",
-      backgroundColor: "rgb(0,0,0)",
-      borderColor: "rgb(0,0,0)",
-      data: {{x|safe}}.map( (v,i) => ({ x: v, y: {{y3|safe}}[i] }))}];
-      chart.options.scales.yAxes = [{
-            scaleLabel: {
-                display: true,
-                labelString: "{{specrun.y3_units}}"
+    Plotly.deleteTraces(canvas, 0);
+    Plotly.addTraces(canvas, {
+        x: {{x|safe}},
+        y: {{y3|safe}},
+        mode: 'lines+markers',
+        type: 'scatter'
+    });
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y3_units}}'
             }
-        }];
-    chart.update();
+        }
+    };
+    Plotly.update(canvas, {}, layout_update);
 }
 
 </script>

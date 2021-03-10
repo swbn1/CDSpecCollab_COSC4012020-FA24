@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h>Multi Graph</h>
-<div class = "container"> 
-    <canvas id = 'graphTest' width="400" height="200">
-</div>
+<div id="graph" width="400" height="200"> </div>
 
 <button onClick = "changeY()">Display {{first.y_units}}</button>
 <button onClick = "changeY2()">Display {{first.y2_units}}</button>
@@ -12,129 +10,131 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script>
 
 function rainbowStop(h) {
   let f= (n,k=(n+h*12)%12) => .5-.5*Math.max(Math.min(k-3,9-k,1),-1);  
   let rgb2hex = (r,g,b) => "#"+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,0)).join('');
   return ( rgb2hex(f(0), f(8), f(4)) );
-} 
+}
 
-Chart.defaults.scatter.showLines = true;
+var canvas = document.getElementById('graph');
 
-var gT = document.getElementById('graphTest');
+var data = [];
 
-var chartTest = new Chart(gT, {
-  type: 'scatter',
-  data: {
-    datasets:[
-    {% for protein in proteins %}
-    {
-      pointRadius: 0,
-      fill: false ,
-      label: "{{protein.model.run_title|safe}}",
-      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}),
-      borderColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
-      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y|safe}}[i] })) 
-      },
+//for each model, add (x, y) trace to data, then create scatter plot
+{% for protein in proteins %}
+var trace{{forloop.counter}} = {
+    x: {{protein.x|safe}},
+    y: {{protein.y|safe}},
+    mode: 'lines+markers',
+    type: 'scatter',
+    name: '{{protein.run_title}}'
+};
+data.push(trace{{forloop.counter}});
+{% endfor %}
 
-    {% endfor%}
-    ]
-  },
-  options:{
-
-    scales: {
-        xAxes: [{
-            type: 'linear',
-            position: 'bottom',
-            scaleLabel: {
-                display: true,
-                labelString: "{{first.x_units}}"
-            }
-        }],
-        yAxes: [{
-            scaleLabel: {
-                display: true,
-                labelString: "{{first.y_units}}"
-            }
-        }]
+var layout = {
+    xaxis: {
+        title: {
+            text: '{{first.x_units}}'
+        }
+    }, 
+    yaxis: {
+        title: {
+            text: '{{first.y_units}}'
+        }
     }
-  }
-});
+};
 
+Plotly.newPlot(canvas, data, layout);
+
+//change data/axes to (x, y)
 function changeY() {
-  chartTest.data = {
-    datasets:[
-    {% for protein in proteins %}
-    {
-      pointRadius: 0,
-      fill: false ,
-      label: "{{protein.model.run_title|safe}}",
-      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}),
-      borderColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
-      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y|safe}}[i] })) 
-      },
-
-    {% endfor%}
-    ]
+  data = [];
+  {% for protein in proteins %}
+  var trace{{forloop.counter}} = {
+    x: {{protein.x|safe}},
+    y: {{protein.y|safe}},
+    mode: 'lines+markers',
+    type: 'scatter',
+    name: '{{protein.run_title}}'
   };
-  chartTest.options.scales.yAxes = [{
-            scaleLabel: {
-                display: true,
-                labelString: "{{first.y_units}}"
-            }
-        }];
-  chartTest.update();
+  data.push(trace{{forloop.counter}});
+  {% endfor %}
+
+  var layout = {
+    xaxis: {
+        title: {
+            text: '{{first.x_units}}'
+        }
+    }, 
+    yaxis: {
+        title: {
+            text: '{{first.y_units}}'
+        }
+    }
+  };
+  Plotly.react(canvas, data, layout);
 }
 
+//change data/axes to (x, y2)
 function changeY2() {
-  chartTest.data = {
-    datasets:[
-    {% for protein in proteins %}
-    {
-      pointRadius: 0,
-      fill: false ,
-      label: "{{protein.model.run_title|safe}}",
-      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}),
-      borderColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
-      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y2|safe}}[i] })) 
-      },
-
-    {% endfor%}
-    ]
+  data = [];
+  {% for protein in proteins %}
+  var trace{{forloop.counter}} = {
+    x: {{protein.x|safe}},
+    y: {{protein.y2|safe}},
+    mode: 'lines+markers',
+    type: 'scatter',
+    name: '{{protein.run_title}}'
   };
-  chartTest.options.scales.yAxes = [{
-            scaleLabel: {
-                display: true,
-                labelString: "{{first.y2_units}}"
-            }
-        }];
-  chartTest.update();
+  data.push(trace{{forloop.counter}});
+  {% endfor %}
+
+  var layout = {
+    xaxis: {
+        title: {
+            text: '{{first.x_units}}'
+        }
+    }, 
+    yaxis: {
+        title: {
+            text: '{{first.y2_units}}'
+        }
+    }
+  };
+  Plotly.react(canvas, data, layout);
 }
 
+//change data/axes to (x, y3)
 function changeY3() {
-  chartTest.data = {
-    datasets:[
-    {% for protein in proteins %}
-    {
-      pointRadius: 0,
-      fill: false ,
-      label: "{{protein.model.run_title|safe}}",
-      backgroundColor: rainbowStop({{forloop.counter}}/{{proteins|length}}),
-      borderColor: rainbowStop({{forloop.counter}}/{{proteins|length}}), // red
-      data:  {{protein.x|safe}}.map( (v,i) => ({ x: v, y: {{protein.y3|safe}}[i] })) 
-      },
-
-    {% endfor%}
-    ]
+  data = [];
+  {% for protein in proteins %}
+  var trace{{forloop.counter}} = {
+    x: {{protein.x|safe}},
+    y: {{protein.y3|safe}},
+    mode: 'lines+markers',
+    type: 'scatter',
+    name: '{{protein.run_title}}'
   };
-  chartTest.options.scales.yAxes = [{
-            scaleLabel: {
-                display: true,
-                labelString: "{{first.y3_units}}"
-            }
-        }];
-  chartTest.update();
+  data.push(trace{{forloop.counter}});
+  {% endfor %}
+
+  var layout = {
+    xaxis: {
+        title: {
+            text: '{{first.x_units}}'
+        }
+    }, 
+    yaxis: {
+        title: {
+            text: '{{first.y3_units}}'
+        }
+    }
+  };
+  Plotly.react(canvas, data, layout);
 }
 
 

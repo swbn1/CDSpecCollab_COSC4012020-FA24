@@ -164,7 +164,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         "DIRS": [str(APPS_DIR / "templates")],
-        "APP_DIRS": True,
+        #"APP_DIRS": True,
         "OPTIONS": {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-loaders
             # https://docs.djangoproject.com/en/dev/ref/templates/api/#loader-types
@@ -183,7 +183,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "cd_spec_viewer_web.utils.context_processors.settings_context",
-                "django.core.context_processors.request",
+                #"django.core.context_processors.request",
             ],
         },
     }

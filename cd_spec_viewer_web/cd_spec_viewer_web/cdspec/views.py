@@ -74,7 +74,7 @@ def create(request):
 #Singular View w/ graph
 def detail(request, pk):
     model = get_object_or_404(SpecRun, pk=pk)
-
+    #Send the model and all of the data points (presented as a list of x, list of y, list of y2, list of y3) to the corresponding template
     return render(request, 'cdspec/detail.html', {'specrun': model, 'x': graph_format(model.data, 0), 'y': graph_format(model.data, 1), 'y2': graph_format(model.data, 2), 'y3': graph_format(model.data, 3), "pk": pk})
 
 #Multi View
@@ -93,10 +93,10 @@ def multi(request, pks):
             messages.info(request, 'Multi-graph failed: graphs have different axes')
             return HttpResponseRedirect('/')
 
-
+    #Send the models and all of the data points (presented as a list of x, list of y, list of y2, list of y3) to the corresponding template
     output_object = [];
     for protein in proteins:
-        output_object.append({'model' : protein, 'x' : graph_format(protein.data, 0), 'y' : graph_format(protein.data, 1), 'y2' : graph_format(protein.data, 2), 'y3' : graph_format(protein.data, 3)});
+        output_object.append({'run_title' : protein.run_title, 'model' : protein, 'x' : graph_format(protein.data, 0), 'y' : graph_format(protein.data, 1), 'y2' : graph_format(protein.data, 2), 'y3' : graph_format(protein.data, 3)});
 
     return render(request, 'cdspec/multi.html', {'proteins': output_object, 'pks': pks, 'first': proteins[0]})
 
