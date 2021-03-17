@@ -25,7 +25,7 @@
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
-
+<button onClick = "changeColor()">Display{{colorChange}}</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -65,6 +65,28 @@ var layout = {
 
 Plotly.newPlot(canvas, data, layout);
 
+function changeColor(){
+    Plotly.deleteTraces(canvas, 0);
+    Plotly.addTraces(canvas, {
+        x: {{x|safe}},
+        y: {{y|safe}},
+        mode: 'lines+markers',
+         marker: {
+            color: 'aliceblue'
+        },
+        line: {
+            color: 'aliceblue' 
+        }
+    });
+   var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{colorChange}}'
+            }
+        }
+    }; 
+    Plotly.update(canvas, {}, layout_update);
+}
 //change data/axes to (x, y)
 function changeY() {
     Plotly.deleteTraces(canvas, 0);
