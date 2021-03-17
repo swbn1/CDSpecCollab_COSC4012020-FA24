@@ -100,56 +100,6 @@ function changeColor(){
     Plotly.update(canvas, data, layout);
 }
 
-function changeY2Color(){
-    Plotly.deleteTraces(canvas, 0);
-    Plotly.addTraces(canvas, {
-        x: {{x|safe}},
-        y: {{y|safe}},
-        mode: 'lines+markers',
-         marker: {
-            color: 'aliceblue'
-        },
-        line: {
-            color: 'aliceblue' 
-        }
-    });
-
-    var layout_update = {
-        yaxis: {
-            title: {
-                text: '{{specrun.y2_units}}'
-            }
-        }
-    };
-    
-    Plotly.update(canvas, {}, layout_update);
-}
-
-function changeY3Color(){
-    Plotly.deleteTraces(canvas, 0);
-    Plotly.addTraces(canvas, {
-        x: {{x|safe}},
-        y: {{y|safe}},
-        mode: 'lines+markers',
-         marker: {
-            color: 'aliceblue'
-        },
-        line: {
-            color: 'aliceblue' 
-        }
-    });
-
-    var layout_update = {
-        yaxis: {
-            title: {
-                text: '{{specrun.y3_units}}'
-            }
-        }
-    };
-    
-    Plotly.update(canvas, {}, layout_update);
-}
-
 //change data/axes to (x, y)
 function changeY() {
     Plotly.deleteTraces(canvas, 0);
