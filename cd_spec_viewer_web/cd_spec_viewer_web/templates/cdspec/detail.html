@@ -81,9 +81,7 @@ function changeColor(){
         }
     });
 
-    var data = [trace];
-
-    var layout = {
+    var layout_update = {
         showlegend: false,
         xaxis: {
             title: {
@@ -97,7 +95,7 @@ function changeColor(){
         }
     }; 
 
-    Plotly.update(canvas, data, layout);
+    Plotly.update(canvas, data, layout_update);
 }
 function changeYColor(){
     Plotly.deleteTraces(canvas, 0);
