@@ -25,6 +25,7 @@
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
+<button onClick = "changecolor()"> Display {{specrun.x_units}} {{specrun.y_units}}</button> 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -34,7 +35,8 @@ var canvas = document.getElementById('graph');
 
 
 //plot (x, y) data as scatter plot
-var trace = {
+function changecolor(){
+   var trace = {
     x: {{x|safe}},
     y: {{y|safe}},
     mode: 'lines+markers',
@@ -61,7 +63,8 @@ var layout = {
             text: '{{specrun.y_units}}'
         }
     }
-};
+}; 
+}
 
 Plotly.newPlot(canvas, data, layout);
 
