@@ -40,11 +40,11 @@ var trace = {
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
-        color: 'aliceblue'
+        color: 'black'
     },
 
     line: {
-        color: 'aliceblue' 
+        color: 'black' 
     }
 };
 
@@ -65,7 +65,13 @@ var layout = {
 }; 
 
 function changecolor(){
+    marker: {
+        color: ''
+    },
 
+    line: {
+        color: '' 
+    }
 }
 
 Plotly.newPlot(canvas, data, layout);
