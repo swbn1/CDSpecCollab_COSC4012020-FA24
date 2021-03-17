@@ -95,7 +95,7 @@ function changeColor(){
         }
     }; 
 
-    Plotly.update(canvas, data, layout_update);
+    Plotly.update(canvas, {}, layout_update);
 }
 function changeYColor(){
     Plotly.deleteTraces(canvas, 0);
@@ -118,7 +118,7 @@ function changeYColor(){
             }
         }
     }; 
-    
+
     Plotly.update(canvas, {}, layout_update);
 }
 
