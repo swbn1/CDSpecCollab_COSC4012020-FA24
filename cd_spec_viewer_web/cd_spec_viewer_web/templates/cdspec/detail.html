@@ -65,7 +65,7 @@ var layout = {
 }; 
 
 function changecolor(){
-plotly     
+Plotly.deleteTraces(canvas, 0);    
 Plotly.addTraces(canvas, {
    x: {{x|safe}},
     y: {{y|safe}},
