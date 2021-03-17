@@ -112,13 +112,13 @@ function changeYColor(){
     });
 
     var layout_update = {
-        showlegend: false,
         yaxis: {
             title: {
                 text: '{{specrun.y_units}}'
             }
         }
     }; 
+    
     Plotly.update(canvas, {}, layout_update);
 }
 
