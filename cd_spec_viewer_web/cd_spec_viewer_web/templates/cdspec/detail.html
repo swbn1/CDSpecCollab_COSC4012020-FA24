@@ -64,7 +64,7 @@ var layout = {
     }
 }; 
 
-Plotly.newPlot(canvas, data, layout);
+
 
 function changecolor(){
 Plotly.deleteTraces(canvas, 0);    
@@ -79,36 +79,7 @@ Plotly.addTraces(canvas, {
     line: {
         color: 'aliceblue' 
     }
-
-    var layout_update = {
-        yaxis: {
-            title: {
-                text: '{{specrun.y_units}}'
-            }
-        }
-    };
-   Plotly.update(canvas, {}, layout_update);
-
-    var layout_update = {
-        yaxis: {
-            title: {
-                text: '{{specrun.y2_units}}'
-            }
-        }
-    };
-
-    Plotly.update(canvas, {}, layout_update);
-
-    var layout_update = {
-        yaxis: {
-            title: {
-                text: '{{specrun.y3_units}}'
-            }
-        }
-    };
-
-    Plotly.update(canvas, {}, layout_update);
-
+    Plotly.newPlot(canvas, data, layout);
 }
 
 
