@@ -26,8 +26,8 @@
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
 <button onClick = "changeYColor()">Display {{specrun.y_units}}</button>
-<button onClick = "changeY2Color()">Display {{specrun.y2_units}}</botton>
-<button onClick = "changeY3Color()">Display {{specrun.y3_units}}</botton>
+<button onClick = "changeY2Color()">Display{{specrun.y2_units}} </botton>
+<button onClick = "changeY3Color()">Display{{specrun.y3_units}}</botton>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -40,11 +40,9 @@ var trace = {
     x: {{x|safe}},
     y: {{y|safe}},
     mode: 'lines+markers',
-    type: 'scatter',
     marker: {
         color: 'black'
     },
-
     line: {
         color: 'black' 
     }
@@ -74,42 +72,12 @@ function changeY2Color(){
         x: {{x|safe}},
         y: {{y2|safe}},
         mode: 'lines+markers',
-        type: 'scatter',
-        color: ['aliceblue','antiquewhite', 'aqua', 'aquamarine', 'azure',
-                'beige', 'bisque', 'black', 'blanchedalmond', 'blue',
-                'blueviolet', 'brown', 'burlywood', 'cadetblue',
-                'chartreuse', 'chocolate', 'coral', 'cornflowerblue',
-                'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan',
-                'darkgoldenrod', 'darkgray', 'darkgrey', 'darkgreen',
-                'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange',
-                'darkorchid', 'darkred', 'darksalmon', 'darkseagreen',
-                'darkslateblue', 'darkslategray', 'darkslategrey',
-                'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue',
-                'dimgray', 'dimgrey', 'dodgerblue', 'firebrick',
-                'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro',
-                'ghostwhite', 'gold', 'goldenrod', 'gray', 'grey', 'green',
-                'greenyellow', 'honeydew', 'hotpink', 'indianred', 'indigo',
-                'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen',
-                'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan',
-                'lightgoldenrodyellow', 'lightgray', 'lightgrey',
-                'lightgreen', 'lightpink', 'lightsalmon', 'lightseagreen',
-                'lightskyblue', 'lightslategray', 'lightslategrey',
-                'lightsteelblue', 'lightyellow', 'lime', 'limegreen',
-                'linen', 'magenta', 'maroon', 'mediumaquamarine',
-                'mediumblue', 'mediumorchid', 'mediumpurple',
-                'mediumseagreen', 'mediumslateblue', 'mediumspringgreen',
-                'mediumturquoise', 'mediumvioletred', 'midnightblue',
-                'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy',
-                'oldlace', 'olive', 'olivedrab', 'orange', 'orangered',
-                'orchid', 'palegoldenrod', 'palegreen', 'paleturquoise',
-                'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink',
-                'plum', 'powderblue', 'purple', 'red', 'rosybrown',
-                'royalblue', 'saddlebrown', 'salmon', 'sandybrown',
-                'seagreen', 'seashell', 'sienna', 'silver', 'skyblue',
-                'slateblue', 'slategray', 'slategrey', 'snow', 'springgreen',
-                'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise',
-                'violet', 'wheat','whitesmoke', 'yellow',
-                'yellowgreen'] 
+         marker: {
+            color: 'aliceblue'
+        },
+        line: {
+            color: 'aliceblue' 
+        }
     });
 
     var layout_update = {
@@ -128,88 +96,12 @@ function changeYColor(){
         x: {{x|safe}},
         y: {{y|safe}},
         mode: 'lines+markers',
-        type: 'scatter',
          marker: {
-              color: ['aliceblue','antiquewhite', 'aqua', 'aquamarine', 'azure',
-                'beige', 'bisque', 'black', 'blanchedalmond', 'blue',
-                'blueviolet', 'brown', 'burlywood', 'cadetblue',
-                'chartreuse', 'chocolate', 'coral', 'cornflowerblue',
-                'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan',
-                'darkgoldenrod', 'darkgray', 'darkgrey', 'darkgreen',
-                'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange',
-                'darkorchid', 'darkred', 'darksalmon', 'darkseagreen',
-                'darkslateblue', 'darkslategray', 'darkslategrey',
-                'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue',
-                'dimgray', 'dimgrey', 'dodgerblue', 'firebrick',
-                'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro',
-                'ghostwhite', 'gold', 'goldenrod', 'gray', 'grey', 'green',
-                'greenyellow', 'honeydew', 'hotpink', 'indianred', 'indigo',
-                'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen',
-                'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan',
-                'lightgoldenrodyellow', 'lightgray', 'lightgrey',
-                'lightgreen', 'lightpink', 'lightsalmon', 'lightseagreen',
-                'lightskyblue', 'lightslategray', 'lightslategrey',
-                'lightsteelblue', 'lightyellow', 'lime', 'limegreen',
-                'linen', 'magenta', 'maroon', 'mediumaquamarine',
-                'mediumblue', 'mediumorchid', 'mediumpurple',
-                'mediumseagreen', 'mediumslateblue', 'mediumspringgreen',
-                'mediumturquoise', 'mediumvioletred', 'midnightblue',
-                'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy',
-                'oldlace', 'olive', 'olivedrab', 'orange', 'orangered',
-                'orchid', 'palegoldenrod', 'palegreen', 'paleturquoise',
-                'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink',
-                'plum', 'powderblue', 'purple', 'red', 'rosybrown',
-                'royalblue', 'saddlebrown', 'salmon', 'sandybrown',
-                'seagreen', 'seashell', 'sienna', 'silver', 'skyblue',
-                'slateblue', 'slategray', 'slategrey', 'snow', 'springgreen',
-                'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise',
-                'violet', 'wheat','whitesmoke', 'yellow',
-                'yellowgreen']
-
+            color: 'aliceblue'
         },
         line: {
-            
-             color: ['aliceblue','antiquewhite', 'aqua', 'aquamarine', 'azure',
-                'beige', 'bisque', 'black', 'blanchedalmond', 'blue',
-                'blueviolet', 'brown', 'burlywood', 'cadetblue',
-                'chartreuse', 'chocolate', 'coral', 'cornflowerblue',
-                'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan',
-                'darkgoldenrod', 'darkgray', 'darkgrey', 'darkgreen',
-                'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange',
-                'darkorchid', 'darkred', 'darksalmon', 'darkseagreen',
-                'darkslateblue', 'darkslategray', 'darkslategrey',
-                'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue',
-                'dimgray', 'dimgrey', 'dodgerblue', 'firebrick',
-                'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro',
-                'ghostwhite', 'gold', 'goldenrod', 'gray', 'grey', 'green',
-                'greenyellow', 'honeydew', 'hotpink', 'indianred', 'indigo',
-                'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen',
-                'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan',
-                'lightgoldenrodyellow', 'lightgray', 'lightgrey',
-                'lightgreen', 'lightpink', 'lightsalmon', 'lightseagreen',
-                'lightskyblue', 'lightslategray', 'lightslategrey',
-                'lightsteelblue', 'lightyellow', 'lime', 'limegreen',
-                'linen', 'magenta', 'maroon', 'mediumaquamarine',
-                'mediumblue', 'mediumorchid', 'mediumpurple',
-                'mediumseagreen', 'mediumslateblue', 'mediumspringgreen',
-                'mediumturquoise', 'mediumvioletred', 'midnightblue',
-                'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy',
-                'oldlace', 'olive', 'olivedrab', 'orange', 'orangered',
-                'orchid', 'palegoldenrod', 'palegreen', 'paleturquoise',
-                'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink',
-                'plum', 'powderblue', 'purple', 'red', 'rosybrown',
-                'royalblue', 'saddlebrown', 'salmon', 'sandybrown',
-                'seagreen', 'seashell', 'sienna', 'silver', 'skyblue',
-                'slateblue', 'slategray', 'slategrey', 'snow', 'springgreen',
-                'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise',
-                'violet', 'wheat','whitesmoke', 'yellow',
-                'yellowgreen']
-
+            color: 'aliceblue' 
         }
-       
-
-            
-        
     });
 
     var layout_update = {
@@ -229,42 +121,12 @@ function changeY3Color(){
         x: {{x|safe}},
         y: {{y3|safe}},
         mode: 'lines+markers',
-        type: 'scatter',
-        color: ['aliceblue','antiquewhite', 'aqua', 'aquamarine', 'azure',
-                'beige', 'bisque', 'black', 'blanchedalmond', 'blue',
-                'blueviolet', 'brown', 'burlywood', 'cadetblue',
-                'chartreuse', 'chocolate', 'coral', 'cornflowerblue',
-                'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan',
-                'darkgoldenrod', 'darkgray', 'darkgrey', 'darkgreen',
-                'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange',
-                'darkorchid', 'darkred', 'darksalmon', 'darkseagreen',
-                'darkslateblue', 'darkslategray', 'darkslategrey',
-                'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue',
-                'dimgray', 'dimgrey', 'dodgerblue', 'firebrick',
-                'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro',
-                'ghostwhite', 'gold', 'goldenrod', 'gray', 'grey', 'green',
-                'greenyellow', 'honeydew', 'hotpink', 'indianred', 'indigo',
-                'ivory', 'khaki', 'lavender', 'lavenderblush', 'lawngreen',
-                'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan',
-                'lightgoldenrodyellow', 'lightgray', 'lightgrey',
-                'lightgreen', 'lightpink', 'lightsalmon', 'lightseagreen',
-                'lightskyblue', 'lightslategray', 'lightslategrey',
-                'lightsteelblue', 'lightyellow', 'lime', 'limegreen',
-                'linen', 'magenta', 'maroon', 'mediumaquamarine',
-                'mediumblue', 'mediumorchid', 'mediumpurple',
-                'mediumseagreen', 'mediumslateblue', 'mediumspringgreen',
-                'mediumturquoise', 'mediumvioletred', 'midnightblue',
-                'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy',
-                'oldlace', 'olive', 'olivedrab', 'orange', 'orangered',
-                'orchid', 'palegoldenrod', 'palegreen', 'paleturquoise',
-                'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink',
-                'plum', 'powderblue', 'purple', 'red', 'rosybrown',
-                'royalblue', 'saddlebrown', 'salmon', 'sandybrown',
-                'seagreen', 'seashell', 'sienna', 'silver', 'skyblue',
-                'slateblue', 'slategray', 'slategrey', 'snow', 'springgreen',
-                'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise',
-                'violet', 'wheat','whitesmoke', 'yellow',
-                'yellowgreen']
+         marker: {
+            color: 'aliceblue'
+        },
+        line: {
+            color: 'aliceblue' 
+        }
     });
 
     var layout_update = {
@@ -285,7 +147,6 @@ function changeY() {
         x: {{x|safe}},
         y: {{y|safe}},
         mode: 'lines+markers',
-        type: 'scatter',
          marker: {
             color: 'black'
         },
@@ -312,7 +173,6 @@ function changeY2() {
         x: {{x|safe}},
         y: {{y2|safe}},
         mode: 'lines+markers',
-        type: 'scatter',
          marker: {
             color: 'black'
         },
@@ -337,7 +197,6 @@ function changeY3() {
         x: {{x|safe}},
         y: {{y3|safe}},
         mode: 'lines+markers',
-        type: 'scatter',
          marker: {
             color: 'black'
         },
