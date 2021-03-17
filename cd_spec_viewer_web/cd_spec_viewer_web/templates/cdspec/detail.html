@@ -113,25 +113,6 @@ function changeYColor(){
     }; 
 
     Plotly.update(canvas, {}, layout_update);
-    
-        mode: 'lines+markers',
-         marker: {
-            color: 'antiquewhite'
-        },
-        line: {
-            color: 'antiquewhite'
-        }
-    });
-
-    var layout_update = {
-        yaxis: {
-            title: {
-                text: '{{specrun.y_units}}'
-            }
-        }
-    }; 
-
-    Plotly.update(canvas, {}, layout_update);
 }
 
 function changeY3Color(){
