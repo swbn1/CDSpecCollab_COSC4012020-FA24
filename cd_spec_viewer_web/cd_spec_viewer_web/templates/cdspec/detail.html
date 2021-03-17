@@ -81,6 +81,8 @@ function changeColor(){
         }
     });
 
+    var data = [trace];
+
     var layout = {
         showlegend: false,
         xaxis: {
@@ -95,7 +97,7 @@ function changeColor(){
         }
     }; 
 
-    Plotly.update(canvas, {}, layout);
+    Plotly.update(canvas, data, layout);
 }
 
 function changeY2Color(){
