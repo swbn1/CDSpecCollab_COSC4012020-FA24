@@ -114,9 +114,6 @@ function changeYColor(){
 
     Plotly.update(canvas, {}, layout_update);
     
-    Plotly.addTraces(canvas, {
-        x: {{x|safe}},
-        y: {{y|safe}},
         mode: 'lines+markers',
          marker: {
             color: 'antiquewhite'
