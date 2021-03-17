@@ -113,7 +113,7 @@ function changeYColor(){
         }
     });
 
-    var layout = {
+    var layout_update = {
         showlegend: false,
         yaxis: {
             title: {
@@ -121,8 +121,7 @@ function changeYColor(){
             }
         }
     }; 
-
-    Plotly.update(canvas, data, layout);
+    Plotly.update(canvas, {}, layout_update);
 }
 
 //change data/axes to (x, y)
