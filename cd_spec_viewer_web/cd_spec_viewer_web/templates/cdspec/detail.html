@@ -25,7 +25,6 @@
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
-<button onClick = "changeColor()">Display</button>
 <button onClick = "changeYColor()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY3Color()">Display</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
@@ -136,6 +135,7 @@ function changeY() {
             color: 'black' 
         }
     });
+
     var layout_update = {
         yaxis: {
             title: {
@@ -143,6 +143,7 @@ function changeY() {
             }
         }
     };
+
     Plotly.update(canvas, {}, layout_update);
 }
 
