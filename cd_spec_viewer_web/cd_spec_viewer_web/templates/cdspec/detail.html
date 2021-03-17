@@ -78,7 +78,20 @@ Plotly.addTraces(canvas, {
         color: 'aliceblue' 
     }
 
-    
+    var layout_update = {
+    showlegend: false,
+    xaxis: {
+        title: {
+            text: '{{specrun.x_units}}'
+        }
+    }, 
+    yaxis: {
+        title: {
+            text: '{{specrun.y_units}}'
+        }
+    }
+}; 
+   Plotly.newPlot(canvas, data, layout_update);
 }
 
 Plotly.newPlot(canvas, data, layout);
