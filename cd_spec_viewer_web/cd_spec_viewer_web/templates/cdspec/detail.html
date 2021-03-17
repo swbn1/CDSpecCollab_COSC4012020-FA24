@@ -80,8 +80,13 @@ function changeColor(){
             color: 'aliceblue' 
         }
     });
-
+    
     var layout_update = {
+        xaxis: {
+        title: {
+            text: '{{specrun.x_units}}'
+        }
+    },
         yaxis: {
             title: {
                 text: '{{specrun.y_units}}'
@@ -89,7 +94,7 @@ function changeColor(){
         }
     };
 
-    Plotly.update(canvas, {}, layout_update);
+    Plotly.update(canvas, {}s, layout_update);
 }
 
 function changeY2Color(){
