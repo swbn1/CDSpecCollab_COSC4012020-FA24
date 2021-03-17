@@ -67,7 +67,7 @@ var layout = {
 function changecolor(){
 Plotly.deleteTraces(canvas, 0);    
 Plotly.addTraces(canvas, {
-   x: {{x|safe}},
+    x: {{x|safe}},
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
@@ -91,7 +91,7 @@ Plotly.addTraces(canvas, {
         }
     }
 }; 
-   Plotly.newPlot(canvas, data, layout_update);
+   Plotly.newPlot(canvas, {}, layout_update);
 }
 
 Plotly.newPlot(canvas, data, layout);
