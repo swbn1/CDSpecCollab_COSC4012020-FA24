@@ -78,6 +78,8 @@ Plotly.addTraces(canvas, {
         color: 'aliceblue' 
     }
 
+    var data = [trace];
+
     var layout_update = {
     showlegend: false,
     xaxis: {
@@ -91,7 +93,7 @@ Plotly.addTraces(canvas, {
         }
     }
 }; 
-   Plotly.newPlot(canvas, {}, layout_update);
+   Plotly.newPlot(canvas, data, layout_update);
 }
 
 Plotly.newPlot(canvas, data, layout);
