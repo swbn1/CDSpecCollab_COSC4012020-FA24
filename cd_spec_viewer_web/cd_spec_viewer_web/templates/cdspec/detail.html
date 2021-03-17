@@ -113,8 +113,7 @@ function changeYColor(){
     }; 
 
     Plotly.update(canvas, {}, layout_update);
-
-      Plotly.deleteTraces(canvas, 0);
+    
     Plotly.addTraces(canvas, {
         x: {{x|safe}},
         y: {{y|safe}},
@@ -134,7 +133,7 @@ function changeYColor(){
             }
         }
     }; 
-    
+
     Plotly.update(canvas, {}, layout_update);
 }
 
