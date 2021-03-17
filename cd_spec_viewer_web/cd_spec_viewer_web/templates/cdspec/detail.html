@@ -64,8 +64,6 @@ var layout = {
     }
 }; 
 
-
-
 function changecolor(){
 Plotly.deleteTraces(canvas, 0);    
 Plotly.addTraces(canvas, {
@@ -79,10 +77,11 @@ Plotly.addTraces(canvas, {
     line: {
         color: 'aliceblue' 
     }
-    Plotly.newPlot(canvas, data, layout);
+
+    
 }
 
-
+Plotly.newPlot(canvas, data, layout);
 
 //change data/axes to (x, y)
 function changeY() {
