@@ -78,15 +78,33 @@ function changeColor(){
             color: 'aliceblue' 
         }
     });
-   var layout_update = {
+
+    var layout_update = {
         yaxis: {
             title: {
-                text: '{{colorChange}}'
+                text: '{{specrun.y_units}}'
+            }
+        }
+    };
+
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y2_units}}'
             }
         }
     }; 
+
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y3_units}}'
+            }
+        }
+    };
     Plotly.update(canvas, {}, layout_update);
 }
+
 //change data/axes to (x, y)
 function changeY() {
     Plotly.deleteTraces(canvas, 0);
