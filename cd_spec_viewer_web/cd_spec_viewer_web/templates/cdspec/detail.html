@@ -65,6 +65,48 @@ var layout = {
 }; 
 
 function changecolor(){
+plotly     
+Plotly.addTraces(canvas, {
+   x: {{x|safe}},
+    y: {{y|safe}},
+    mode: 'lines+markers',
+    marker: {
+        color: 'aliceblue'
+    },
+
+    line: {
+        color: 'aliceblue' 
+    }
+
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y_units}}'
+            }
+        }
+    };
+   Plotly.update(canvas, {}, layout_update);
+
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y2_units}}'
+            }
+        }
+    };
+
+    Plotly.update(canvas, {}, layout_update);
+
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y3_units}}'
+            }
+        }
+    };
+
+    Plotly.update(canvas, {}, layout_update);
+
 }
 
 Plotly.newPlot(canvas, data, layout);
@@ -76,7 +118,12 @@ function changeY() {
         x: {{x|safe}},
         y: {{y|safe}},
         mode: 'lines+markers',
-        type: 'scatter'
+         marker: {
+            color: 'black'
+        },
+        line: {
+            color: 'black' 
+        }
     });
     var layout_update = {
         yaxis: {
@@ -95,7 +142,12 @@ function changeY2() {
         x: {{x|safe}},
         y: {{y2|safe}},
         mode: 'lines+markers',
-        type: 'scatter'
+         marker: {
+            color: 'black'
+        },
+        line: {
+            color: 'black' 
+        }
     });
     var layout_update = {
         yaxis: {
@@ -114,7 +166,12 @@ function changeY3() {
         x: {{x|safe}},
         y: {{y3|safe}},
         mode: 'lines+markers',
-        type: 'scatter'
+         marker: {
+            color: 'black'
+        },
+        line: {
+            color: 'black' 
+        }
     });
     var layout_update = {
         yaxis: {
