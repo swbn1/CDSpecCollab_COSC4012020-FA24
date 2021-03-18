@@ -32,8 +32,10 @@
 <script>
 var canvas = document.getElementById('graph');
 //plot (x, y) data as scatter plot
+<div>
 <label for="colorpicker">Color Picker:</label>
 <input type="color" id="colorpicker" value="#0000ff">
+</div>
 var trace = {
     x: {{x|safe}},
     y: {{y|safe}},
