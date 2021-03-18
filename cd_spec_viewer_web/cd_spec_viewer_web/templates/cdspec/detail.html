@@ -32,24 +32,6 @@
 <script>
 var canvas = document.getElementById('graph');
 
-function initColorPicker()
-{
-    var canvasEl = document.getElementById('colorCanvas');
-    var canvasContext = canvasEl.getContext('2d');
-
-    var image = new Image(250, 250);
-    image.onload = () => canvasContext.drawImage(image, 0, 0, image.width, image.height); 
-    image.src = "./images/myColorPickerImage.png";
-
-    canvasEl.onclick = function(mouseEvent) 
-    {
-      var imgData = canvasContext.getImageData(mouseEvent.offsetX, mouseEvent.offsetY, 1, 1);
-      var rgba = imgData.data;
-
-      alert("rgba(" + rgba[0] + ", " + rgba[1] + ", " + rgba[2] + ", " + rgba[3] + ")");
-    }
-}
-
 //plot (x, y) data as scatter plot
 var trace = {
     x: {{x|safe}},
@@ -57,11 +39,11 @@ var trace = {
     mode: 'lines+markers',
     marker: {
         color: 'black',
-        initColorPicker();
+        data-mdb-picker="color-picker"
     },
     line: {
         color: 'black',
-        initColorPicker(); 
+        data-mdb-picker="color-picker"
     }
 };
 
