@@ -28,22 +28,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
+<link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/css/mdb5/plugins/color-picker.min.css?v=3.3.0">
 <script>
 var canvas = document.getElementById('graph');
-
 //plot (x, y) data as scatter plot
 var trace = {
     x: {{x|safe}},
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
+        color: 'black'
         
-        data-mdb-picker="color-picker"
     },
     line: {
-    
-        data-mdb-picker="color-picker"
+        color: 'black'
+        
     }
 };
 
