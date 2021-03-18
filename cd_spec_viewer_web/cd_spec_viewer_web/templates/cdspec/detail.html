@@ -29,11 +29,245 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-<div class="color-picker" data-mdb-picker="color-picker" style="max-width: 350px;">
-<link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/css/mdb5/plugins/color-picker.min.css?v=3.3.0">
+<div class="col-lg-10 col-md-12">
+                <link rel="stylesheet" href="https://mdbcdn.b-cdn.net/wp-content/themes/mdbootstrap4/css/mdb5/plugins/color-picker.min.css?v=3.3.0">
+<!--Section: Docs content-->
+<section class="mdb-docs-content-pro">
+  <!--Section: Introduction-->
+  <section id="section-introduction">
+    <!-- Main title -->
+    <h2 class="h1 fw-bold">
+      Color picker      <span id="dpl-newmdb-pro-component-marker">
+<a class="btn btn-danger ripple-surface" href="/docs/standard/pro/" role="button">
+    MDB Pro component <i class="far fa-gem ms-1"></i>
+</a>
+
+</span>
+    </h2>
+
+    <!-- Seo title -->
+    <h1 class="h6">Bootstrap 5 Color picker plugin</h1>
+
+    <!-- Description -->
+    <p>
+      Color Picker plugin allows you to select different colors. You can successfully use it in
+      various product wizards, clothing sales, or other situations where you need to be able to
+      choose a color.
+    </p>
+
+    <p class="note note-light">
+      <strong>Note:</strong> Read the <strong>API</strong> tab to find all available options and
+      advanced customization
+    </p>
+
+    <span class="dpl-newmdb-docs-alert-advanced"><p class="note note-danger">
+  <strong>Note:</strong> This component requires <strong>MDB Pro Advanced</strong> package.
+  <br>
+  <br>
+  <a class="btn btn-primary" href="https://mdbootstrap.com/docs/standard/pro/" role="button">Get MDB Pro</a>
+</p>
+</span>
+  </section>
+  <!--Section: Introduction-->
+
+  <hr class="my-5">
+
+  <!--Section: Basic example-->
+  <section id="section-basic-example">
+    <!-- Section title -->
+    <h2 class="mb-4">Basic example</h2>
+
+    <!-- description -->
+    <p class="mb-4">
+      The Color picker can be placed anywhere on the page. You can initialize it using
+      <code>data-mdb-picker="color-picker"</code>.
+    </p>
+
+    <!--Section: Live Preview-->
+    <section class="border p-4 d-flex justify-content-center mb-4">
+      <div class="color-picker" data-mdb-picker="color-picker" style="max-width: 350px;">
+      <div class="color-picker-canvas-wrapper">
+        <div class="color-picker-canvas-dot" style="top: 114.5px; left: 244px;"></div>
+        <canvas width="350" height="350"><div class="color-picker-canvas-dot" style="top: -8px; left: 342px;"></div></canvas>
+      </div>
+    
+      <div class="color-picker-controls d-flex align-items-center p-2">
+        <div class="color-picker-color-dot-wrapper">
+          <div class="color-picker-color-dot" style="background-color: rgb(167, 46, 46);">
+          </div>
+        </div>
+        <div class="ps-4 w-100">
+          <div class="color-picker-range">
+            <input type="range" class="form-range" value="0" min="0" max="360" id="hueRange">
+          </div>
+          <div class="color-picker-range">
+            <div class="color-picker-range-alpha">
+              <input type="range" class="form-range" value="1" min="0" max="1" step="0.01" id="alphaRange" style="--track-background:linear-gradient(to right, transparent, rgba(255,0,0, 1);">
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="color-picker-color-inputs-wrapper d-flex align-items-center p-2">
+      <div class="form-outline me-2">
+        <input type="number" id="h" class="form-control text-center me-2 active" min="0" max="360" step="1">
+        <label class="form-label" for="input-1" style="margin-left: 0px;">h</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="s" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-2" style="margin-left: 0px;">s</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 14.4px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="l" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-3" style="margin-left: 0px;">l</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 11.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline">
+        <input type="number" id="a" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-4" style="margin-left: 0px;">a</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+    
+      <div class="color-picker-change-view-icons d-flex flex-column align-items-center">
+        <button id="next-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-up"></i>
+        </button>
+        <button id="previous-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-down"></i>
+        </button>
+      </div>
+    
+      <button id="copy-code" class="btn btn-link py-0 px-2"><i class="far fa-copy"></i></button>
+    </div></div>
+    </section>
+    <!--Section: Live Preview-->
+
+    <!--Section: Code-->
+    <section>
+      <!-- prettier-ignore -->
+      <div class="bg-image border border-danger text-center"><img src="https://mdbootstrap.com/img/Others/access-restricted-prism.jpg" class="img-fluid rounded">
+    <div class="mask d-flex align-items-center" style="background-color: rgba(251, 251, 251, 0.7);">
+      <div class="text-center w-100">
+        <h2 class="p-3">Access restricted</h2>
+        <div class="d-none d-sm-block">
+          <p>To view this code you must have an <strong><u><a href="https://mdbootstrap.com/docs/standard/pro/" target="_blank">MDB 5 PRO license</a></u></strong></p>
+          <p><strong>Purchase MDB 5 PRO</strong> if you are a new user or <strong>Log in</strong> if you already have it</p>
+        </div>
+<a class="auth-modal-toggle btn btn-sm btn-primary m-2" data-auth-modal-tab="sign-in">Login</a>
+        <a class="btn m-2 btn-sm btn-danger" href="https://mdbootstrap.com/docs/standard/pro/" target="_blank" role="button">Buy Pro</a>
+      </div>
+    </div></div>
+    </section>
+    <!--Section: Code-->
+  </section>
+  <!--Section: Basic example-->
+
+  <hr class="my-5">
+
+  <!-- Section: Disable state example-->
+  <section id="section-disable-state-example">
+    <!-- Section title -->
+    <h2 class="mb-4">Disable state example</h2>
+
+    <!-- description -->
+    <p class="mb-4">
+      To add a Color picker as read-only use
+      <code>data-mdb-color-picker-disabled="true"</code>.
+    </p>
+
+    <!--Section: Live Preview-->
+    <section class="border p-4 d-flex justify-content-center mb-4">
+      <div class="color-picker" data-mdb-picker="color-picker" data-mdb-color-picker-disabled="true" style="max-width: 350px;">
       <div class="color-picker-canvas-wrapper">
         <div class="color-picker-canvas-dot" style="top: -8px; left: 342px;"></div>
-        <canvas width="350" height="350"><div class="color-picker-canvas-dot" style="top: -8px; left: 342px;"></div></canvas>
+        <canvas width="350" height="350"></canvas>
+      </div>
+    
+      <div class="color-picker-controls d-flex align-items-center p-2">
+        <div class="color-picker-color-dot-wrapper">
+          <div class="color-picker-color-dot" style="background-color: rgb(255, 0, 0);">
+          </div>
+        </div>
+        <div class="ps-4 w-100">
+          <div class="color-picker-range">
+            <input type="range" class="form-range" value="0" min="0" max="360" id="hueRange" disabled="">
+          </div>
+          <div class="color-picker-range">
+            <div class="color-picker-range-alpha">
+              <input type="range" class="form-range" value="1" min="0" max="1" step="0.01" id="alphaRange" disabled="" style="--track-background:linear-gradient(to right, transparent, rgba(255,0,0, 1);">
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="color-picker-color-inputs-wrapper d-flex align-items-center p-2">
+      <div class="form-outline me-2">
+        <input type="number" id="h" class="form-control text-center me-2 active" min="0" max="360" step="1" disabled="">
+        <label class="form-label" for="input-1" style="margin-left: 0px;">h</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="s" class="form-control text-center me-2 active" min="0" max="1" step="0.01" disabled="">
+        <label class="form-label" for="input-2" style="margin-left: 0px;">s</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 14.4px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="l" class="form-control text-center me-2 active" min="0" max="1" step="0.01" disabled="">
+        <label class="form-label" for="input-3" style="margin-left: 0px;">l</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 11.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline">
+        <input type="number" id="a" class="form-control text-center me-2 active" min="0" max="1" step="0.01" disabled="">
+        <label class="form-label" for="input-4" style="margin-left: 0px;">a</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+    
+      <div class="color-picker-change-view-icons d-flex flex-column align-items-center">
+        <button id="next-format" type="button" class="btn btn-link btn-sm py-0 px-2 disabled">
+          <i class="fas fa-angle-up"></i>
+        </button>
+        <button id="previous-format" type="button" class="btn btn-link btn-sm py-0 px-2 disabled">
+          <i class="fas fa-angle-down"></i>
+        </button>
+      </div>
+    
+      <button id="copy-code" class="btn btn-link py-0 px-2 disabled"><i class="far fa-copy"></i></button>
+    </div></div>
+    </section>
+    <!--Section: Live Preview-->
+
+    <!--Section: Code-->
+    <section>
+      <!-- prettier-ignore -->
+      <div class="bg-image border border-danger text-center"><img src="https://mdbootstrap.com/img/Others/access-restricted-prism.jpg" class="img-fluid rounded">
+    <div class="mask d-flex align-items-center" style="background-color: rgba(251, 251, 251, 0.7);">
+      <div class="text-center w-100">
+        <h2 class="p-3">Access restricted</h2>
+        <div class="d-none d-sm-block">
+          <p>To view this code you must have an <strong><u><a href="https://mdbootstrap.com/docs/standard/pro/" target="_blank">MDB 5 PRO license</a></u></strong></p>
+          <p><strong>Purchase MDB 5 PRO</strong> if you are a new user or <strong>Log in</strong> if you already have it</p>
+        </div>
+<a class="auth-modal-toggle btn btn-sm btn-primary m-2" data-auth-modal-tab="sign-in">Login</a>
+        <a class="btn m-2 btn-sm btn-danger" href="https://mdbootstrap.com/docs/standard/pro/" target="_blank" role="button">Buy Pro</a>
+      </div>
+    </div></div>
+    </section>
+    <!--Section: Code-->
+  </section>
+  <!--Section: Disable state example -->
+
+  <hr class="my-5">
+
+  <!--Section: Swatches example-->
+  <section id="section-swatches-example">
+    <!-- Section title -->
+    <h2 class="mb-4">Swatches</h2>
+
+    <!-- description -->
+    <p class="mb-4">
+      You can add ready-made samples for the user. Use the
+      <code>colorPickerSwatches</code> option and pass an array of colors as a parameter. If you
+      want to add colors in several columns, add them in separate tables.
+    </p>
+
+    <!--Section: Live Preview-->
+    <section class="border p-4 d-flex justify-content-center mb-4">
+      <div class="color-picker" style="max-width: 350px;">
+      <div class="color-picker-canvas-wrapper">
+        <div class="color-picker-canvas-dot" style="top: -8px; left: 342px;"></div>
+        <canvas width="350" height="350"></canvas>
       </div>
     
       <div class="color-picker-controls d-flex align-items-center p-2">
@@ -80,7 +314,383 @@
       </div>
     
       <button id="copy-code" class="btn btn-link py-0 px-2"><i class="far fa-copy"></i></button>
+    </div><div class="color-picker-swatches p-2"><div class="row"><div class="col"><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(13, 110, 253);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(102, 16, 242);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(111, 66, 193);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(178, 60, 253);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(214, 51, 132);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(220, 53, 69);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(253, 126, 20);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(255, 193, 7);"></div></div><div class="col"><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(25, 135, 84);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(32, 201, 151);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(13, 202, 240);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(57, 192, 237);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(117, 117, 117);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(79, 79, 79);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(38, 38, 38);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(0, 0, 0);"></div></div></div></div></div>
+    </section>
+    <!--Section: Live Preview-->
+
+    <!--Section: Code-->
+    <section>
+      <!-- prettier-ignore -->
+      <div class="bg-image border border-danger text-center"><img src="https://mdbootstrap.com/img/Others/access-restricted-prism.jpg" class="img-fluid rounded">
+    <div class="mask d-flex align-items-center" style="background-color: rgba(251, 251, 251, 0.7);">
+      <div class="text-center w-100">
+        <h2 class="p-3">Access restricted</h2>
+        <div class="d-none d-sm-block">
+          <p>To view this code you must have an <strong><u><a href="https://mdbootstrap.com/docs/standard/pro/" target="_blank">MDB 5 PRO license</a></u></strong></p>
+          <p><strong>Purchase MDB 5 PRO</strong> if you are a new user or <strong>Log in</strong> if you already have it</p>
+        </div>
+<a class="auth-modal-toggle btn btn-sm btn-primary m-2" data-auth-modal-tab="sign-in">Login</a>
+        <a class="btn m-2 btn-sm btn-danger" href="https://mdbootstrap.com/docs/standard/pro/" target="_blank" role="button">Buy Pro</a>
+      </div>
     </div></div>
+    </section>
+    <!--Section: Code-->
+  </section>
+  <!--Section: Swatches example-->
+
+  <hr class="my-5">
+
+  <!--Section: Swatches height example-->
+  <section id="section-swatches-height-example">
+    <!-- Section title -->
+    <h2 class="mb-4">Swatches Height</h2>
+
+    <!-- description -->
+    <p class="mb-4">
+      If the defined samples take up a lot of space, you can set their maximum height using the
+      <code>colorPickerSwatchesHeight</code> option.
+    </p>
+
+    <!--Section: Live Preview-->
+    <section class="border p-4 d-flex justify-content-center mb-4">
+      <div class="color-picker" style="max-width: 350px;">
+      <div class="color-picker-canvas-wrapper">
+        <div class="color-picker-canvas-dot" style="top: -8px; left: 342px;"></div>
+        <canvas width="350" height="350"></canvas>
+      </div>
+    
+      <div class="color-picker-controls d-flex align-items-center p-2">
+        <div class="color-picker-color-dot-wrapper">
+          <div class="color-picker-color-dot" style="background-color: rgb(255, 0, 0);">
+          </div>
+        </div>
+        <div class="ps-4 w-100">
+          <div class="color-picker-range">
+            <input type="range" class="form-range" value="0" min="0" max="360" id="hueRange">
+          </div>
+          <div class="color-picker-range">
+            <div class="color-picker-range-alpha">
+              <input type="range" class="form-range" value="1" min="0" max="1" step="0.01" id="alphaRange" style="--track-background:linear-gradient(to right, transparent, rgba(255,0,0, 1);">
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="color-picker-color-inputs-wrapper d-flex align-items-center p-2">
+      <div class="form-outline me-2">
+        <input type="number" id="h" class="form-control text-center me-2 active" min="0" max="360" step="1">
+        <label class="form-label" for="input-1" style="margin-left: 0px;">h</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="s" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-2" style="margin-left: 0px;">s</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 14.4px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="l" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-3" style="margin-left: 0px;">l</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 11.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline">
+        <input type="number" id="a" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-4" style="margin-left: 0px;">a</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+    
+      <div class="color-picker-change-view-icons d-flex flex-column align-items-center">
+        <button id="next-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-up"></i>
+        </button>
+        <button id="previous-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-down"></i>
+        </button>
+      </div>
+    
+      <button id="copy-code" class="btn btn-link py-0 px-2"><i class="far fa-copy"></i></button>
+    </div><div class="color-picker-swatches p-2" style="max-height: 100px;"><div class="row"><div class="col"><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(13, 110, 253);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(102, 16, 242);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(111, 66, 193);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(178, 60, 253);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(214, 51, 132);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(220, 53, 69);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(253, 126, 20);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(255, 193, 7);"></div></div><div class="col"><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(25, 135, 84);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(32, 201, 151);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(13, 202, 240);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(57, 192, 237);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(117, 117, 117);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(79, 79, 79);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(38, 38, 38);"></div><div tabindex="1" class="mb-1 color-picker-swatches-color" style="background-color: rgb(0, 0, 0);"></div></div></div></div></div>
+    </section>
+    <!--Section: Live Preview-->
+
+    <!--Section: Code-->
+    <section>
+      <!-- prettier-ignore -->
+      <div class="bg-image border border-danger text-center"><img src="https://mdbootstrap.com/img/Others/access-restricted-prism.jpg" class="img-fluid rounded">
+    <div class="mask d-flex align-items-center" style="background-color: rgba(251, 251, 251, 0.7);">
+      <div class="text-center w-100">
+        <h2 class="p-3">Access restricted</h2>
+        <div class="d-none d-sm-block">
+          <p>To view this code you must have an <strong><u><a href="https://mdbootstrap.com/docs/standard/pro/" target="_blank">MDB 5 PRO license</a></u></strong></p>
+          <p><strong>Purchase MDB 5 PRO</strong> if you are a new user or <strong>Log in</strong> if you already have it</p>
+        </div>
+<a class="auth-modal-toggle btn btn-sm btn-primary m-2" data-auth-modal-tab="sign-in">Login</a>
+        <a class="btn m-2 btn-sm btn-danger" href="https://mdbootstrap.com/docs/standard/pro/" target="_blank" role="button">Buy Pro</a>
+      </div>
+    </div></div>
+    </section>
+    <!--Section: Code-->
+  </section>
+  <!--Section: Swatches height example-->
+
+  <hr class="my-5">
+
+  <!--Section: Default value example-->
+  <section id="section-default-value-example">
+    <!-- Section title -->
+    <h2 class="mb-4">Default value</h2>
+
+    <!-- description -->
+    <p class="mb-4">
+      To set the default value use the <code>data-mdb-color-picker-value</code> option.
+    </p>
+
+    <!--Section: Live Preview-->
+    <section class="border p-4 d-flex justify-content-center mb-4">
+      <div class="color-picker" data-mdb-picker="color-picker" data-mdb-color-picker-value="rgba(15,219,104,1)" style="max-width: 350px;">
+      <div class="color-picker-canvas-wrapper">
+        <div class="color-picker-canvas-dot" style="top: 40.93px; left: 317.668px;"></div>
+        <canvas width="350" height="350"></canvas>
+      </div>
+    
+      <div class="color-picker-controls d-flex align-items-center p-2">
+        <div class="color-picker-color-dot-wrapper">
+          <div class="color-picker-color-dot" style="background-color: rgb(15, 219, 104);">
+          </div>
+        </div>
+        <div class="ps-4 w-100">
+          <div class="color-picker-range">
+            <input type="range" class="form-range" value="0" min="0" max="360" id="hueRange">
+          </div>
+          <div class="color-picker-range">
+            <div class="color-picker-range-alpha">
+              <input type="range" class="form-range" value="1" min="0" max="1" step="0.01" id="alphaRange" style="--track-background:linear-gradient(to right, transparent, rgba(15,219,104, 1);">
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="color-picker-color-inputs-wrapper d-flex align-items-center p-2">
+      <div class="form-outline me-2">
+        <input type="number" id="r" class="form-control text-center me-2 active" min="0" max="255" step="1">
+        <label class="form-label" for="input-1" style="margin-left: 0px;">h</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="g" class="form-control text-center me-2 active" min="0" max="255" step="1">
+        <label class="form-label" for="input-2" style="margin-left: 0px;">s</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 14.4px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="b" class="form-control text-center me-2 active" min="0" max="255" step="1">
+        <label class="form-label" for="input-3" style="margin-left: 0px;">l</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 11.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline">
+        <input type="number" id="a" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-4" style="margin-left: 0px;">a</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+    
+      <div class="color-picker-change-view-icons d-flex flex-column align-items-center">
+        <button id="next-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-up"></i>
+        </button>
+        <button id="previous-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-down"></i>
+        </button>
+      </div>
+    
+      <button id="copy-code" class="btn btn-link py-0 px-2"><i class="far fa-copy"></i></button>
+    </div></div>
+    </section>
+    <!--Section: Live Preview-->
+
+    <!--Section: Code-->
+    <section>
+      <!-- prettier-ignore -->
+      <div class="bg-image border border-danger text-center"><img src="https://mdbootstrap.com/img/Others/access-restricted-prism.jpg" class="img-fluid rounded">
+    <div class="mask d-flex align-items-center" style="background-color: rgba(251, 251, 251, 0.7);">
+      <div class="text-center w-100">
+        <h2 class="p-3">Access restricted</h2>
+        <div class="d-none d-sm-block">
+          <p>To view this code you must have an <strong><u><a href="https://mdbootstrap.com/docs/standard/pro/" target="_blank">MDB 5 PRO license</a></u></strong></p>
+          <p><strong>Purchase MDB 5 PRO</strong> if you are a new user or <strong>Log in</strong> if you already have it</p>
+        </div>
+<a class="auth-modal-toggle btn btn-sm btn-primary m-2" data-auth-modal-tab="sign-in">Login</a>
+        <a class="btn m-2 btn-sm btn-danger" href="https://mdbootstrap.com/docs/standard/pro/" target="_blank" role="button">Buy Pro</a>
+      </div>
+    </div></div>
+    </section>
+    <!--Section: Code-->
+  </section>
+  <!--Section: Default value example-->
+
+  <hr class="my-5">
+
+  <!--Section: Dropdown example-->
+  <section id="section-dropdown-example">
+    <!-- Section title -->
+    <h2 class="mb-4">Dropdown</h2>
+
+    <!-- description -->
+    <p class="mb-4">
+      You can use color picker as dropdown, just add
+      <code>data-mdb-color-picker-dropdown="true"</code>
+    </p>
+
+    <!--Section: Live Preview-->
+    <section class="border p-4 d-flex justify-content-center mb-4">
+      <div class="dropdown"><a class="btn btn-light" href="#" role="button" id="dropdownMenuLink" data-mdb-toggle="dropdown" aria-expanded="false"> Open </a><div class="color-picker dropdown-menu" data-mdb-picker="color-picker" data-mdb-color-picker-dropdown="true" style="max-width: 350px;">
+      <div class="color-picker-canvas-wrapper">
+        <div class="color-picker-canvas-dot" style="top: -8px; left: 342px;"></div>
+        <canvas width="350" height="350"></canvas>
+      </div>
+    
+      <div class="color-picker-controls d-flex align-items-center p-2">
+        <div class="color-picker-color-dot-wrapper">
+          <div class="color-picker-color-dot" style="background-color: rgb(255, 0, 0);">
+          </div>
+        </div>
+        <div class="ps-4 w-100">
+          <div class="color-picker-range">
+            <input type="range" class="form-range" value="0" min="0" max="360" id="hueRange">
+          </div>
+          <div class="color-picker-range">
+            <div class="color-picker-range-alpha">
+              <input type="range" class="form-range" value="1" min="0" max="1" step="0.01" id="alphaRange" style="--track-background:linear-gradient(to right, transparent, rgba(255,0,0, 1);">
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="color-picker-color-inputs-wrapper d-flex align-items-center p-2">
+      <div class="form-outline me-2">
+        <input type="number" id="h" class="form-control text-center me-2 active" min="0" max="360" step="1">
+        <label class="form-label" for="input-1" style="margin-left: 0px;">h</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 8px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="s" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-2" style="margin-left: 0px;">s</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 8px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="l" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-3" style="margin-left: 0px;">l</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 8px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline">
+        <input type="number" id="a" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-4" style="margin-left: 0px;">a</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 8px;"></div><div class="form-notch-trailing"></div></div></div>
+    
+      <div class="color-picker-change-view-icons d-flex flex-column align-items-center">
+        <button id="next-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-up"></i>
+        </button>
+        <button id="previous-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-down"></i>
+        </button>
+      </div>
+    
+      <button id="copy-code" class="btn btn-link py-0 px-2"><i class="far fa-copy"></i></button>
+    </div></div></div>
+    </section>
+    <!--Section: Live Preview-->
+
+    <!--Section: Code-->
+    <section>
+      <!-- prettier-ignore -->
+      <div class="bg-image border border-danger text-center"><img src="https://mdbootstrap.com/img/Others/access-restricted-prism.jpg" class="img-fluid rounded">
+    <div class="mask d-flex align-items-center" style="background-color: rgba(251, 251, 251, 0.7);">
+      <div class="text-center w-100">
+        <h2 class="p-3">Access restricted</h2>
+        <div class="d-none d-sm-block">
+          <p>To view this code you must have an <strong><u><a href="https://mdbootstrap.com/docs/standard/pro/" target="_blank">MDB 5 PRO license</a></u></strong></p>
+          <p><strong>Purchase MDB 5 PRO</strong> if you are a new user or <strong>Log in</strong> if you already have it</p>
+        </div>
+<a class="auth-modal-toggle btn btn-sm btn-primary m-2" data-auth-modal-tab="sign-in">Login</a>
+        <a class="btn m-2 btn-sm btn-danger" href="https://mdbootstrap.com/docs/standard/pro/" target="_blank" role="button">Buy Pro</a>
+      </div>
+    </div></div>
+    </section>
+    <!--Section: Code-->
+  </section>
+  <!--Section: Dropdown example-->
+
+  <hr class="my-5">
+
+  <!--Section: Disable section example-->
+  <section id="section-disable-section">
+    <!-- Section title -->
+    <h2 class="mb-4">Disable section</h2>
+
+    <!-- description -->
+    <p class="mb-4">
+      If you want to use only some picker elements you can disable unnecessary elements. The
+      following example shows the use of the
+      <code>colorPickerColorPalette</code> option. Other options can be found in the API tab.
+    </p>
+
+    <!--Section: Live Preview-->
+    <section class="border p-4 d-flex justify-content-center mb-4">
+      <div class="color-picker" data-mdb-picker="color-picker" data-mdb-color-picker-color-palette="false">
+      <div class="color-picker-controls d-flex align-items-center p-2">
+        <div class="color-picker-color-dot-wrapper">
+          <div class="color-picker-color-dot" style="background-color: rgb(255, 0, 0);">
+          </div>
+        </div>
+        <div class="ps-4 w-100">
+          <div class="color-picker-range">
+            <input type="range" class="form-range" value="0" min="0" max="360" id="hueRange">
+          </div>
+          <div class="color-picker-range">
+            <div class="color-picker-range-alpha">
+              <input type="range" class="form-range" value="1" min="0" max="1" step="0.01" id="alphaRange" style="--track-background:linear-gradient(to right, transparent, rgba(255,0,0, 1);">
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="color-picker-color-inputs-wrapper d-flex align-items-center p-2">
+      <div class="form-outline me-2">
+        <input type="number" id="h" class="form-control text-center me-2 active" min="0" max="360" step="1">
+        <label class="form-label" for="input-1" style="margin-left: 0px;">h</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="s" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-2" style="margin-left: 0px;">s</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 14.4px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline me-2">
+        <input type="number" id="l" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-3" style="margin-left: 0px;">l</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 11.2px;"></div><div class="form-notch-trailing"></div></div></div>
+      <div class="form-outline">
+        <input type="number" id="a" class="form-control text-center me-2 active" min="0" max="1" step="0.01">
+        <label class="form-label" for="input-4" style="margin-left: 0px;">a</label>
+      <div class="form-notch"><div class="form-notch-leading" style="width: 9px;"></div><div class="form-notch-middle" style="width: 15.2px;"></div><div class="form-notch-trailing"></div></div></div>
+    
+      <div class="color-picker-change-view-icons d-flex flex-column align-items-center">
+        <button id="next-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-up"></i>
+        </button>
+        <button id="previous-format" type="button" class="btn btn-link btn-sm py-0 px-2">
+          <i class="fas fa-angle-down"></i>
+        </button>
+      </div>
+    
+      <button id="copy-code" class="btn btn-link py-0 px-2"><i class="far fa-copy"></i></button>
+    </div></div>
+    </section>
+    <!--Section: Live Preview-->
+
+    <!--Section: Code-->
+    <section>
+      <!-- prettier-ignore -->
+      <div class="bg-image border border-danger text-center"><img src="https://mdbootstrap.com/img/Others/access-restricted-prism.jpg" class="img-fluid rounded">
+    <div class="mask d-flex align-items-center" style="background-color: rgba(251, 251, 251, 0.7);">
+      <div class="text-center w-100">
+        <h2 class="p-3">Access restricted</h2>
+        <div class="d-none d-sm-block">
+          <p>To view this code you must have an <strong><u><a href="https://mdbootstrap.com/docs/standard/pro/" target="_blank">MDB 5 PRO license</a></u></strong></p>
+          <p><strong>Purchase MDB 5 PRO</strong> if you are a new user or <strong>Log in</strong> if you already have it</p>
+        </div>
+<a class="auth-modal-toggle btn btn-sm btn-primary m-2" data-auth-modal-tab="sign-in">Login</a>
+        <a class="btn m-2 btn-sm btn-danger" href="https://mdbootstrap.com/docs/standard/pro/" target="_blank" role="button">Buy Pro</a>
+      </div>
+    </div></div>
+    </section>
+    <!--Section: Code-->
+  </section>
+  <!--Section: Disable section example-->
+</section>
+<!--Section: Docs content-->
+              </div>
 
 <script>
 var canvas = document.getElementById('graph');
