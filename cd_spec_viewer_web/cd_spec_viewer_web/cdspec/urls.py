@@ -1,5 +1,7 @@
 from django.urls import path, re_path
 from django.conf.urls import url
+from django.contrib import admin
+from django.urls import path, include # <--
 
 from cd_spec_viewer_web.cdspec import views
 from .views import SpecRunJson
@@ -21,4 +23,6 @@ urlpatterns = [
     re_path('^multi/(?P<pks>(?:[1-9][0-9]*/)+)$', views.multi, name='multi'),
     # /cdspec/ table data
     url(r'^spec_run_data/$', SpecRunJson.as_view(), name="spec_run_list_json"),
+    path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
 ]
