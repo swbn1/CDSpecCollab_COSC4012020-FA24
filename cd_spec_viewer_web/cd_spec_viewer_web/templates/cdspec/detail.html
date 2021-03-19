@@ -30,7 +30,7 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js">
 
 </script>
-<input type = "color">
+
 <script>
 
 var canvas = document.getElementById('graph');
@@ -42,10 +42,10 @@ var trace = {
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
-        color: 'black'
+        color: '<input type = "color">'
     },
     line: {
-        color: 'black'
+        color: '<input type = "color">'
     }
 };
 
@@ -75,10 +75,10 @@ function changeY() {
         y: {{y|safe}},
         mode: 'lines+markers',
          marker: {
-            color: 'black'
+            color: '<input type = "color">'
         },
         line: {
-            color: 'black' 
+            color: '<input type = "color">' 
         }
     });
 
@@ -101,10 +101,10 @@ function changeY2() {
         y: {{y2|safe}},
         mode: 'lines+markers',
          marker: {
-            color: 'black'
+            color: '<input type = "color">'
         },
         line: {
-            color: 'black' 
+            color: '<input type = "color">' 
         }
     });
     var layout_update = {
@@ -125,10 +125,10 @@ function changeY3() {
         y: {{y3|safe}},
         mode: 'lines+markers',
          marker: {
-            color: 'black'
+            color: '<input type = "color">'
         },
         line: {
-            color: 'black' 
+            color: '<input type = "color">' 
         }
     });
     var layout_update = {
