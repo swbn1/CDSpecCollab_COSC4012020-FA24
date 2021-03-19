@@ -28,19 +28,52 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="dist/iro.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro"></script>
 <script>
-var canvas = document.getElementById('graph');
-//plot (x, y) data as scatter plot
 
+var canvas = document.getElementById('graph');
+
+var colorWheel = new iro.ColorPicker("#colorWheelDemo", {
+
+    layout: [
+    { 
+      component: iro.ui.Wheel,
+      options: {
+        wheelLightness: true,
+        wheelAngle: 0,
+        wheelDirection: "anticlockwise"
+      } 
+    },
+    {
+      component: iro.ui.Box,
+      options: {
+        // see below
+      }
+    },
+    {
+      component: iro.ui.Slider,
+      options: {
+        sliderType: 'hue' // can also be 'saturation', 'value', 'alpha' or 'kelvin',
+        sliderShape: 'circle',
+        activeIndex: 2
+      }
+    }
+    ]
+  
+});
+
+//plot (x, y) data as scatter plot
 var trace = {
+    
     x: {{x|safe}},
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
-        color: 'black'
+        color: colorWheel
     },
     line: {
-        color: 'black'
+        color: colorWheel
     }
 };
 
@@ -70,10 +103,10 @@ function changeY() {
         y: {{y|safe}},
         mode: 'lines+markers',
          marker: {
-            color: 'black'
+            color: colorWheel
         },
         line: {
-            color: 'black' 
+            color: colorWheel
         }
     });
 
@@ -96,10 +129,10 @@ function changeY2() {
         y: {{y2|safe}},
         mode: 'lines+markers',
          marker: {
-            color: 'black'
+            color: colorwheel
         },
         line: {
-            color: 'black' 
+            color: colorWheel
         }
     });
     var layout_update = {
@@ -120,10 +153,10 @@ function changeY3() {
         y: {{y3|safe}},
         mode: 'lines+markers',
          marker: {
-            color: 'black'
+            color: colorwheel
         },
         line: {
-            color: 'black' 
+            color: colorwheel
         }
     });
     var layout_update = {
@@ -138,6 +171,7 @@ function changeY3() {
 
 </script>
 
+<div class="wheel" id="colorWheelDemo"></div>
 
 
 {% endblock %}
