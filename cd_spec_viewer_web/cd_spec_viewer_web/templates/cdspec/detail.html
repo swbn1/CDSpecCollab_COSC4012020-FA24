@@ -34,34 +34,7 @@
 
 var canvas = document.getElementById('graph');
 
-var colorWheel = new iro.ColorPicker("colorWheelDemo", {
 
-    layout: [
-    { 
-      component: iro.ui.Wheel,
-      options: {
-        wheelLightness: true,
-        wheelAngle: 0,
-        wheelDirection: "anticlockwise"
-      } 
-    },
-    {
-      component: iro.ui.Box,
-      options: {
-        // see below
-      }
-    },
-    {
-      component: iro.ui.Slider,
-      options: {
-        sliderType: 'hue' // can also be 'saturation', 'value', 'alpha' or 'kelvin',
-        sliderShape: 'circle',
-        activeIndex: 2
-      }
-    }
-    ]
-  
-});
 
 //plot (x, y) data as scatter plot
 var trace = {
@@ -171,7 +144,6 @@ function changeY3() {
 
 </script>
 
-<div class="wheel" id="colorWheelDemo"></div>
 
 
 {% endblock %}
