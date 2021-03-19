@@ -34,14 +34,7 @@
 <script>
 
 var canvas = document.getElementById('graph');
-var colorPicker = new iro.ColorPicker('picker', {
-  layout: [
-    { 
-      component: iro.ui.Wheel,
-      options: {}
-    },
-  ]
-});
+var colorPicker = new iro.ColorPicker('picker');
 //plot (x, y) data as scatter plot
 var trace = {
     x: {{x|safe}},
