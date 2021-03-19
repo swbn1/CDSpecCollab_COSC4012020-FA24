@@ -73,11 +73,11 @@ function changeY() {
         y: {{y|safe}},
         mode: 'lines+markers',
          marker: {
-            color: <input type= "color">
+            color: 'black'
            
         },
         line: {
-            color:<input type= "color">
+            color: 'black'
         }
     });
 
@@ -100,10 +100,10 @@ function changeY2() {
         y: {{y2|safe}},
         mode: 'lines+markers',
          marker: {
-            color: <input type= "color">
+            color:'black' 
         },
         line: {
-            color: <input type= "color">
+            color:'black' 
         }
     });
     var layout_update = {
@@ -124,13 +124,12 @@ function changeY3() {
         y: {{y3|safe}},
         mode: 'lines+markers',
          marker: {
-            color: <input type= "color"> 
+            color: 'black'
         },
         line: {
-            color: <input type= "color">
+            color: 'black'
         }
     });
-
     var layout_update = {
         yaxis: {
             title: {
@@ -140,6 +139,13 @@ function changeY3() {
     };
     Plotly.update(canvas, {}, layout_update);
 }
+
+<div class="card">
+  <div class="card-body text-center d-flex justify-content-center align-items-center flex-column">
+    <p>Click the below button to activate the Color Picker</p>
+    <button class="btn btn-primary btn-sm" id="color-picker-2">Open Picker</button>
+  </div>
+</div>
 
 </script>
 
