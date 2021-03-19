@@ -32,6 +32,9 @@
 <script src="dist/color-picker.min.js"></script>
 
 <div class="example"></div>
+
+
+<script>
 let color_pickers = [
     new ColorPickerControl({ container: document.querySelector('.example')}),
     // more instances...
@@ -69,7 +72,6 @@ picker.on('close', (instance) => {
 });
 ];
 
-<script>
 var canvas = document.getElementById('graph');
 
 //plot (x, y) data as scatter plot
