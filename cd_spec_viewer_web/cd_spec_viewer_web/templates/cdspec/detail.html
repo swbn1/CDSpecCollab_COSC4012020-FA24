@@ -42,11 +42,15 @@ var trace = {
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
-        color: colorPicker
+        color: colorPicker.on('color:change', function(color) {
+            // log the current color as a HEX string
+            console.log(color.hexString);
+});
     },
     line: {
-       color: colorPicker 
-    }
+       color: colorPicker.on('color:change', function(color) {
+            // log the current color as a HEX string
+            console.log(color.hexString);
 };
 
 var data = [trace];
