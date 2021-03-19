@@ -32,7 +32,14 @@
 <div id="picker"></div>
 
 <script>
-var colorPicker = new iro.ColorPicker('picker');
+var colorPicker = new iro.ColorPicker('picker', {
+  layout: [
+    { 
+      component: iro.ui.Wheel,
+      options: {}
+    },
+  ]
+});
 var canvas = document.getElementById('graph');
 
 //plot (x, y) data as scatter plot
@@ -42,10 +49,10 @@ var trace = {
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
-        color: 'black' 
+        color: colorPicker 
     },
     line: {
-       color: 'black'  
+       color: colorPicker 
     }
 };
 
