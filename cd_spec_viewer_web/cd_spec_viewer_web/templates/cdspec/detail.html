@@ -28,31 +28,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script src="html5kellycolorpicker.min.js"></script>
 <script>
 
 var canvas = document.getElementById('graph');
 
- new KellyColorPicker({
-    place : 'picker', 
-    input : 'color'
 
-    userEvents: {
-      updateinput : function(handler, input, manualEnter) {},
-      change : function(handler) {}, 
-      mousemoveh : function(event, handler, dot) {}, 
-      mouseuph : function(event, handler, dot) {}, 
-      mousemovesv : function(event, handler, dot) {}, 
-      mouseupsv : function(event, handler, dot) {}, 
-      mousemoverest : function(event, handler, dot) {}, 
-      mouseupalpha : function(event, handler, dot) {}, 
-      mousemovealpha : function(event, handler, dot) {}, 
-      setmethod : function (handler, newMethod) {},
-      selectcolorsaver : function (handler, colorSaverObj) {},
-    }
-});
-<canvas id="picker"></canvas>
-<input id="color" value="#54aedb">
 
 //plot (x, y) data as scatter plot
 var trace = {
