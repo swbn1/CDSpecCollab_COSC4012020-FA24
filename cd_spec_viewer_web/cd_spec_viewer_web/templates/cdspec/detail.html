@@ -39,10 +39,10 @@ var trace = {
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
-        color: 'black'
+        color: <input type= "color"> 
     },
     line: {
-        color: 'black'
+        color: <input type= "color">
     }
 };
 
@@ -63,7 +63,7 @@ var layout = {
 }; 
 
 
-Plotly.newPlot(canvas, data, layout, <input type="color">);
+Plotly.newPlot(canvas, data, layout);
 
 //change data/axes to (x, y)
 function changeY() {
