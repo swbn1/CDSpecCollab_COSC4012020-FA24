@@ -76,12 +76,12 @@ var trace{{forloop.counter}} = {
     x: {{protein.x|safe}},
     y: {{protein.y|safe}},
     mode: 'lines+markers',
-      marker: {
-            color: 'black' 
-        },
-        line: {
-            color: 'black'
-        }
+    marker: {
+          color: 'black' 
+    },
+    line: {
+         color: 'black'
+    }
     name: '{{protein.run_title}}'
 };
 data.push(trace{{forloop.counter}});
