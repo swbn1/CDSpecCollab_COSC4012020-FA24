@@ -77,6 +77,12 @@ var trace{{forloop.counter}} = {
     y: {{protein.y|safe}},
     mode: 'lines+markers',
     type: 'scatter',
+   arker: {
+        color: 'black' 
+    },
+    line: {
+       color:  'black' 
+    } 
     name: '{{protein.run_title}}'
 };
 data.push(trace{{forloop.counter}});
