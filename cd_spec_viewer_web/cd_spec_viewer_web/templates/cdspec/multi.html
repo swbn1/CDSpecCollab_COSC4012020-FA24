@@ -76,12 +76,7 @@ var trace{{forloop.counter}} = {
     x: {{protein.x|safe}},
     y: {{protein.y|safe}},
     mode: 'lines+markers',
-    marker: {
-          color:'black' 
-    },
-    line: {
-         color: 'black'
-    }
+    type: 'scatter',
     name: '{{protein.run_title}}'
 };
 data.push(trace{{forloop.counter}});
@@ -110,12 +105,7 @@ function changeY() {
     x: {{protein.x|safe}},
     y: {{protein.y|safe}},
     mode: 'lines+markers',
-      marker: {
-            color: hexInput.value  
-        },
-        line: {
-            color: hexInput.value  
-        }
+    type: 'scatter',
     name: '{{protein.run_title}}'
   };
   data.push(trace{{forloop.counter}});
@@ -144,12 +134,7 @@ function changeY2() {
     x: {{protein.x|safe}},
     y: {{protein.y2|safe}},
     mode: 'lines+markers',
-      marker: {
-            color: hexInput.value  
-        },
-        line: {
-            color: hexInput.value  
-        }
+    type: 'scatter',
     name: '{{protein.run_title}}'
   };
   data.push(trace{{forloop.counter}});
@@ -178,12 +163,7 @@ function changeY3() {
     x: {{protein.x|safe}},
     y: {{protein.y3|safe}},
     mode: 'lines+markers',
-      marker: {
-            color: hexInput.value  
-        },
-        line: {
-            color: hexInput.value  
-        }
+    type: 'scatter',
     name: '{{protein.run_title}}'
   };
   data.push(trace{{forloop.counter}});
