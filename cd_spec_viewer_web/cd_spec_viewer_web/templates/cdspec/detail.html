@@ -43,6 +43,8 @@
 
 <script>
 var canvas = document.getElementById('graph');
+
+function changeColor(){
 // Create a new color picker instance
 // https://iro.js.org/guide.html#getting-started
 var colorPicker = new iro.ColorPicker(".colorPicker", {
@@ -73,16 +75,17 @@ colorPicker.on(["color:init", "color:change"], function(color){
 hexInput.addEventListener('change', function() {
   colorPicker.color.hexString = this.value;
 });
+}
 //plot (x, y) data as scatter plot
 var trace = {
     x: {{x|safe}},
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
-        color: 'black' 
+        color: changeColor()
     },
     line: {
-       color:'black' 
+        color: changeColor() 
     }
 };
 
