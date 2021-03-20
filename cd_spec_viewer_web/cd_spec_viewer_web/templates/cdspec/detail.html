@@ -43,7 +43,6 @@
 <script>
 
 var canvas = document.getElementById('graph');
-
 function changeColor(){
 // Create a new color picker instance
 // https://iro.js.org/guide.html#getting-started
@@ -119,11 +118,11 @@ function changeY() {
         y: {{y|safe}},
         mode: 'lines+markers',
          marker: {
-            color: colorPicker
+            color: hexInput.value 
            
         },
         line: {
-            color: colorPicker
+            color: 'black'
         }
     });
 
