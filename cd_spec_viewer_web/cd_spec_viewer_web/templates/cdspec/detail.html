@@ -84,10 +84,10 @@ var trace = {
     y: {{y|safe}},
     mode: 'lines+markers',
     marker: {
-        color: colorPicker.color.hexString 
+        color: 'black',
     },
     line: {
-       color: colorPicker.color.hexString 
+       color:  'black', 
     }
 };
 
@@ -118,11 +118,11 @@ function changeY() {
         y: {{y|safe}},
         mode: 'lines+markers',
          marker: {
-            color: 'black'
+            color: colorPicker.color.hexString
            
         },
         line: {
-            color: 'black'
+            color: colorPicker.color.hexString
         }
     });
 
