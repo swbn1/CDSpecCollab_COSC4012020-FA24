@@ -21,7 +21,7 @@
 </form>
 
 <div id="graph" width="400" height="200"> </div>
-
+<button onClick = "changeColor()">Display </button>
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
@@ -31,7 +31,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 
  <div class="wrap">
-    <button onClick = "changeColor()">Display </button>
       <div class="half">
         <div class="colorPicker"></div>
       </div>
@@ -118,11 +117,11 @@ function changeY() {
         y: {{y|safe}},
         mode: 'lines+markers',
          marker: {
-            color: 'black'
+            color: changeColor()
            
         },
         line: {
-            color: 'black'
+            color: changeColor()
         }
     });
 
