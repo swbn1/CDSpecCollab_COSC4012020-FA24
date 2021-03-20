@@ -21,7 +21,7 @@
 </form>
 
 <div id="graph" width="400" height="200"> </div>
-<button onClick = "changeColor()">Display </button>
+
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
@@ -31,6 +31,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 
  <div class="wrap">
+    <button onClick = "changeColor()">Display </button>
       <div class="half">
         <div class="colorPicker"></div>
       </div>
@@ -40,13 +41,10 @@
         <input id="hexInput"></input> 
       </div>
     </div>
-
 <script>
+
 var canvas = document.getElementById('graph');
-
 function changeColor(){
-
-}
 // Create a new color picker instance
 // https://iro.js.org/guide.html#getting-started
 var colorPicker = new iro.ColorPicker(".colorPicker", {
@@ -77,6 +75,8 @@ colorPicker.on(["color:init", "color:change"], function(color){
 hexInput.addEventListener('change', function() {
   colorPicker.color.hexString = this.value;
 });
+}
+
 
 //plot (x, y) data as scatter plot
 var trace = {
