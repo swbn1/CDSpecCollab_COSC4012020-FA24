@@ -53,6 +53,7 @@ colorPicker.on(["color:init", "color:change"], function(color){
   
   hexInput.value = color.hexString;
 
+
 });
 
 hexInput.addEventListener('change', function() {
@@ -76,12 +77,12 @@ var trace{{forloop.counter}} = {
     x: {{protein.x|safe}},
     y: {{protein.y|safe}},
     mode: 'lines+markers',
-    name: '{{protein.run_title}}'
+    name: '{{protein.run_title}}',
     marker: {
-          color: hexInput.value
+          color: 'orange'
     },
     line: {
-          color: hexInput.value 
+          color: 'blue'
     }
 };
 data.push(trace{{forloop.counter}});
@@ -110,7 +111,7 @@ function changeY() {
     x: {{protein.x|safe}},
     y: {{protein.y|safe}},
     mode: 'lines+markers',
-    name: '{{protein.run_title}}' 
+    name: '{{protein.run_title}}', 
     marker: {
           color: hexInput.value
     },
@@ -144,7 +145,7 @@ function changeY2() {
     x: {{protein.x|safe}},
     y: {{protein.y2|safe}},
     mode: 'lines+markers',
-    name: '{{protein.run_title}}
+    name: '{{protein.run_title}}',
     marker: {
           color: hexInput.value
     },
@@ -178,7 +179,7 @@ function changeY3() {
     x: {{protein.x|safe}},
     y: {{protein.y3|safe}},
     mode: 'lines+markers',
-    name: '{{protein.run_title}}'
+    name: '{{protein.run_title}}',
     marker: {
           color: hexInput.value
     },
