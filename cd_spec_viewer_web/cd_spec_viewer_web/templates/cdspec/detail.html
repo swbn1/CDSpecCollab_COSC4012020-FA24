@@ -21,12 +21,16 @@
 </form>
 
 <div id="graph" width="400" height="200"> </div>
+
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+<script>
 
 var canvas = document.getElementById('graph');
 
