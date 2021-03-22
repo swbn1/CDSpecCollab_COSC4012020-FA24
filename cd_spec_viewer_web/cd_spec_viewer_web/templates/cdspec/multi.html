@@ -109,7 +109,7 @@ function changeY() {
        color: hexInput.value
     },
     line:{
-       color: hexInput2.value
+       color: hexInput.value
     },
     name: '{{protein.run_title}}'
   };
@@ -139,7 +139,12 @@ function changeY2() {
     x: {{protein.x|safe}},
     y: {{protein.y2|safe}},
     mode: 'lines+markers',
-    type: 'scatter',
+     marker: {
+       color: hexInput.value
+    },
+    line:{
+       color: hexInput.value
+    },
     name: '{{protein.run_title}}'
    
   };
@@ -169,7 +174,12 @@ function changeY3() {
     x: {{protein.x|safe}},
     y: {{protein.y3|safe}},
     mode: 'lines+markers',
-    type: 'scatter',
+    marker: {
+       color: hexInput.value
+    },
+    line:{
+       color: hexInput.value
+    },
     name: '{{protein.run_title}}',
     
   };
