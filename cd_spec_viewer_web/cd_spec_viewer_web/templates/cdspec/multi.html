@@ -20,7 +20,8 @@
         <span class="title">Selected Color:</span>
         <div id="values"></div>
         <input id="hexInput"></input> 
-      </div>
+       <input id="hexInput2"></input> 
+       </div>
     </div>
 
 <script>
@@ -39,6 +40,7 @@ var colorPicker = new iro.ColorPicker(".colorPicker", {
 
 var values = document.getElementById("values");
 var hexInput = document.getElementById("hexInput");
+var hexInput2 = document.getElementById("hexInput2");
 
 // https://iro.js.org/guide.html#color-picker-events
 colorPicker.on(["color:init", "color:change"], function(color){
@@ -109,6 +111,12 @@ function changeY() {
     },
     line:{
        color: hexInput.value
+    },
+     marker: {
+       color: hexInput2.value
+    },
+    line:{
+       color: hexInput2.value
     },
     name: '{{protein.run_title}}'
   };
