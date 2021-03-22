@@ -139,6 +139,10 @@ function changeY() {
     y: {{protein.y|safe}},
     mode: 'lines+markers',
     type: 'scatter',
+    marker:{
+        color: hexInput.value
+    }
+
     name: '{{protein.run_title}}'
   };
   data.push(trace{{forloop.counter}});
