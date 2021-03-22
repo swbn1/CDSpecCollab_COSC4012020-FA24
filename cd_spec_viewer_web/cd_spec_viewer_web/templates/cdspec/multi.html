@@ -60,39 +60,6 @@ hexInput.addEventListener('change', function() {
 });
 }
 
-function changeColor2(){
-// Create a new color picker instance
-// https://iro.js.org/guide.html#getting-started
-var colorPicker = new iro.ColorPicker(".colorPicker", {
-  // color picker options
-  // Option guide: https://iro.js.org/guide.html#color-picker-options
-  width: 280,
-  color: "rgb(255, 0, 0)",
-  borderWidth: 1,
-  borderColor: "#fff",
-});
-
-var values = document.getElementById("values");
-var hexInput = document.getElementById("hexInput");
-
-// https://iro.js.org/guide.html#color-picker-events
-colorPicker.on(["color:init", "color:change"], function(color){
-  // Show the current color in different formats
-  // Using the selected color: https://iro.js.org/guide.html#selected-color-api
-  values.innerHTML = [
-    "hex: " + color.hexString,
-    "rgb: " + color.rgbString,
-    "hsl: " + color.hslString,
-  ].join("<br>");
-  
-  hexInput.value = color.hexString;
-
-});
-
-hexInput.addEventListener('change', function() {
-  colorPicker.color.hexString = this.value;
-});
-}
 function rainbowStop(h) {
   let f= (n,k=(n+h*12)%12) => .5-.5*Math.max(Math.min(k-3,9-k,1),-1);  
   let rgb2hex = (r,g,b) => "#"+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,0)).join('');
