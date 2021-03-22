@@ -139,13 +139,15 @@ function changeY2() {
     y: {{protein.y2|safe}},
     mode: 'lines+markers',
      marker: {
-       color: rainbowStop(h)
+       color: hexInput.value,
+       color: hexInput.value
     },
     line:{
-       color: 'red'
+       color: hexInput.value,
+       color: hexInput.value
     },
     name: '{{protein.run_title}}'
-   
+  
   };
   data.push(trace{{forloop.counter}});
   {% endfor %}
