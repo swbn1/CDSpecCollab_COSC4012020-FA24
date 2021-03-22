@@ -20,7 +20,6 @@
         <span class="title">Selected Color:</span>
         <div id="values"></div>
         <input id="hexInput"></input> 
-       <input id="hexInput2"></input> 
        </div>
     </div>
 
@@ -40,7 +39,7 @@ var colorPicker = new iro.ColorPicker(".colorPicker", {
 
 var values = document.getElementById("values");
 var hexInput = document.getElementById("hexInput");
-var hexInput2 = document.getElementById("hexInput2");
+var hexInput2 = document.getElementById("hexInput");
 
 // https://iro.js.org/guide.html#color-picker-events
 colorPicker.on(["color:init", "color:change"], function(color){
