@@ -43,6 +43,7 @@
 <script>
 
 var canvas = document.getElementById('graph');
+//function that display the color wheel
 function changeColor(){
 // Create a new color picker instance
 // https://iro.js.org/guide.html#getting-started
@@ -58,6 +59,7 @@ var colorPicker = new iro.ColorPicker(".colorPicker", {
 var values = document.getElementById("values");
 var hexInput = document.getElementById("hexInput");
 
+// method to when user change the color on the color wheel it will hex value, rgb value, and hsl value for the color
 // https://iro.js.org/guide.html#color-picker-events
 colorPicker.on(["color:init", "color:change"], function(color){
   // Show the current color in different formats
@@ -72,6 +74,7 @@ colorPicker.on(["color:init", "color:change"], function(color){
 
 });
 
+// color wheel methods for user to manual add a hex value for a particular color
 hexInput.addEventListener('change', function() {
   colorPicker.color.hexString = this.value;
 });
@@ -82,7 +85,9 @@ hexInput.addEventListener('change', function() {
 var trace = {
     x: {{x|safe}},
     y: {{y|safe}},
-    mode: 'lines+markers',
+    // mode come from the plotly 
+    mode: 'lines+markers'
+    // change to color of marker and line for plotly 
     marker: {
         color: 'black' 
     },
@@ -90,9 +95,10 @@ var trace = {
        color:  'black' 
     }
 };
-
+//store the plotly trace in the variable data
 var data = [trace];
 
+// main layout of the graph without changing the y axis and x axis 
 var layout = {
     showlegend: false,
     xaxis: {
@@ -112,11 +118,15 @@ Plotly.newPlot(canvas, data, layout);
 
 //change data/axes to (x, y)
 function changeY() {
+    //deleting the old trace of the canvas
     Plotly.deleteTraces(canvas, 0);
+    //add a new trace with new y axis and the x axis does not change
     Plotly.addTraces(canvas, {
         x: {{x|safe}},
         y: {{y|safe}},
+        // mode come from the plotly 
         mode: 'lines+markers',
+        // changes of color for plotly marker and line with the color wheel implementation 
          marker: {
             color: hexInput.value 
            
@@ -125,7 +135,7 @@ function changeY() {
             color: hexInput.value 
         }
     });
-
+    // update the layout of the graph
     var layout_update = {
         yaxis: {
             title: {
@@ -133,17 +143,21 @@ function changeY() {
             }
         }
     };
-
+    //built in plotly methods to update the graph
     Plotly.update(canvas, {}, layout_update);
 }
 
 //change data/axes to (x, y2)
 function changeY2() {
+   //deleting the old trace of the canvas 
     Plotly.deleteTraces(canvas, 0);
+    //add a new trace with new y axis and the x axis does not change
     Plotly.addTraces(canvas, {
         x: {{x|safe}},
         y: {{y2|safe}},
+       // mode come from the plotly 
         mode: 'lines+markers',
+        // changes of color for plotly marker and line with the color wheel implementation 
          marker: {
             color: hexInput.value  
         },
@@ -151,6 +165,7 @@ function changeY2() {
             color: hexInput.value  
         }
     });
+     // update the layout of the graph
     var layout_update = {
         yaxis: {
             title: {
@@ -158,16 +173,21 @@ function changeY2() {
             }
         }
     };
+    //built in plotly methods to update the graph
     Plotly.update(canvas, {}, layout_update);
 }
 
 //change data/axes to (x, y3)
 function changeY3() {
-    Plotly.deleteTraces(canvas, 0);
+    //deleting the old trace of the canvas
+    Plotly.deleteTraces(canvas, 0);   
+    //add a new trace with new y axis and the x axis does not change
     Plotly.addTraces(canvas, {
         x: {{x|safe}},
         y: {{y3|safe}},
+        // mode come from the plotly 
         mode: 'lines+markers',
+        // changes of color for plotly marker and line with the color wheel implementation  
          marker: {
             color: hexInput.value 
         },
@@ -175,6 +195,7 @@ function changeY3() {
             color: hexInput.value 
         }
     });
+     // update the layout of the graph
     var layout_update = {
         yaxis: {
             title: {
@@ -182,6 +203,7 @@ function changeY3() {
             }
         }
     };
+    //built in plotly methods to update the graph
     Plotly.update(canvas, {}, layout_update);
 }
 </script>
