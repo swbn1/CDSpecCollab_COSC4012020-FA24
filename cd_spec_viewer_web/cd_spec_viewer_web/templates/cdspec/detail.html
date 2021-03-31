@@ -83,12 +83,13 @@ hexInput.addEventListener('change', function() {
 
 
 //plot (x, y) data as scatter plot
-var trace = {
+//create trace of the protein data
+//more found in https://plotly.com/javascript/line-and-scatter/
+var trace = { 
     x: {{x|safe}},
     y: {{y|safe}},
-    // mode come from the plotly
     mode: 'lines+markers'
-    // change to color of marker and line for plotly 
+    // change color of marker and line for plotly 
     marker: {
         color: 'black' 
     },
@@ -119,9 +120,9 @@ Plotly.newPlot(canvas, data, layout);
 
 //change data/axes to (x, y)
 function changeY() {
-    //deleting the old trace of the canvas
+    //delete current data
     Plotly.deleteTraces(canvas, 0);
-    //add a new trace with new y axis and the x axis does not change
+    //add trace of x,y data
     Plotly.addTraces(canvas, {
         x: {{x|safe}},
         y: {{y|safe}},
@@ -136,7 +137,7 @@ function changeY() {
             color: hexInput.value 
         }
     });
-    // update the layout of the graph
+    //change y axis title to display y units
     var layout_update = {
         yaxis: {
             title: {
@@ -152,7 +153,7 @@ function changeY() {
 function changeY2() {
    //deleting the old trace of the canvas 
     Plotly.deleteTraces(canvas, 0);
-    //add a new trace with new y axis and the x axis does not change
+    //add trace of x,y2 data
     Plotly.addTraces(canvas, {
         x: {{x|safe}},
         y: {{y2|safe}},
@@ -166,7 +167,7 @@ function changeY2() {
             color: hexInput.value  
         }
     });
-     // update the layout of the graph
+     //change y axis title to display y2 units
     var layout_update = {
         yaxis: {
             title: {
@@ -182,7 +183,7 @@ function changeY2() {
 function changeY3() {
     //deleting the old trace of the canvas
     Plotly.deleteTraces(canvas, 0);   
-    //add a new trace with new y axis and the x axis does not change
+    //add trace of x,y3 data
     Plotly.addTraces(canvas, {
         x: {{x|safe}},
         y: {{y3|safe}},
@@ -196,7 +197,7 @@ function changeY3() {
             color: hexInput.value 
         }
     });
-     // update the layout of the graph
+     //change y axis title to display y3 units
     var layout_update = {
         yaxis: {
             title: {

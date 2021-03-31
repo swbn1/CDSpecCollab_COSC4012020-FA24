@@ -61,7 +61,9 @@ hexInput.addEventListener('change', function() {
   colorPicker.color.hexString = this.value;
 });
 }
-// function to stop the rainbow color
+
+//this function is currently unused
+//was used before in the Chart.js implementation; returns a color for some int h such that colors are distinct for each h
 function rainbowStop(h) {
   let f= (n,k=(n+h*12)%12) => .5-.5*Math.max(Math.min(k-3,9-k,1),-1);  
   let rgb2hex = (r,g,b) => "#"+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,0)).join('');
@@ -72,7 +74,7 @@ var canvas = document.getElementById('graph');
 
 var data = [];
 
-//for each model, add (x, y) trace to data, then create scatter plot
+//for each model, add (x, y) trace to data array, then create scatter plot
 {% for protein in proteins %}
 var trace{{forloop.counter}} = {
     x: {{protein.x|safe}},
@@ -84,7 +86,7 @@ var trace{{forloop.counter}} = {
     name: '{{protein.run_title}}'
 };
 
-// adding trace ti data variable
+// adding trace to data array
 data.push(trace{{forloop.counter}});
 {% endfor %}
 
@@ -106,7 +108,8 @@ Plotly.newPlot(canvas, data, layout);
 
 //change data/axes to (x, y)
 function changeY() {
-  data = [];
+  data = []; //clear data
+  //add (x, y) trace to data array for each model
   {% for protein in proteins %}
   var trace{{forloop.counter}} = {
     x: {{protein.x|safe}},
@@ -123,6 +126,7 @@ function changeY() {
   data.push(trace{{forloop.counter}});
   {% endfor %}
 
+  //set axes titles to x, y units
   var layout = {
     xaxis: {
         title: {
@@ -135,6 +139,7 @@ function changeY() {
         }
     }
   };
+  //change the canvas to display new multi-graph based on this data/layout
   Plotly.react(canvas, data, layout);
 }
 
@@ -158,6 +163,7 @@ function changeY2() {
   data.push(trace{{forloop.counter}});
   {% endfor %}
 
+  //set axes titles to x, y2 units
   var layout = {
     xaxis: {
         title: {
@@ -170,6 +176,7 @@ function changeY2() {
         }
     }
   };
+  //change the canvas to display new multi-graph based on this data/layout
   Plotly.react(canvas, data, layout);
 }
 
@@ -193,6 +200,7 @@ function changeY3() {
   data.push(trace{{forloop.counter}});
   {% endfor %}
 
+  //set axes titles to x, y3 units
   var layout = {
     xaxis: {
         title: {
@@ -205,6 +213,7 @@ function changeY3() {
         }
     }
   };
+  //change the canvas to display new multi-graph based on this data/layout
   Plotly.react(canvas, data, layout);
 }
 
