@@ -149,7 +149,8 @@ function changeY() {
 
 //change data/axes to (x, y2)
 function changeY2() {
-  data = [];
+  data = []; //clear data
+  //add (x, y) trace to data array for each model
   {% for protein in proteins %}
   var trace{{forloop.counter}} = {
     x: {{protein.x|safe}},
@@ -189,7 +190,8 @@ function changeY2() {
 
 //change data/axes to (x, y3)
 function changeY3() {
-  data = [];
+  data = []; //clear data
+  //add (x, y) trace to data array for each model
   {% for protein in proteins %}
   var trace{{forloop.counter}} = {
     x: {{protein.x|safe}},
