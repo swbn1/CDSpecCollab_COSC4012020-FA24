@@ -91,7 +91,15 @@ var trace = {
     y: {{y|safe}},
     mode: 'lines+markers',
     // change color of marker and line for plotly 
-    type: 'scatter'
+    marker: {
+        color: "black" 
+           
+    },
+    line: {
+        color: "black" 
+    }
+
+
 };
 //store the plotly trace in the variable data
 var data = [trace];
