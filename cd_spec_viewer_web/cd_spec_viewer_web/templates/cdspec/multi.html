@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 <h>Multi Graph</h>
+
+{# create a div to display the graph #}
 <div id="graph" width="400" height="200"> </div>
+
+{# button for each funtions in the python script #}
 <button onClick = "changeColor()">Display </button>
 <button onClick = "changeY()">Display {{first.y_units}}</button>
 <button onClick = "changeY2()">Display {{first.y2_units}}</button>
 <button onClick = "changeY3()">Display {{first.y3_units}}</button>
 
+{# imported javascript data for the poltly app and the colorwheel #}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
- 
+
+{# create a div for the color wheel#}
  <div class="wrap">
       <div class="half">
         <div class="colorPicker"></div>
