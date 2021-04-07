@@ -40,7 +40,7 @@
         <input id="hexInput"></input> 
       </div>
     </div>
-    
+
 <script>
 // blank canvas creation
 var canvas = document.getElementById('graph');
@@ -91,12 +91,7 @@ var trace = {
     y: {{y|safe}},
     mode: 'lines+markers'
     // change color of marker and line for plotly 
-    marker: {
-        color: 'black' 
-    },
-    line: {
-       color:  'black' 
-    }
+    type: 'scatter'
 };
 //store the plotly trace in the variable data
 var data = [trace];
