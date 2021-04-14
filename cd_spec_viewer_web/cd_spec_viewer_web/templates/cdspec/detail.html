@@ -24,7 +24,7 @@
 <div id="graph" width="400" height="200"> </div>
 
 {# button for each funtions in the python script #}
-<button onClick = "changeColor()">Display </button>
+<button onClick = "changeColor()">Display Please click this button once! </button>
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
@@ -39,6 +39,7 @@
  <div class="wrap">
       <div class="half">
         <div class="colorPicker"></div>
+        <span class="title">Drag the circle inside the color wheels.</span> 
       </div>
       <div class="half readout">
         <span class="title">Selected Color:</span>
