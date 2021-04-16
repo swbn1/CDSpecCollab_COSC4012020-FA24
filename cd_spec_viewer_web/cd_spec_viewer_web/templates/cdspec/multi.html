@@ -6,7 +6,6 @@
 <div id="graph" width="400" height="200"> </div>
 
 {# button for each funtions in the python script #}
-<button onClick = "changeColor()">Display Please click this button once! </button>
 <button onClick = "changeY()">Display {{first.y_units}}</button>
 <button onClick = "changeY2()">Display {{first.y2_units}}</button>
 <button onClick = "changeY3()">Display {{first.y3_units}}</button>
@@ -32,8 +31,8 @@
 
 <script>
 
-//function that display the color wheel
-function changeColor(){
+
+
 // Create a new color picker instance
 // https://iro.js.org/guide.html#getting-started
 var colorPicker = new iro.ColorPicker(".colorPicker", {
@@ -67,7 +66,7 @@ colorPicker.on(["color:init", "color:change"], function(color){
 hexInput.addEventListener('change', function() {
   colorPicker.color.hexString = this.value;
 });
-}
+
 
 //this function is currently unused
 //was used before in the Chart.js implementation; returns a color for some int h such that colors are distinct for each h
@@ -89,8 +88,14 @@ var trace{{forloop.counter}} = {
     y: {{protein.y|safe}},
    // mode come from the plotly
     mode: 'lines+markers',
-   // type come from plotly
-    type: 'scatter',
+   // change color of marker and line for plotly 
+    marker: {
+        color: hexInput.value 
+          
+    },
+    line: {
+        color: hexInput.value  
+    }
     name: '{{protein.run_title}}'
 };
 
