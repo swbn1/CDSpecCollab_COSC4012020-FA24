@@ -88,14 +88,7 @@ var trace{{forloop.counter}} = {
     y: {{protein.y|safe}},
    // mode come from the plotly
     mode: 'lines+markers',
-   // change color of marker and line for plotly 
-    marker: {
-        color: hexInput.value 
-          
-    },
-    line: {
-        color: hexInput.value  
-    },
+    type: 'scatter',
     name: '{{protein.run_title}}'
 };
 
