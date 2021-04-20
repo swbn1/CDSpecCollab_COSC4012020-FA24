@@ -21,6 +21,7 @@
       <div class="half">
         <div class="colorPicker"></div>
        <span class="title">Drag the circle inside the color wheels.</span> 
+       <span class="title">Drag the circle inside the opacity bar to change how vibrant the color is.</span>
       </div>
       <div class="half readout">
         <span class="title">Selected Color:</span>
@@ -124,10 +125,10 @@ function changeY() {
     mode: 'lines+markers',
     // change color of marker and line for plotly 
     marker: {
-       color: hexInput.value
+      color: [hexInput.value]
     },
     line:{
-       color: hexInput.value
+      color: [hexInput.value]
     },
     name: '{{protein.run_title}}'
   };
@@ -164,10 +165,10 @@ function changeY2() {
     mode: 'lines+markers',
     // change color of marker and line for plotly
      marker: {
-       color: hexInput.value
+       color: [hexInput.value]
     },
     line:{
-       color: hexInput.value
+       color: [hexInput.value]
     },
     name: '{{protein.run_title}}'
    
@@ -205,10 +206,10 @@ function changeY3() {
     mode: 'lines+markers',
     // change color of marker and line for plotly 
     marker: {
-       color: hexInput.value
+       color: [hexInput.value]
     },
     line:{
-       color: hexInput.value
+       color: [hexInput.value]
     },
     name: '{{protein.run_title}}',
    
