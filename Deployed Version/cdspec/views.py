@@ -12,6 +12,8 @@ from cdspec.models import SpecRun
 from .forms import CreateForm, EditForm
 from cdspec.util import handle_file_upload, Units, graph_format
 
+from django.db.models import Q
+
 # Create your views here.
 
 #Index View, a list of last ten objects
@@ -20,6 +22,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_runs'
 
     def get_queryset(self):
+        user = self.request.user
         return SpecRun.objects.order_by('-upload_date')[:10]
 
 #Edit view, allows the editing of existing objects
@@ -105,6 +108,21 @@ def multi(request, pks):
 # Table List View
 class SpecRunJson(BaseDatatableView):
     model = SpecRun
+    
+    #filter out models based on logged in user and model visibility
+    def get_initial_queryset(self):
+        user = self.request.user
+        q = SpecRun.objects
+        #view all spec runs
+        if user.has_perm('cdspec.can_view_all'):
+           return q
+        #view spec runs only if visible to student or public
+        elif user.has_perm('cdspec.can_view_student'):
+           return q.filter(Q(visible_student=True)|Q(visible_public=True))
+        #only view spec runs visible to public
+        else:
+           return q.filter(visible_public=True)
+        
     
 #Delete view
 @require_http_methods(["POST"])
