@@ -14,7 +14,7 @@ class UserAdmin(auth_admin.UserAdmin):
 
     form = UserChangeForm
     add_form = UserCreationForm
-    fieldsets = (("User", {"fields": ("username",)}),) + tuple(
+    fieldsets = tuple(
         auth_admin.UserAdmin.fieldsets
     )
 
