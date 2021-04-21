@@ -31,7 +31,7 @@ def edit(request, pk):
     user = request.user
     if not user.has_perm('cdspec.can_edit'):
        messages.info(request, "You do not have permission to edit this model")
-       return HttpResponseRedirect("/" + str(pk)) 
+       return HttpResponseRedirect("/cdspec/" + str(pk)) 
     
     #The post statement is the form submit handler. 
     if request.method == 'POST':
@@ -51,7 +51,7 @@ def create(request):
     user = request.user
     if not user.has_perm('cdspec.can_upload'):
        messages.info(request, "You do not have permission to upload")
-       return HttpResponseRedirect("/") 
+       return HttpResponseRedirect("/cdspec/") 
 
     #The post statement is the form submit handler. 
     if request.method == 'POST':
@@ -94,7 +94,7 @@ def detail(request, pk):
     if not model.visible_public:
        if (not model.visible_student and not user.has_perm('cdspec.can_view_all')) or (model.visible_student and not user.has_perm('cdspec.can_view_student')):
           messages.info(request, "You do not have permission to access this spec model")
-          return HttpResponseRedirect('/')
+          return HttpResponseRedirect('/cdspec/')
 
     #Send the model and all of the data points (presented as a list of x, list of y, list of y2, list of y3) to the corresponding template
     return render(request, 'cdspec/detail.html', {'specrun': model, 'x': graph_format(model.data, 0), 'y': graph_format(model.data, 1), 'y2': graph_format(model.data, 2),
@@ -121,7 +121,7 @@ def multi(request, pks):
               proteins.append(obj)
            else:
               messages.info(request, "You do not have permission to access this spec model")
-              return HttpResponseRedirect('/')
+              return HttpResponseRedirect('/cdspec/')
 
     #check if the models have the same units
     x_units = proteins[0].x_units
@@ -177,5 +177,5 @@ def delete(request, pk):
         obj.delete() 
         # after deleting redirect to  
         # home page 
-        return HttpResponseRedirect("/") 
+        return HttpResponseRedirect("/cdspec/") 
   

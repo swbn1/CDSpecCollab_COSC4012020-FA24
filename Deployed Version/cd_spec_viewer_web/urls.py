@@ -23,11 +23,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include('cdspec.urls')),
+    path('cdspec/', include('cdspec.urls')),
     path('admin/', admin.site.urls),
     path("users/", include('users.urls')),
     path("accounts/", include('allauth.urls')),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
+    path(
+        "", TemplateView.as_view(template_name="pages/home.html"), name="home"
+    ),
+
 ]
