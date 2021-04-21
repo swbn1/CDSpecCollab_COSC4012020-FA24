@@ -86,12 +86,17 @@ colorPicker.on(["color:init", "color:change"], function(color){
   ].join("<br>");
   
   hexInput.value = color.hexString;
+});
 
+//change color of plot only when color wheel changes (not on init)
+colorPicker.on(["color:change"], function(color) {
+   changePlotColor();
 });
 
 // color wheel methods for user to manual add a hex value for a particular color
 hexInput.addEventListener('change', function() {
   colorPicker.color.hexString = this.value;
+  changePlotColor();
 });
 
 
@@ -132,6 +137,15 @@ var layout = {
 
 // main graph without latout change
 Plotly.newPlot(canvas, data, layout);
+
+//change plot color to current hex input
+function changePlotColor() {
+    var update = {
+        'marker.color': hexInput.value,
+        'line.color': hexInput.value
+    };
+    Plotly.update(canvas, update, {});
+}
 
 //change data/axes to (x, y)
 function changeY() {
