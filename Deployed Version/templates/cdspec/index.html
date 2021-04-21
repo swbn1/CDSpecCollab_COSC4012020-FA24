@@ -8,6 +8,7 @@
 </ul>
 {% endif %}
 
+
 {% block content %}
 	<table id="table-view" class="table" style="width: 100%" />
 {% endblock %}
@@ -28,7 +29,7 @@
 
 		var dt_table = $('#table-view').DataTable({
 						<!-- could not get url reverse matching to work -->
-			ajax: '/spec_run_data',
+			ajax: '/cdspec/spec_run_data',
 			order: [[ 1, "desc" ]],
 			"rowCallback": function( row, data ) {
 				if ( $.inArray(data.pk, selected) !== -1 ) {
