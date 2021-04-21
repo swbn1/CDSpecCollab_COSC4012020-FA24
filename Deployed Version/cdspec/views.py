@@ -5,6 +5,7 @@ from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import permission_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.contrib import messages
 
@@ -27,6 +28,11 @@ class IndexView(generic.ListView):
 
 #Edit view, allows the editing of existing objects
 def edit(request, pk):
+    user = request.user
+    if not user.has_perm('cdspec.can_edit'):
+       messages.info(request, "You do not have permission to edit this model")
+       return HttpResponseRedirect("/" + str(pk)) 
+    
     #The post statement is the form submit handler. 
     if request.method == 'POST':
         #We first recreate the form object using the request objects.
@@ -42,6 +48,11 @@ def edit(request, pk):
 
 #Create View, allows the creation of new objects
 def create(request):
+    user = request.user
+    if not user.has_perm('cdspec.can_upload'):
+       messages.info(request, "You do not have permission to upload")
+       return HttpResponseRedirect("/") 
+
     #The post statement is the form submit handler. 
     if request.method == 'POST':
         #We first recreate the form object using the request objects.
@@ -76,16 +87,41 @@ def create(request):
 
 #Singular View w/ graph
 def detail(request, pk):
+    user = request.user
     model = get_object_or_404(SpecRun, pk=pk)
+    
+    #restrict view access
+    if not model.visible_public:
+       if (not model.visible_student and not user.has_perm('cdspec.can_view_all')) or (model.visible_student and not user.has_perm('cdspec.can_view_student')):
+          messages.info(request, "You do not have permission to access this spec model")
+          return HttpResponseRedirect('/')
+
     #Send the model and all of the data points (presented as a list of x, list of y, list of y2, list of y3) to the corresponding template
     return render(request, 'cdspec/detail.html', {'specrun': model, 'x': graph_format(model.data, 0), 'y': graph_format(model.data, 1), 'y2': graph_format(model.data, 2),
     'y3': (graph_format(model.data, 3) if model.y3_units is not None else None), "pk": pk})
 
 #Multi View
 def multi(request, pks):
+
+    user = request.user
+
     proteins = []
     for pk in pks.split('/')[:-1]:
-        proteins.append(get_object_or_404(SpecRun, pk=pk))
+        obj = get_object_or_404(SpecRun, pk=pk)
+        #view all spec runs
+        if user.has_perm('cdspec.can_view_all'):
+           proteins.append(obj)
+        #view spec runs only if visible to student or public
+        elif user.has_perm('cdspec.can_view_student'):
+           if obj.visible_student or obj.visible_public:
+              proteins.append(obj)
+        #only view spec runs visible to public
+        else:
+           if obj.visible_public:
+              proteins.append(obj)
+           else:
+              messages.info(request, "You do not have permission to access this spec model")
+              return HttpResponseRedirect('/')
 
     #check if the models have the same units
     x_units = proteins[0].x_units
@@ -126,9 +162,14 @@ class SpecRunJson(BaseDatatableView):
     
 #Delete view
 @require_http_methods(["POST"])
-def delete(request, pk): 
+def delete(request, pk):
+    user = request.user 
     # fetch the object related to passed id 
-    obj = get_object_or_404(SpecRun, id = pk) 
+    obj = get_object_or_404(SpecRun, id = pk)
+
+    if not user.has_perm('cdspec.can_delete'):
+       messages.info(request, "You do not have permission to delete this model")
+       return HttpResponseRedirect("/" + str(pk)) 
   
   
     if request.method =="POST": 
