@@ -32,5 +32,13 @@ class SpecRun(models.Model):
     def __str__(self):
         return self.run_title + "[" + str(self.pk) + "]"
     
-    #class Meta:
+    class Meta:
     #     app_label = 'cd_spec_viewer_web.cdspec'
+       permissions = [
+           ("can_upload", "Can upload a CD spec model"),
+           ("can_edit", "Can edit a CD spec model"),
+           ("can_delete", "Can delete a CD spec model"),
+           ("can_view_student", "Can view a CD spec model for students"),
+           ("can_view_all", "Can view any CD spec model")
+       ]
+    
