@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>{{specrun.run_title}}</h1>
+<ul>
+<li>Uploaded: {{specrun.upload_date}}</li>
+<li>Ran: {{specrun.run_date}} by {{specrun.run_user}}</li>
+<li>File: <a href="{{specrun.source_file.url}}">{{specrun.source_file}}</li></a>
+<li>Description: <textarea>{{specrun.run_description}}</textarea></li>
+<li>{{specrun.data_points}} Datapoints: <textarea>{{specrun.data}}</textarea><br>
+</ul>
+
+<form action="{% url 'cdspec:edit' specrun.id %}">
+    {% csrf_token %}
+    <input type="submit" name="edit" value="Edit" />
+</form>
+
+<form action="{%url 'cdspec:delete' specrun.id%}" method="post">
+    {% csrf_token %}
+    <input type="submit" name="delete" value="Delete" />
+</form>
+
+{# create a div to display the graph #}
+<div id="graph" width="400" height="200"> </div>
+
+{# button for each funtions in the python script #}
+<button onClick = "changeY()">Display {{specrun.y_units}}</button>
+{% if specrun.y2_units != None %}
+<button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
+{% endif %}
+{% if specrun.y3_units != None %}
+<button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
+{% endif %}
+
+{# imported javascript data for the poltly app and the colorwheel #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+
+{# create a div for the color wheel#}
+ <div class="wrap">
+      <div class="half">
+        <div class="colorPicker"></div>
+        <span class="title">Drag the circle inside the color wheels.</span> 
+      </div>
+      <div class="half readout">
+        <span class="title">Selected Color:</span>
+        <div id="values"></div>
+        <input id="hexInput"></input> 
+      </div>
+    </div>
+
+<script>
+// blank canvas creation
+var canvas = document.getElementById('graph');
+
+
+// Create a new color picker instance
+// https://iro.js.org/guide.html#getting-started
+var colorPicker = new iro.ColorPicker(".colorPicker", {
+  // color picker options
+  // Option guide: https://iro.js.org/guide.html#color-picker-options
+  width: 280,
+  color: "rgb(255, 0, 0)",
+  borderWidth: 1,
+  borderColor: "#fff",
+});
+
+var values = document.getElementById("values");
+var hexInput = document.getElementById("hexInput");
+
+// method to when user change the color on the color wheel it will hex value, rgb value, and hsl value for the color
+// https://iro.js.org/guide.html#color-picker-events
+colorPicker.on(["color:init", "color:change"], function(color){
+  // Show the current color in different formats
+  // Using the selected color: https://iro.js.org/guide.html#selected-color-api
+  values.innerHTML = [
+    "hex: " + color.hexString,
+    "rgb: " + color.rgbString,
+    "hsl: " + color.hslString,
+  ].join("<br>");
+  
+  hexInput.value = color.hexString;
+
+});
+
+// color wheel methods for user to manual add a hex value for a particular color
+hexInput.addEventListener('change', function() {
+  colorPicker.color.hexString = this.value;
+});
+
+
+
+//plot (x, y) data as scatter plot
+//create trace of the protein data
+//more found in https://plotly.com/javascript/line-and-scatter/
+var trace = { 
+    x: {{x|safe}},
+    y: {{y|safe}},
+    mode: 'lines+markers',
+    // change color of marker and line for plotly 
+    marker: {
+        color: hexInput.value 
+          
+    },
+    line: {
+        color: hexInput.value  
+    }
+};
+//store the plotly trace in the variable data
+var data = [trace];
+
+// main layout of the graph without changing the y axis and x axis 
+var layout = {
+    showlegend: false,
+    xaxis: {
+        title: {
+            text: '{{specrun.x_units}}'
+        }
+    }, 
+    yaxis: {
+        title: {
+            text: '{{specrun.y_units}}'
+        }
+    }
+}; 
+
+// main graph without latout change
+Plotly.newPlot(canvas, data, layout);
+
+//change data/axes to (x, y)
+function changeY() {
+    //delete current data
+    Plotly.deleteTraces(canvas, 0);
+    //add trace of x,y data
+    Plotly.addTraces(canvas, {
+        x: {{x|safe}},
+        y: {{y|safe}},
+        // mode come from the plotly 
+        mode: 'lines+markers',
+        // changes of color for plotly marker and line with the color wheel implementation 
+         marker: {
+            color: hexInput.value 
+           
+        },
+        line: {
+            color: hexInput.value 
+        }
+    });
+    //change y axis title to display y units
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y_units}}'
+            }
+        }
+    };
+    //built in plotly methods to update the graph
+    Plotly.update(canvas, {}, layout_update);
+}
+
+//change data/axes to (x, y2)
+function changeY2() {
+   //deleting the old trace of the canvas 
+    Plotly.deleteTraces(canvas, 0);
+    //add trace of x,y2 data
+    Plotly.addTraces(canvas, {
+        x: {{x|safe}},
+        y: {{y2|safe}},
+       // mode come from the plotly 
+        mode: 'lines+markers',
+        // changes of color for plotly marker and line with the color wheel implementation 
+         marker: {
+            color: hexInput.value  
+        },
+        line: {
+            color: hexInput.value  
+        }
+    });
+     //change y axis title to display y2 units
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y2_units}}'
+            }
+        }
+    };
+    //built in plotly methods to update the graph
+    Plotly.update(canvas, {}, layout_update);
+}
+
+//change data/axes to (x, y3)
+function changeY3() {
+    //deleting the old trace of the canvas
+    Plotly.deleteTraces(canvas, 0);   
+    //add trace of x,y3 data
+    Plotly.addTraces(canvas, {
+        x: {{x|safe}},
+        y: {{y3|safe}},
+        // mode come from the plotly 
+        mode: 'lines+markers',
+        // changes of color for plotly marker and line with the color wheel implementation  
+         marker: {
+            color: hexInput.value 
+        },
+        line: {
+            color: hexInput.value 
+        }
+    });
+     //change y axis title to display y3 units
+    var layout_update = {
+        yaxis: {
+            title: {
+                text: '{{specrun.y3_units}}'
+            }
+        }
+    };
+    //built in plotly methods to update the graph
+    Plotly.update(canvas, {}, layout_update);
+}
+</script>
+
+
+{% endblock %}
