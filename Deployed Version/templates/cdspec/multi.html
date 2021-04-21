@@ -7,8 +7,12 @@
 
 {# button for each funtions in the python script #}
 <button onClick = "changeY()">Display {{first.y_units}}</button>
+{% if first.y2_units != None %}
 <button onClick = "changeY2()">Display {{first.y2_units}}</button>
+{% endif %}
+{% if first.y3_units != None %}
 <button onClick = "changeY3()">Display {{first.y3_units}}</button>
+{% endif %}
 
 {# imported javascript data for the poltly app and the colorwheel #}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
