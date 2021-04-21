@@ -19,9 +19,8 @@ class UserAdmin(auth_admin.UserAdmin):
     )
 
     staff_fieldsets = (
-        (None, {'fields': ("username",)}),
+        (None, {'fields': ("username", "is_staff")}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
-        # No permissions
         (_('Groups'), {'fields': ('groups',)}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
