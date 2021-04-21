@@ -10,15 +10,19 @@
 <li>{{specrun.data_points}} Datapoints: <textarea>{{specrun.data}}</textarea><br>
 </ul>
 
+{% if perms.cdspec.can_edit %}
 <form action="{% url 'cdspec:edit' specrun.id %}">
     {% csrf_token %}
     <input type="submit" name="edit" value="Edit" />
 </form>
+{% endif %}
 
+{% if perms.cdspec.can_delete %}
 <form action="{%url 'cdspec:delete' specrun.id%}" method="post">
     {% csrf_token %}
     <input type="submit" name="delete" value="Delete" />
 </form>
+{% endif %}
 
 {# create a div to display the graph #}
 <div id="graph" width="400" height="200"> </div>
