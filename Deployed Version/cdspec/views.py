@@ -8,6 +8,7 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import permission_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 from cdspec.models import SpecRun
 from .forms import CreateForm, EditForm
@@ -22,9 +23,19 @@ class IndexView(generic.ListView):
     template_name = "cdspec/index.html"
     context_object_name = 'latest_runs'
 
+    def get(self, request, *args, **kwargs):
+        if kwargs:
+           return render(request, 'cdspec/index.html', {'username' : kwargs['user']})
+        else:
+           return render(request, 'cdspec/index.html')
+
     def get_queryset(self):
-        user = self.request.user
-        return SpecRun.objects.order_by('-upload_date')[:10]
+        #if uploadedby=user argument is passed, filter the table
+        if self.kwargs:
+           user = get_user_model().objects.get(username=self.kwargs['user'])
+           return SpecRun.objects.filter(upload_user=user).order_by('-upload_date')[:10]
+        else:
+           return SpecRun.objects.order_by('-upload_date')[:10]
 
 #Edit view, allows the editing of existing objects
 def edit(request, pk):
@@ -150,6 +161,12 @@ class SpecRunJson(BaseDatatableView):
     def get_initial_queryset(self):
         user = self.request.user
         q = SpecRun.objects
+
+        #filter out if looking for models from single upload user
+        if self.kwargs:
+           uploader = get_user_model().objects.get(username=self.kwargs['user'])
+           q = q.filter(upload_user=uploader)
+
         #view all spec runs
         if user.has_perm('cdspec.can_view_all'):
            return q
