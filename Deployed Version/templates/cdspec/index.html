@@ -80,7 +80,7 @@
 			buttons : [
 			{
 				text : "Upload",
-				action: function(){ window.location.href = "create"; }
+				action: function(){ window.location.href = "/cdspec/create"; }
 			},
 			{
 				text : "Multi-Graph",
@@ -88,7 +88,7 @@
 					if(selected.length != 0){
 					var slug = "/"
 					selected.forEach(pk => slug+= pk + "/");
-					window.location.href = "multi" + slug;
+					window.location.href = "/cdspec/multi" + slug;
 					}
 				}
 			},
