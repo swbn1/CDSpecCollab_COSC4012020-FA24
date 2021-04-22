@@ -4,7 +4,7 @@
 <h1>{{specrun.run_title}}</h1>
 <ul style="list-style-type:none; margin:0; padding:0;">
 <li><b>Uploaded:</b> {{specrun.upload_date}}
-{% if specrun.upload_user != None %} by <a href="{% url 'users:detail' specrun.upload_user.username %}">{{specrun.upload_user.username}}</a> {% endif %}</li>
+{% if specrun.upload_user != None %} by <a href="/cdspec/uploadedby={{specrun.upload_user.username}}">{{specrun.upload_user.username}}</a> {% endif %}</li>
 <li><b>Ran:</b> {{specrun.run_date}} by {{specrun.run_user}}</li>
 <li><b>File:</b> <a href="{{specrun.source_file.url}}">{{specrun.source_file}}</li></a>
 <li><b>Description:</b> <textarea style="width: 100%; max-width: 100%;" readonly>{{specrun.run_description}}</textarea></li>
