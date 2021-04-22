@@ -1,12 +1,15 @@
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.core.validators import FileExtensionValidator
+from django.contrib.auth import get_user_model
 
 #from cd_spec_viewer_web.users import User
 # Create your models here.
 
+User = get_user_model()
+
 class SpecRun(models.Model):
-    #upload_user = models.ForeignKey("Upload User", User, on_delete=models.CASCADE)
+    upload_user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     upload_date = models.DateTimeField("Upload Date", auto_now_add=True)
     run_date = models.DateTimeField("Run Date")
     run_user = models.CharField("Run by:", max_length=64)

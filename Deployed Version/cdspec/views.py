@@ -78,6 +78,7 @@ def create(request):
             if "Y3UNITS" in parsed_dictionary['header']:
                 model.y3_units = parsed_dictionary['header']['Y3UNITS']
             #print(molar_ellipticity_calculation(parsed_dictionary['data'], model.pathlength, model.protein_concentration, model.number_of_amino_acids, model.degrees_index))
+            model.upload_user = user
             #Then save the model to the db, here we can return a different view, maybe redirect.
             model.save()
             return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
