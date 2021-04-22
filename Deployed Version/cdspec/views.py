@@ -123,6 +123,10 @@ def multi(request, pks):
 
     user = request.user
 
+    if pks == "":
+       messages.info(request, "Select table rows to use the Multi-Graph function")
+       return HttpResponseRedirect('/cdspec/')
+
     proteins = []
     for pk in pks.split('/')[:-1]:
         obj = get_object_or_404(SpecRun, pk=pk)

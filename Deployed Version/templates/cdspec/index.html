@@ -89,7 +89,9 @@
 					var slug = "/"
 					selected.forEach(pk => slug+= pk + "/");
 					window.location.href = "/cdspec/multi" + slug;
-					}
+					} else {
+                                           alert("Select table rows to use the Multi-Graph function");
+                                        }
 				}
 			},
 			]
