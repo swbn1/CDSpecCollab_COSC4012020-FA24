@@ -144,7 +144,7 @@ def multi(request, pks):
     for protein in proteins:
         if protein.x_units != x_units or protein.y_units != y_units or protein.y2_units != y2_units or protein.y3_units != y3_units:
             messages.info(request, 'Multi-graph failed: graphs have different axes')
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('/cdspec/')
 
     #Send the models and all of the data points (presented as a list of x, list of y, list of y2, list of y3) to the corresponding template
     output_object = [];
