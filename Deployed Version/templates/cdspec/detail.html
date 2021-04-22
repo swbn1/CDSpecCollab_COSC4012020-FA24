@@ -2,33 +2,19 @@
 {% block content %}
 
 <h1>{{specrun.run_title}}</h1>
-<ul>
-<li>Uploaded: {{specrun.upload_date}}</li>
-<li>Ran: {{specrun.run_date}} by {{specrun.run_user}}</li>
-<li>File: <a href="{{specrun.source_file.url}}">{{specrun.source_file}}</li></a>
-<li>Description: <textarea cols="50" readonly>{{specrun.run_description}}</textarea></li>
-<li>{{specrun.data_points}} Datapoints: <textarea cols="50" readonly>{{specrun.data}}</textarea></li>
-<li> Protein Concentration: {{specrun.protein_concentration}} mg/mL</li>
-<li> Pathlength: {{specrun.pathlength}} cm</li>
-<li> # of Amino Acids: {{specrun.number_of_amino_acids}}</li>
+<ul style="list-style-type:none; margin:0; padding:0;">
+<li><b>Uploaded:</b> {{specrun.upload_date}}</li>
+<li><b>Ran:</b> {{specrun.run_date}} by {{specrun.run_user}}</li>
+<li><b>File:</b> <a href="{{specrun.source_file.url}}">{{specrun.source_file}}</li></a>
+<li><b>Description:</b> <textarea style="width: 100%; max-width: 100%;" readonly>{{specrun.run_description}}</textarea></li>
+<li><b>{{specrun.data_points}} Datapoints:</b> <textarea style="width: 100%; max-width: 100%;" readonly>{{specrun.data}}</textarea></li>
+<li><b>Protein Concentration:</b> {{specrun.protein_concentration|stringformat:".3G"}} mg/mL</li>
+<li><b>Pathlength:</b> {{specrun.pathlength|stringformat:".3G"}} cm</li>
+<li><b># of Amino Acids:</b> {{specrun.number_of_amino_acids}}</li>
 </ul>
 
-{% if perms.cdspec.can_edit %}
-<form action="{% url 'cdspec:edit' specrun.id %}">
-    {% csrf_token %}
-    <input type="submit" name="edit" value="Edit" />
-</form>
-{% endif %}
-
-{% if perms.cdspec.can_delete %}
-<form action="{%url 'cdspec:delete' specrun.id%}" method="post">
-    {% csrf_token %}
-    <input type="submit" name="delete" value="Delete" />
-</form>
-{% endif %}
-
 {# create a div to display the graph #}
-<div id="graph" width="400" height="200"> </div>
+<div id="graph" width="100%" height="100%"> </div>
 
 {# button for each funtions in the python script #}
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
@@ -57,6 +43,23 @@
         <input id="hexInput"></input> 
       </div>
     </div>
+
+{% if perms.cdspec.can_edit %}
+<br>
+<h2>Admin Controls:</h2>
+<form action="{% url 'cdspec:edit' specrun.id %}">
+    {% csrf_token %}
+    <input type="submit" name="edit" value="Edit" />
+</form>
+{% endif %}
+
+{% if perms.cdspec.can_delete %}
+<form action="{%url 'cdspec:delete' specrun.id%}" method="post">
+    {% csrf_token %}
+    <input type="submit" onclick="return confirm('Are you sure you want to remove this file?')" name="delete" value="Delete" />
+</form>
+{% endif %}
+
 
 <script>
 // blank canvas creation
