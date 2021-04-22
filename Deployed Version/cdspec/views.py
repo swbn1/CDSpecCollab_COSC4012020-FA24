@@ -90,6 +90,7 @@ def create(request):
                 model.y3_units = parsed_dictionary['header']['Y3UNITS']
             #print(molar_ellipticity_calculation(parsed_dictionary['data'], model.pathlength, model.protein_concentration, model.number_of_amino_acids, model.degrees_index))
             model.upload_user = user
+            model.upload_user_string = user.username
             #Then save the model to the db, here we can return a different view, maybe redirect.
             model.save()
             return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
@@ -164,8 +165,7 @@ class SpecRunJson(BaseDatatableView):
 
         #filter out if looking for models from single upload user
         if self.kwargs:
-           uploader = get_user_model().objects.get(username=self.kwargs['user'])
-           q = q.filter(upload_user=uploader)
+           q = q.filter(upload_user_string=self.kwargs['user'])
 
         #view all spec runs
         if user.has_perm('cdspec.can_view_all'):

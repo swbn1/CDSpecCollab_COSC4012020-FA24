@@ -10,6 +10,7 @@ User = get_user_model()
 
 class SpecRun(models.Model):
     upload_user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
+    upload_user_string = models.CharField(default="", max_length=150)
     upload_date = models.DateTimeField("Upload Date", auto_now_add=True)
     run_date = models.DateTimeField("Run Date")
     run_user = models.CharField("Run by:", max_length=64)
