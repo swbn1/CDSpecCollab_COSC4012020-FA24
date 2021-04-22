@@ -71,29 +71,34 @@ def create(request):
         #As long as the form is valid, we proceed to parsing.
         if form.is_valid():
             #We parse the file into three dictionaries, header, data and indicies all within parsed_dictionary
-            parsed_dictionary = handle_file_upload(request.FILES['source_file'])  
-            #We then save the form but don't commit to db yet
-            model = form.save(commit=False)
-            #We add all the model's fields that are from the parsed dictionary
-            date_time_string = parsed_dictionary['header']['DATE'] + " " + parsed_dictionary['header']['TIME']
-            model.run_date = datetime.datetime.strptime(date_time_string, "%y/%m/%d %H:%M:%S")
-            model.data = parsed_dictionary['data']
-            model.data_points = parsed_dictionary['header']['NPOINTS']
-            #Setting the x/y header names
-            if "XUNITS" in parsed_dictionary['header']: 
-                model.x_units = parsed_dictionary['header']['XUNITS']
-            if "YUNITS" in parsed_dictionary['header']:
-                model.y_units = parsed_dictionary['header']['YUNITS']
-            if "Y2UNITS" in parsed_dictionary['header']:
-                model.y2_units = parsed_dictionary['header']['Y2UNITS']
-            if "Y3UNITS" in parsed_dictionary['header']:
-                model.y3_units = parsed_dictionary['header']['Y3UNITS']
-            #print(molar_ellipticity_calculation(parsed_dictionary['data'], model.pathlength, model.protein_concentration, model.number_of_amino_acids, model.degrees_index))
-            model.upload_user = user
-            model.upload_user_string = user.username
-            #Then save the model to the db, here we can return a different view, maybe redirect.
-            model.save()
-            return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
+            try:
+               parsed_dictionary = handle_file_upload(request.FILES['source_file'])  
+               #We then save the form but don't commit to db yet
+               model = form.save(commit=False)
+               #We add all the model's fields that are from the parsed dictionary
+               date_time_string = parsed_dictionary['header']['DATE'] + " " + parsed_dictionary['header']['TIME']
+               model.run_date = datetime.datetime.strptime(date_time_string, "%y/%m/%d %H:%M:%S")
+               model.data = parsed_dictionary['data']
+               model.data_points = parsed_dictionary['header']['NPOINTS']
+               #Setting the x/y header names
+               if "XUNITS" in parsed_dictionary['header']: 
+                   model.x_units = parsed_dictionary['header']['XUNITS']
+               if "YUNITS" in parsed_dictionary['header']:
+                   model.y_units = parsed_dictionary['header']['YUNITS']
+               if "Y2UNITS" in parsed_dictionary['header']:
+                   model.y2_units = parsed_dictionary['header']['Y2UNITS']
+               if "Y3UNITS" in parsed_dictionary['header']:
+                   model.y3_units = parsed_dictionary['header']['Y3UNITS']
+               #print(molar_ellipticity_calculation(parsed_dictionary['data'], model.pathlength, model.protein_concentration, model.number_of_amino_acids, model.degrees_index))
+               model.upload_user = user
+               model.upload_user_string = user.username
+               #Then save the model to the db, here we can return a different view, maybe redirect.
+               model.save()
+               return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
+            except:
+               messages.error(request, 'Unable to parse file, format error')
+               return render(request, 'cdspec/create.html', {'form' : form})
+
     else:
         form = CreateForm()
     return render(request, 'cdspec/create.html', {'form': form,})
