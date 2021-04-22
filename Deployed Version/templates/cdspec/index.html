@@ -49,9 +49,16 @@
 					}					
 				},
 				{
-					title: 'Creation User',
+					title: 'Run by',
 					data: 'run_user'
 				},
+                                {
+                                        title: 'Uploaded By',
+                                        data: 'upload_user',
+                                        render: function(data) {
+                                                return '<a href="/users/' + data + '">' + data + '</a>'
+                                        }
+                                },
 				{
 					title: 'Date',
 					data: 'upload_date',
