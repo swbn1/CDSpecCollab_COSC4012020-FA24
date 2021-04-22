@@ -85,13 +85,9 @@
 			{
 				text : "Multi-Graph",
 				action: function(){
-					if(selected.length != 0){
-					var slug = "/"
-					selected.forEach(pk => slug+= pk + "/");
-					window.location.href = "/cdspec/multi" + slug;
-					} else {
-                                           alert("Select table rows to use the Multi-Graph function");
-                                        }
+				   var slug = "/"
+				   selected.forEach(pk => slug+= pk + "/");
+				   window.location.href = "/cdspec/multi" + slug;
 				}
 			},
 			]
