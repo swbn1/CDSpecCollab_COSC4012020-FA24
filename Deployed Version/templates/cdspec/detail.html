@@ -6,8 +6,11 @@
 <li>Uploaded: {{specrun.upload_date}}</li>
 <li>Ran: {{specrun.run_date}} by {{specrun.run_user}}</li>
 <li>File: <a href="{{specrun.source_file.url}}">{{specrun.source_file}}</li></a>
-<li>Description: <textarea>{{specrun.run_description}}</textarea></li>
-<li>{{specrun.data_points}} Datapoints: <textarea>{{specrun.data}}</textarea><br>
+<li>Description: <textarea cols="50" readonly>{{specrun.run_description}}</textarea></li>
+<li>{{specrun.data_points}} Datapoints: <textarea cols="50" readonly>{{specrun.data}}</textarea></li>
+<li> Protein Concentration: {{specrun.protein_concentration}} mg/mL</li>
+<li> Pathlength: {{specrun.pathlength}} cm</li>
+<li> # of Amino Acids: {{specrun.number_of_amino_acids}}</li>
 </ul>
 
 {% if perms.cdspec.can_edit %}
@@ -46,7 +49,7 @@
  <div class="wrap">
       <div class="half">
         <div class="colorPicker"></div>
-        <label for="title">Drag the circle inside the color wheels.</lebel>  
+        <span class="title">Drag the circle inside the color wheels.</span> 
       </div>
       <div class="half readout">
         <span class="title">Selected Color:</span>
