@@ -200,7 +200,8 @@ def delete(request, pk):
   
   
     if request.method =="POST": 
-        # delete object 
+        # delete object
+        obj.source_file.delete() 
         obj.delete() 
         # after deleting redirect to  
         # home page 
