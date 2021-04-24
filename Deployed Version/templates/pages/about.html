@@ -38,7 +38,8 @@
 
             <h3 style ="font-size:18px">Signing in:</h3>
             <p>You can sign in to your account by clicking on <a {% if not request.user.is_authenticated %} href="{% url 'account_login' %}" {% endif %}>Sign In</a> at the top of the page.</p>
-            <p>Your login username will be the beginning part of the your email preceding "@example.com".</p>
+            <p>If you have an SMCM email, then you can simply sign in with Google.</p>
+            <p>Otherwise, your login username will be the beginning part of the your email preceding "@example.com".</p>
             <p>You need to enter the verified password that you created for your account on the website.</p>
             <p>You can allow the website to remember your account if you like; this part is optional.</p>
 
