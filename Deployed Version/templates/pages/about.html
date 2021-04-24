@@ -29,7 +29,7 @@
             <h3 style ="font-size:18px">Uploading files to the database:</h3>
             <p>If you want to upload a CD spectrometer run, click on the upload button on the table view page.</p>
             <p>This will lead you to the create page, where you will need to fill out various information and provide a properly formatted .csv file pertaining to the run.</p>
-            <p>Once this is done, you can then click summit button. You will be redirected to a detailed view of that run that includes an interactive graph.</p>
+            <p>Once this is done, you can then click the submit button. You will be redirected to a detailed view of that run that includes an interactive graph.</p>
 
             <h3 style ="font-size:18px">Creating an account:</h3>
             <p>You can create an account by clicking on <a {% if not request.user.is_authenticated %} href="{% url 'account_signup' %}" {% endif %}> Sign Up</a> at the top of the page.</p>
