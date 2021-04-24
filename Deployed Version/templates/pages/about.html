@@ -20,13 +20,12 @@
             <p>A table view listing all of the runs can be found by clicking on the <a href="{% url 'cdspec:index' %}">Index</a> tab on the top of the page.</p>
             <p>You can see a detailed view of each run by clicking on the name on the first column of the table.</p>
             <p>If you want to graph multiple runs at once, you must select multiple runs by clicking on the rows of the table.</p>
-            <p>There is a previous button and next button in the table view page at the bottom for you to see older/newer runs.</p>
             {% if perms.cdspec.can_edit %}
             <p>Additionally, as an Administrator, you have the ability to edit/delete individual runs. The Administrator controls are located at the bottom of the detailed view page.</p>
             {% endif %}
 
 
-            <h3 style ="font-size:18px">Uploading files to the database:</h3>
+            <h3 style ="font-size:18px">Uploading runs to the database:</h3>
             <p>If you want to upload a CD spectrometer run, click on the upload button on the table view page.</p>
             <p>This will lead you to the create page, where you will need to fill out various information and provide a properly formatted .csv file pertaining to the run.</p>
             <p>Once this is done, you can then click the submit button. You will be redirected to a detailed view of that run that includes an interactive graph.</p>
