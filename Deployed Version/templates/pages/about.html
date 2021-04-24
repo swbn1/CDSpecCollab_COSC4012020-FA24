@@ -34,7 +34,7 @@
             <p>You can create an account by clicking on <a {% if not request.user.is_authenticated %} href="{% url 'account_signup' %}" {% endif %}> Sign Up</a> at the top of the page.</p>
             <p>This will lead you to a sign up page, where you will need to provide an email address and password.</p>
             <p>You must then go into your email and click on the verification link in order to verify your account before being authorized.</p>
-            <p>Alternatively, if you have an SMCM email, you can go straight to the <a href="{% url 'account_login' %}">login</a> page and log in using your Google account.</p>
+            <p>Alternatively, if you have an SMCM email, you can go straight to the <a {% if not request.user.is_authenticated %} href="{% url 'account_login' %}" {% endif %}>login</a> page and log in using your Google account.</p>
 
             <h3 style ="font-size:18px">Signing in:</h3>
             <p>You can sign in to your account by clicking on <a {% if not request.user.is_authenticated %} href="{% url 'account_login' %}" {% endif %}>Sign In</a> at the top of the page.</p>
