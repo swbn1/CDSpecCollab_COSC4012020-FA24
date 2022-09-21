@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-import os #imports operating system
-import sys #imports system
+import os
+import sys
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cd_spec_viewer_web.settings")
