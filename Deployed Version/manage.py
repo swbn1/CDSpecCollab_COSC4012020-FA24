@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import os
+import os #imports operating system
 import sys
 
 if __name__ == "__main__":
