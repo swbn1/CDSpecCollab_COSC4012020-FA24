@@ -26,9 +26,10 @@ User = get_user_model()
 # form -> Logout current User and login another User
 # add_form -> Add new User
 class UserAdmin(auth_admin.UserAdmin):
-
-    form = UserChangeForm
-    add_form = UserCreationForm
+    """Custom implementation of the UserAdmin class from Django.auth
+    Similar solution with explination: https://stackoverflow.com/questions/15012235/using-django-auth-useradmin-for-a-custom-user-model"""
+    form = UserChangeForm #override the form used to modify items
+    add_form = UserCreationForm #override the form used to create items
     fieldsets = tuple(
         auth_admin.UserAdmin.fieldsets
     )

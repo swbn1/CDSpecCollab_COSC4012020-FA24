@@ -24,9 +24,9 @@ class UserChangeForm(admin_forms.UserChangeForm):
 
 
 class UserCreationForm(admin_forms.UserCreationForm):
-    """Manages the user creation form
+    """Manages the  user creation form
 
-    Inherited Attirbutes:
+    Inherited Attributes:
         error_messages: A dictionary containing error messages
         cleaned_data: A dictionary containing the desired username and both copies of the password entered
     """

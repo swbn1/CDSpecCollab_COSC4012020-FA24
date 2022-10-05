@@ -11,11 +11,14 @@ from django.utils.translation import gettext_lazy as _ #translator
 
 
 class UsersConfig(AppConfig): #UsersConfig is a subclass of the class 'AppConfig'
+    """Configures the User app"""
     name = 'users' #providing it a name as 'users'
     verbose_name = _("Users") #the human readable name
 
     def ready(self):
-        #import the module cd_spec_viewer_web.users.signals -> if it is not present then the try block will throw an ImportError.
+        """Attempts to load the signals module
+            Raises:
+                ImportError: the signals module could not be found"""
         try:
             import cd_spec_viewer_web.users.signals  # noqa F401
         except ImportError:

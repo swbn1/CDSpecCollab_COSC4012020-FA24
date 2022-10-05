@@ -15,7 +15,7 @@ from django.utils.translation import gettext_lazy as _
 class User(AbstractUser):
     """Default user for CD Spec Viewer Web."""
 
-    #: First and last name do not cover name patterns around the globe
+    #TODO: First and last name do not cover name patterns around the globe
     name = CharField(_("Name of User"), blank=True, max_length=255)
 
     def get_absolute_url(self):
