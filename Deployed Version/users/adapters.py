@@ -1,19 +1,19 @@
-#commented by Andrew Kivrak
-#importing any method from typing package
+"""Customizes generic account adapters from allauth
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
+#Python
 from typing import Any
 
-#importing the required files from other package/classes(user defined)
-
-#importing DefaultAccountAdapter from allauth.account.adapter
+#Third-party
 from allauth.account.adapter import DefaultAccountAdapter
-
-#importing DefaultSocialAccountAdapter from allauth.socialaccount.adapter 
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
-#importing settings form django.conf
+#Django
 from django.conf import settings
-
-#importing HttpRequest from django.http 
 from django.http import HttpRequest
 
 

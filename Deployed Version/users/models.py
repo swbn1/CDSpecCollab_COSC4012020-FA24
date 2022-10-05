@@ -1,3 +1,11 @@
+"""Custom user model for use in the Users module
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
+#Django
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField
 from django.urls import reverse

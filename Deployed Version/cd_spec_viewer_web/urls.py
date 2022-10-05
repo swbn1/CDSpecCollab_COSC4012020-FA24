@@ -12,7 +12,13 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+    
+    Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+    This file and all contributions herin are covered by the GPL 3.0 License 
+    https://www.gnu.org/licenses/gpl-3.0.html
 """
+#Django
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
@@ -23,10 +29,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('cdspec/', include('cdspec.urls')),
+    path('cdspec/', include('cdspec.urls')), #Configure CDSPEC app urls
     path('admin/', admin.site.urls),
-    path("users/", include('users.urls')),
-    path("accounts/", include('allauth.urls')),
+    path("users/", include('users.urls')), #Configure USER app urls
+    path("accounts/", include('allauth.urls')), #Configure urls from AllAuth
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),

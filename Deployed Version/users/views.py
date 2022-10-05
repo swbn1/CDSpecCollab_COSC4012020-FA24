@@ -1,3 +1,16 @@
+"""Custom views for users
+Globals: 
+    user_detail_view -> Model
+    user_update_view -> Model
+    user_redirect_view -> Model
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
+
+#Django
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -9,7 +22,6 @@ User = get_user_model()
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
-
     model = User
     slug_field = "username"
     slug_url_kwarg = "username"
