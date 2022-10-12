@@ -1,6 +1,14 @@
-#django
+"""Implements a factory to generate fake users for unit tests
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
+#Django
 from typing import Any, Sequence
 from django.contrib.auth import get_user_model
+#Third-party
 from factory import Faker, post_generation
 from factory.django import DjangoModelFactory
 
