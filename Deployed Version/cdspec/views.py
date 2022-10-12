@@ -1,3 +1,11 @@
+"""This file defines views to be used by the CDSpec app
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
+#Python
 import datetime
 #Django
 from django.shortcuts import render, get_object_or_404
@@ -9,7 +17,7 @@ from django.contrib.auth.decorators import permission_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
-
+#Local Django
 from cdspec.models import SpecRun
 from .forms import CreateForm, EditForm
 from cdspec.util import handle_file_upload, Units, graph_format

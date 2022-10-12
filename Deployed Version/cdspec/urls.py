@@ -1,3 +1,10 @@
+"""This file specifies valid URL patterns for viewing CDSpec models
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
 from django.urls import path, re_path
 from django.conf.urls import url
 

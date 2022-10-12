@@ -1,3 +1,10 @@
+"""This file creates the models used by the CDSpec viewer
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
 #Django
 from django.db import models
 from django.contrib.postgres.fields import JSONField
@@ -24,6 +31,7 @@ class SpecRun(models.Model):
     visible_public = models.BooleanField("Visible to Public", default=False)
     source_file = models.FileField(upload_to='cdspecruns', validators=[FileExtensionValidator(allowed_extensions=['csv'])])
 
+    
     #Calculation variables
     protein_concentration = models.DecimalField("Protein Concentration", max_digits=50, decimal_places=20)
     pathlength = models.DecimalField("Curvette Pathlength", max_digits=50, decimal_places=20)
