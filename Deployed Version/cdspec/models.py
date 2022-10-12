@@ -1,13 +1,15 @@
+#Django
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth import get_user_model
 
-#from cd_spec_viewer_web.users import User
+# From cd_spec_viewer_web.users import User
 # Create your models here.
 
 User = get_user_model()
 
+#Creating User Model
 class SpecRun(models.Model):
     upload_user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     upload_user_string = models.CharField(default="", max_length=150)
@@ -38,6 +40,7 @@ class SpecRun(models.Model):
     
     class Meta:
     #     app_label = 'cd_spec_viewer_web.cdspec'
+    #Permission for the users
        permissions = [
            ("can_upload", "Can upload a CD spec model"),
            ("can_edit", "Can edit a CD spec model"),
