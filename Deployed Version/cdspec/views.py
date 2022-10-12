@@ -1,5 +1,5 @@
 import datetime
-
+#Django
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
@@ -46,9 +46,9 @@ def edit(request, pk):
     
     #The post statement is the form submit handler. 
     if request.method == 'POST':
-        #We first recreate the form object using the request objects.
+        """First recreates the form object using the request objects"""
         form = EditForm(request.POST, instance=get_object_or_404(SpecRun, pk=pk))
-        #As long as the form is valid, we proceed to parsing.
+        """If form is valid, it proceed to parsing"""
         if form.is_valid():
             model = form.save()
             return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
@@ -108,7 +108,7 @@ def detail(request, pk):
     user = request.user
     model = get_object_or_404(SpecRun, pk=pk)
     
-    #restrict view access
+    #restricts viewing access from users with no permission
     if not model.visible_public:
        if (not model.visible_student and not user.has_perm('cdspec.can_view_all')) or (model.visible_student and not user.has_perm('cdspec.can_view_student')):
           messages.info(request, "You do not have permission to access this spec model")
@@ -130,13 +130,16 @@ def multi(request, pks):
     proteins = []
     for pk in pks.split('/')[:-1]:
         obj = get_object_or_404(SpecRun, pk=pk)
+        
         #view all spec runs
         if user.has_perm('cdspec.can_view_all'):
            proteins.append(obj)
+           
         #view spec runs only if visible to student or public
         elif user.has_perm('cdspec.can_view_student'):
            if obj.visible_student or obj.visible_public:
               proteins.append(obj)
+              
         #only view spec runs visible to public
         else:
            if obj.visible_public:
@@ -191,19 +194,21 @@ class SpecRunJson(BaseDatatableView):
 @require_http_methods(["POST"])
 def delete(request, pk):
     user = request.user 
+    
     # fetch the object related to passed id 
     obj = get_object_or_404(SpecRun, id = pk)
-
+    
+    #If user has no permission delete
     if not user.has_perm('cdspec.can_delete'):
        messages.info(request, "You do not have permission to delete this model")
        return HttpResponseRedirect("/" + str(pk)) 
   
-  
     if request.method =="POST": 
-        # delete object
+    
+        #delete object
         obj.source_file.delete() 
         obj.delete() 
-        # after deleting redirect to  
-        # home page 
+        
+        # after deleting redirect to home page 
         return HttpResponseRedirect("/cdspec/") 
   
