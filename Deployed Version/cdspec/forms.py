@@ -1,3 +1,4 @@
+#Django
 from django.forms import ModelForm
 from cdspec.models import SpecRun
 
@@ -9,7 +10,7 @@ class CreateForm(ModelForm):
         model = SpecRun
         fields = ('run_title', 'run_description', 'run_user', 'visible_student', 'visible_public',
          'source_file', 'protein_concentration', 'pathlength', 'number_of_amino_acids')
-
+#Edit Form, fields specify the fields that can be edited
 class EditForm(ModelForm):
     class Meta:
         model = SpecRun
