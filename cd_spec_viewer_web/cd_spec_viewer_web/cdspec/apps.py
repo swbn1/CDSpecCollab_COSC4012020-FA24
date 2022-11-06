@@ -8,7 +8,7 @@ https://www.gnu.org/licenses/gpl-3.0.html
 #Django
 from django.apps import AppConfig
 
-#'CDspecConfig' is a subclass of classs 'AppCon
+#'CDspecConfig' is a subclass of classs 'AppConfig'
 class CdspecConfig(AppConfig):
     
     """Configures the CDspece app""" 
