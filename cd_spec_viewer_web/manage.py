@@ -25,6 +25,7 @@ if __name__ == "__main__":
 
     # This allows easy placement of apps within the interior
     # cd_spec_viewer_web directory.
+    # FOLLOWING 2 LINES NOT FOUND IN "DEPLOYED" VERSION
     current_path = Path(__file__).parent.resolve()
     sys.path.append(str(current_path / "cd_spec_viewer_web"))
 
