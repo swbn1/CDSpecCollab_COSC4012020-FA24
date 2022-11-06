@@ -1,3 +1,7 @@
+# Automatically generated for Django Projects;
+# Points to settings.py file;
+# Command-line utility for administrative tasks;
+
 #!/usr/bin/env python
 import os
 import sys
