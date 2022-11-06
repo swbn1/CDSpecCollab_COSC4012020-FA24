@@ -1,12 +1,29 @@
+"""This file creates the models used by the CDSpec viewer
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
+#Django
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.core.validators import FileExtensionValidator
+#IMPORT DISCREPANCY: Deployed features an additional import:
+#   from django.contrib.auth import get_user_model
 
 #from cd_spec_viewer_web.users import User
 # Create your models here.
 
+#CODE DISCREPANCY: Deployed has an addition line dependent on get_user_model import
+# User = get_user_model()
+
+#Creates user model
 class SpecRun(models.Model):
+#CODE DISCREPANCIES:
+# Not commented out in Deployed
     #upload_user = models.ForeignKey("Upload User", User, on_delete=models.CASCADE)
+    #upload_user_string = models.CharField(default="", max_length=150)
     upload_date = models.DateTimeField("Upload Date", auto_now_add=True)
     run_date = models.DateTimeField("Run Date")
     run_user = models.CharField("Run by:", max_length=64)
@@ -34,4 +51,12 @@ class SpecRun(models.Model):
     
     # class Meta:
     #     app_label = 'cd_spec_viewer_web.cdspec'
+    # DISCREPANCY: Deployed features a permissions list:
+    #       permissions = [
+    #       ("can_upload", "Can upload a CD spec model"),
+    #       ("can_edit", "Can edit a CD spec model"),
+    #       ("can_delete", "Can delete a CD spec model"),
+    #       ("can_view_student", "Can view a CD spec model for students"),
+    #       ("can_view_all", "Can view any CD spec model")
+    #   ]
 
