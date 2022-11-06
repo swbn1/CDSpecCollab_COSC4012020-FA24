@@ -1,5 +1,13 @@
-import datetime
+"""This file defines views to be used by the CDSpec app
 
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
+#Python
+import datetime
+#Django
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
@@ -7,13 +15,17 @@ from django.urls import reverse
 from django.views.decorators.http import require_http_methods
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.contrib import messages
-
+#Local Django
 from cd_spec_viewer_web.cdspec.models import SpecRun
 from .forms import CreateForm, EditForm
 from cd_spec_viewer_web.cdspec.util import handle_file_upload, Units, graph_format
 
+#IMPORT DISCREPANCY: Not included here
+# from django.db.models import Q
+
 # Create your views here.
 
+#LARGE CODE DISCREPANCY:
 #Index View, a list of last ten objects
 class IndexView(generic.ListView):
     template_name = "cdspec/index.html"
@@ -21,6 +33,27 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return SpecRun.objects.order_by('-upload_date')[:10]
+#
+#THIS IS WHAT BODY OF INDEX VIEW LOOKS LIKE IN DEPLOYED VERSION:
+#
+"""
+    template_name = "cdspec/index.html"
+    context_object_name = 'latest_runs'
+
+    def get(self, request, *args, **kwargs):
+        if kwargs:
+           return render(request, 'cdspec/index.html', {'username' : kwargs['user']})
+        else:
+           return render(request, 'cdspec/index.html')
+
+    def get_queryset(self):
+        #if uploadedby=user argument is passed, filter the table
+        if self.kwargs:
+           user = get_user_model().objects.get(username=self.kwargs['user'])
+           return SpecRun.objects.filter(upload_user=user).order_by('-upload_date')[:10]
+        else:
+           return SpecRun.objects.order_by('-upload_date')[:10]
+"""
 
 #Edit view, allows the editing of existing objects
 def edit(request, pk):
