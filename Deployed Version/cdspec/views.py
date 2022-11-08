@@ -3,6 +3,7 @@ This file defines views to be used by the CDSpec app;
 Django views are python functions which take http requests, and return http responses (e.g. HTML);
 To execute a view, we must call it via a URL;
 Therefore, the cdspec urls.py will make calls to the views.py class to access views of the cdspec folder;
+More information: https://www.w3schools.com/django/django_views.php
 
 Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
 
