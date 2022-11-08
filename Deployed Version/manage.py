@@ -3,6 +3,7 @@ Manage.py is a file automatically created in each Django Project;
 It is similar to django-admin in that it serves as Django's command-line utility for administrative tasks,
 so it can take in commands;
 It should set the DJANGO_SETTINGS_MODULE to point to this project's settings.py variable;
+More information: https://docs.djangoproject.com/en/4.1/ref/django-admin/
 
 Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
 
