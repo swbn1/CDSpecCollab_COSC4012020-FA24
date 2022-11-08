@@ -1,3 +1,14 @@
+"""
+Manage.py is a file automatically created in each Django Project;
+It is similar to django-admin in that it serves as Django's command-line utility for administrative tasks,
+so it can take in commands;
+It should set the DJANGO_SETTINGS_MODULE to point to this project's settings.py variable;
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
 #!/usr/bin/env python
 #Python
 import os
