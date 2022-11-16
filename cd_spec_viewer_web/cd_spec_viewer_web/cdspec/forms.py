@@ -7,9 +7,7 @@ https://www.gnu.org/licenses/gpl-3.0.html
 """
 #Django
 from django.forms import ModelForm
-# DISCREPANCY NOTED: from cd_spec_viewer_web.cdspec.models here, but deployed folder had
-# from cdspec.models only
-from cd_spec_viewer_web.cdspec.models import SpecRun
+from cdspec.models import SpecRun
 
 
 

@@ -9,21 +9,17 @@ https://www.gnu.org/licenses/gpl-3.0.html
 from django.db import models
 from django.contrib.postgres.fields import JSONField
 from django.core.validators import FileExtensionValidator
-#IMPORT DISCREPANCY: Deployed features an additional import:
-#   from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 
-#from cd_spec_viewer_web.users import User
+# From cd_spec_viewer_web.users import User
 # Create your models here.
 
-#CODE DISCREPANCY: Deployed has an addition line dependent on get_user_model import
-# User = get_user_model()
+User = get_user_model()
 
-#Creates user model
+#Creating User Model
 class SpecRun(models.Model):
-#CODE DISCREPANCIES:
-# Not commented out in Deployed
-    #upload_user = models.ForeignKey("Upload User", User, on_delete=models.CASCADE)
-    #upload_user_string = models.CharField(default="", max_length=150)
+    upload_user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
+    upload_user_string = models.CharField(default="", max_length=150)
     upload_date = models.DateTimeField("Upload Date", auto_now_add=True)
     run_date = models.DateTimeField("Run Date")
     run_user = models.CharField("Run by:", max_length=64)
@@ -35,6 +31,7 @@ class SpecRun(models.Model):
     visible_public = models.BooleanField("Visible to Public", default=False)
     source_file = models.FileField(upload_to='cdspecruns', validators=[FileExtensionValidator(allowed_extensions=['csv'])])
 
+    
     #Calculation variables
     protein_concentration = models.DecimalField("Protein Concentration", max_digits=50, decimal_places=20)
     pathlength = models.DecimalField("Curvette Pathlength", max_digits=50, decimal_places=20)
@@ -49,14 +46,14 @@ class SpecRun(models.Model):
     def __str__(self):
         return self.run_title + "[" + str(self.pk) + "]"
     
-    # class Meta:
+    class Meta:
     #     app_label = 'cd_spec_viewer_web.cdspec'
-    # DISCREPANCY: Deployed features a permissions list:
-    #       permissions = [
-    #       ("can_upload", "Can upload a CD spec model"),
-    #       ("can_edit", "Can edit a CD spec model"),
-    #       ("can_delete", "Can delete a CD spec model"),
-    #       ("can_view_student", "Can view a CD spec model for students"),
-    #       ("can_view_all", "Can view any CD spec model")
-    #   ]
-
+    #Permission for the users
+       permissions = [
+           ("can_upload", "Can upload a CD spec model"),
+           ("can_edit", "Can edit a CD spec model"),
+           ("can_delete", "Can delete a CD spec model"),
+           ("can_view_student", "Can view a CD spec model for students"),
+           ("can_view_all", "Can view any CD spec model")
+       ]
+    

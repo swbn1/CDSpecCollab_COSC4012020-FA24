@@ -1,13 +1,5 @@
 {% extends 'base.html' %}
 
-{% if messages %}
-<ul class="messages">
-    {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-
 {% block content %}
 	<table id="table-view" class="table" style="width: 100%" />
 {% endblock %}
@@ -28,7 +20,7 @@
 
 		var dt_table = $('#table-view').DataTable({
 						<!-- could not get url reverse matching to work -->
-			ajax: '/spec_run_data',
+			ajax: '/cdspec/spec_run_data/{{username|safe}}',
 			order: [[ 1, "desc" ]],
 			"rowCallback": function( row, data ) {
 				if ( $.inArray(data.pk, selected) !== -1 ) {
@@ -44,13 +36,20 @@
 					title: 'Molecule Name',
 					data: 'run_title',
 					render: function (data, type, row) {
-						return '<a href="/' + row.pk + '">' + row.run_title + '</a>';
+						return '<a href="/cdspec/' + row.pk + '">' + row.run_title + '</a>';
 					}					
 				},
 				{
-					title: 'Creation User',
+					title: 'Run by',
 					data: 'run_user'
 				},
+                                {
+                                        title: 'Uploaded By',
+                                        data: 'upload_user_string',
+                                        render: function(data) {
+                                                return '<a href="/cdspec/uploadedby=' + data + '">' + data + '</a>'
+                                        }
+                                },
 				{
 					title: 'Date',
 					data: 'upload_date',
@@ -81,16 +80,14 @@
 			buttons : [
 			{
 				text : "Upload",
-				action: function(){ window.location.href = "create"; }
+				action: function(){ window.location.href = "/cdspec/create"; }
 			},
 			{
 				text : "Multi-Graph",
 				action: function(){
-					if(selected.length != 0){
-					var slug = "/"
-					selected.forEach(pk => slug+= pk + "/");
-					window.location.href = "multi" + slug;
-					}
+				   var slug = "/"
+				   selected.forEach(pk => slug+= pk + "/");
+				   window.location.href = "/cdspec/multi" + slug;
 				}
 			},
 			]

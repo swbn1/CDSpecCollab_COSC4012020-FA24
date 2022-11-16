@@ -1,27 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-<h>Multi Graph</h>
+<h1>Multi Graph</h1>
 
 {# create a div to display the graph #}
 <div id="graph" width="400" height="200"> </div>
 
+<div>
 {# button for each funtions in the python script #}
 <button onClick = "changeY()">Display {{first.y_units}}</button>
+{% if first.y2_units != None %}
 <button onClick = "changeY2()">Display {{first.y2_units}}</button>
+{% endif %}
+{% if first.y3_units != None %}
 <button onClick = "changeY3()">Display {{first.y3_units}}</button>
-
+{% endif %}
+</div>
 {# imported javascript data for the poltly app and the colorwheel #}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 
+<div>
+<label for="model"> Change Color: </label>
+{% for protein in proteins %}
+<input type="radio" name="modelS" value="{{forloop.counter}}" checked="checked">{{protein.run_title}}</input>
+{% endfor %}
+
+</div>
+
 {# create a div for the color wheel#}
  <div class="wrap">
       <div class="half">
         <div class="colorPicker"></div>
        <span class="title">Drag the circle inside the color wheels.</span> 
-       <span class="title">Drag the circle inside the opacity bar to change how vibrant the color is.</span>
       </div>
       <div class="half readout">
         <span class="title">Selected Color:</span>
@@ -63,14 +75,28 @@ colorPicker.on(["color:init", "color:change"], function(color){
 
 });
 
-// color wheel methods for user to manual add a hex value for a particular color
-hexInput.addEventListener('change', function() {
-  colorPicker.color.hexString = this.value;
+//change color of plot only when color wheel changes (not on init)
+colorPicker.on(["color:change"], function(color) {
+   changePlotColor();
 });
 
 
-//this function is currently unused
-//was used before in the Chart.js implementation; returns a color for some int h such that colors are distinct for each h
+// color wheel methods for user to manual add a hex value for a particular color
+hexInput.addEventListener('change', function() {
+  colorPicker.color.hexString = this.value;
+  changePlotColor();
+});
+
+//change a trace's color based on selected radio button
+function changePlotColor() {
+    var update = {
+        'marker.color': hexInput.value,
+        'line.color': hexInput.value
+    };
+    Plotly.update(canvas, update, {}, [document.querySelector('input[name="modelS"]:checked').value - 1]);
+}
+
+//returns a color for some int h such that colors are distinct for each h
 function rainbowStop(h) {
   let f= (n,k=(n+h*12)%12) => .5-.5*Math.max(Math.min(k-3,9-k,1),-1);  
   let rgb2hex = (r,g,b) => "#"+[r,g,b].map(x=>Math.round(x*255).toString(16).padStart(2,0)).join('');
@@ -89,12 +115,6 @@ var trace{{forloop.counter}} = {
     y: {{protein.y|safe}},
    // mode come from the plotly
     mode: 'lines+markers',
-    marker: {
-      color: [hexInput.value]
-    },
-    line:{
-      color: [hexInput.value]
-    },
     name: '{{protein.run_title}}'
 };
 
@@ -120,25 +140,14 @@ Plotly.newPlot(canvas, data, layout);
 
 //change data/axes to (x, y)
 function changeY() {
-  data = []; //clear data
-  //add (x, y) trace to data array for each model
+  //update (x, y) trace to data array for each model
   {% for protein in proteins %}
-  var trace{{forloop.counter}} = {
-    x: {{protein.x|safe}},
-    y: {{protein.y|safe}},
-    // mode come from the plotly
-    mode: 'lines+markers',
-    // change color of marker and line for plotly 
-    marker: {
-      color: [hexInput.value]
-    },
-    line:{
-      color: [hexInput.value]
-    },
-    name: '{{protein.run_title}}'
+  var update{{forloop.counter}} = {
+    x: [{{protein.x|safe}}],
+    y: [{{protein.y|safe}}]
   };
-  // adding trace to data array
-  data.push(trace{{forloop.counter}});
+  //update plot
+  Plotly.update(canvas, update{{forloop.counter}}, {}, [{{forloop.counter}} - 1]);
   {% endfor %}
 
   //set axes titles to x, y units
@@ -154,32 +163,20 @@ function changeY() {
         }
     }
   };
-  //change the canvas to display new multi-graph based on this data/layout
-  Plotly.react(canvas, data, layout);
+  //update plot layout to display correct y units
+  Plotly.update(canvas, {}, layout);
 }
 
 //change data/axes to (x, y2)
 function changeY2() {
-  data = []; //clear data
-  //add (x, y2) trace to data array for each model
+  //update (x, y2) trace to data array for each model
   {% for protein in proteins %}
-  var trace{{forloop.counter}} = {
-    x: {{protein.x|safe}},
-    y: {{protein.y2|safe}},
-    // mode come from the plotly
-    mode: 'lines+markers',
-    // change color of marker and line for plotly
-     marker: {
-       color: [hexInput.value]
-    },
-    line:{
-       color: [hexInput.value]
-    },
-    name: '{{protein.run_title}}'
-   
+  var update{{forloop.counter}} = {
+    x: [{{protein.x|safe}}],
+    y: [{{protein.y2|safe}}]
   };
-  // adding trace to data array
-  data.push(trace{{forloop.counter}});
+  //update plot
+  Plotly.update(canvas, update{{forloop.counter}}, {}, [{{forloop.counter}} - 1]);
   {% endfor %}
 
   //set axes titles to x, y2 units
@@ -195,32 +192,20 @@ function changeY2() {
         }
     }
   };
-  //change the canvas to display new multi-graph based on this data/layout
-  Plotly.react(canvas, data, layout);
+  //update plot layout to display correct y2 units
+  Plotly.update(canvas, {}, layout);
 }
 
 //change data/axes to (x, y3)
 function changeY3() {
-  data = []; //clear data
-  //add (x, y3) trace to data array for each model
+  //update (x, y3) trace to data array for each model
   {% for protein in proteins %}
-  var trace{{forloop.counter}} = {
-    x: {{protein.x|safe}},
-    y: {{protein.y3|safe}},
-    // mode come from the plotly
-    mode: 'lines+markers',
-    // change color of marker and line for plotly 
-    marker: {
-       color: [hexInput.value]
-    },
-    line:{
-       color: [hexInput.value]
-    },
-    name: '{{protein.run_title}}',
-   
+  var update{{forloop.counter}} = {
+    x: [{{protein.x|safe}}],
+    y: [{{protein.y3|safe}}]
   };
-  // adding trace to data array
-  data.push(trace{{forloop.counter}});
+  //update plot
+  Plotly.update(canvas, update{{forloop.counter}}, {}, [{{forloop.counter}} - 1]);
   {% endfor %}
 
   //set axes titles to x, y3 units
@@ -236,8 +221,8 @@ function changeY3() {
         }
     }
   };
-  //change the canvas to display new multi-graph based on this data/layout
-  Plotly.react(canvas, data, layout);
+  //update plot layout to display correct y3 units
+  Plotly.update(canvas, {}, layout);
 }
 
 

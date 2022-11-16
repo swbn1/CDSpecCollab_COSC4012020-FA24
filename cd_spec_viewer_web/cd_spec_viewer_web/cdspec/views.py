@@ -1,4 +1,9 @@
-"""This file defines views to be used by the CDSpec app
+"""
+This file defines views to be used by the CDSpec app;
+Django views are python functions which take http requests, and return http responses (e.g. HTML);
+To execute a view, we must call it via a URL;
+Therefore, the cdspec urls.py will make calls to the views.py class to access views of the cdspec folder;
+More information: https://www.w3schools.com/django/django_views.php
 
 Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
 
@@ -13,30 +18,21 @@ from django.views import generic
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import permission_required
 from django_datatables_view.base_datatable_view import BaseDatatableView
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 #Local Django
-from cd_spec_viewer_web.cdspec.models import SpecRun
+from cdspec.models import SpecRun
 from .forms import CreateForm, EditForm
-from cd_spec_viewer_web.cdspec.util import handle_file_upload, Units, graph_format
+from cdspec.util import handle_file_upload, Units, graph_format
 
-#IMPORT DISCREPANCY: Not included here
-# from django.db.models import Q
+from django.db.models import Q
 
 # Create your views here.
 
-#LARGE CODE DISCREPANCY:
 #Index View, a list of last ten objects
 class IndexView(generic.ListView):
-    template_name = "cdspec/index.html"
-    context_object_name = 'latest_runs'
-
-    def get_queryset(self):
-        return SpecRun.objects.order_by('-upload_date')[:10]
-#
-#THIS IS WHAT BODY OF INDEX VIEW LOOKS LIKE IN DEPLOYED VERSION:
-#
-"""
     template_name = "cdspec/index.html"
     context_object_name = 'latest_runs'
 
@@ -53,26 +49,9 @@ class IndexView(generic.ListView):
            return SpecRun.objects.filter(upload_user=user).order_by('-upload_date')[:10]
         else:
            return SpecRun.objects.order_by('-upload_date')[:10]
-"""
-# ANOTHER LARGE DISCREPANCY
+
 #Edit view, allows the editing of existing objects
 def edit(request, pk):
-    #The post statement is the form submit handler. 
-    if request.method == 'POST':
-        #We first recreate the form object using the request objects.
-        form = EditForm(request.POST, instance=get_object_or_404(SpecRun, pk=pk))
-        #As long as the form is valid, we proceed to parsing.
-        if form.is_valid():
-            model = form.save()
-            return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
-    else:
-        form = EditForm(instance=get_object_or_404(SpecRun, pk=pk))
-    return render(request, 'cdspec/edit.html', {'form': form, 'pk':pk})
-
-#
-# HERE IS CODE FROM DEPLOYED VERSION FOR edit view
-#
-"""
     user = request.user
     if not user.has_perm('cdspec.can_edit'):
        messages.info(request, "You do not have permission to edit this model")
@@ -80,20 +59,24 @@ def edit(request, pk):
     
     #The post statement is the form submit handler. 
     if request.method == 'POST':
-        #First recreates the form object using the request objects
+        """First recreates the form object using the request objects"""
         form = EditForm(request.POST, instance=get_object_or_404(SpecRun, pk=pk))
-        #If form is valid, it proceed to parsing
+        """If form is valid, it proceed to parsing"""
         if form.is_valid():
             model = form.save()
             return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
     else:
         form = EditForm(instance=get_object_or_404(SpecRun, pk=pk))
     return render(request, 'cdspec/edit.html', {'form': form, 'pk':pk})
-"""
 
 
 #Create View, allows the creation of new objects
 def create(request):
+    user = request.user
+    if not user.has_perm('cdspec.can_upload'):
+       messages.info(request, "You do not have permission to upload")
+       return HttpResponseRedirect("/cdspec/") 
+
     #The post statement is the form submit handler. 
     if request.method == 'POST':
         #We first recreate the form object using the request objects.
@@ -101,50 +84,40 @@ def create(request):
         #As long as the form is valid, we proceed to parsing.
         if form.is_valid():
             #We parse the file into three dictionaries, header, data and indicies all within parsed_dictionary
-            parsed_dictionary = handle_file_upload(request.FILES['source_file'])  
-            #We then save the form but don't commit to db yet
-            model = form.save(commit=False)
-            #We add all the model's fields that are from the parsed dictionary
-            date_time_string = parsed_dictionary['header']['DATE'] + " " + parsed_dictionary['header']['TIME']
-            model.run_date = datetime.datetime.strptime(date_time_string, "%y/%m/%d %H:%M:%S")
-            model.data = parsed_dictionary['data']
-            model.data_points = parsed_dictionary['header']['NPOINTS']
-            #Setting the x/y header names
-            if "XUNITS" in parsed_dictionary['header']: 
-                model.x_units = parsed_dictionary['header']['XUNITS']
-            if "YUNITS" in parsed_dictionary['header']:
-                model.y_units = parsed_dictionary['header']['YUNITS']
-            if "Y2UNITS" in parsed_dictionary['header']:
-                model.y2_units = parsed_dictionary['header']['Y2UNITS']
-            if "Y3UNITS" in parsed_dictionary['header']:
-                model.y3_units = parsed_dictionary['header']['Y3UNITS']
-            #print(molar_ellipticity_calculation(parsed_dictionary['data'], model.pathlength, model.protein_concentration, model.number_of_amino_acids, model.degrees_index))
-#MILD DISCREPANCY: Following 2 lines in Deployed but not here            
-            #model.upload_user = user
-            #model.upload_user_string = user.username
-            #Then save the model to the db, here we can return a different view, maybe redirect.
-            model.save()
-            return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
-#Also contains an except in DEPLOYED version
-"""
+            try:
+               parsed_dictionary = handle_file_upload(request.FILES['source_file'])  
+               #We then save the form but don't commit to db yet
+               model = form.save(commit=False)
+               #We add all the model's fields that are from the parsed dictionary
+               date_time_string = parsed_dictionary['header']['DATE'] + " " + parsed_dictionary['header']['TIME']
+               model.run_date = datetime.datetime.strptime(date_time_string, "%y/%m/%d %H:%M:%S")
+               model.data = parsed_dictionary['data']
+               model.data_points = parsed_dictionary['header']['NPOINTS']
+               #Setting the x/y header names
+               if "XUNITS" in parsed_dictionary['header']: 
+                   model.x_units = parsed_dictionary['header']['XUNITS']
+               if "YUNITS" in parsed_dictionary['header']:
+                   model.y_units = parsed_dictionary['header']['YUNITS']
+               if "Y2UNITS" in parsed_dictionary['header']:
+                   model.y2_units = parsed_dictionary['header']['Y2UNITS']
+               if "Y3UNITS" in parsed_dictionary['header']:
+                   model.y3_units = parsed_dictionary['header']['Y3UNITS']
+               #print(molar_ellipticity_calculation(parsed_dictionary['data'], model.pathlength, model.protein_concentration, model.number_of_amino_acids, model.degrees_index))
+               model.upload_user = user
+               model.upload_user_string = user.username
+               #Then save the model to the db, here we can return a different view, maybe redirect.
+               model.save()
+               return HttpResponseRedirect(reverse('cdspec:detail', args=(model.id,)))
             except:
                messages.error(request, 'Unable to parse file, format error')
                return render(request, 'cdspec/create.html', {'form' : form})
-"""
+
     else:
         form = CreateForm()
     return render(request, 'cdspec/create.html', {'form': form,})
 
-# ANOTHER HUGE DISCREPANCY IN CODE
-# Singular View w/ graph
+#Singular View w/ graph
 def detail(request, pk):
-    model = get_object_or_404(SpecRun, pk=pk)
-    #Send the model and all of the data points (presented as a list of x, list of y, list of y2, list of y3) to the corresponding template
-    return render(request, 'cdspec/detail.html', {'specrun': model, 'x': graph_format(model.data, 0), 'y': graph_format(model.data, 1), 'y2': graph_format(model.data, 2), 'y3': graph_format(model.data, 3), "pk": pk})
-#
-# ALL OF THIS IS THE DEF BODY IN DEPLOYED, BUT NOT HERE
-#
-"""
     user = request.user
     model = get_object_or_404(SpecRun, pk=pk)
     
@@ -157,48 +130,24 @@ def detail(request, pk):
     #Send the model and all of the data points (presented as a list of x, list of y, list of y2, list of y3) to the corresponding template
     return render(request, 'cdspec/detail.html', {'specrun': model, 'x': graph_format(model.data, 0), 'y': graph_format(model.data, 1), 'y2': graph_format(model.data, 2),
     'y3': (graph_format(model.data, 3) if model.y3_units is not None else None), "pk": pk})
-"""
 
-#MORE DISCREPANCIES IN CODE
 #Multi View
 def multi(request, pks):
-    proteins = []
-    for pk in pks.split('/')[:-1]:
-        proteins.append(get_object_or_404(SpecRun, pk=pk))
-
-    #check if the models have the same units
-    x_units = proteins[0].x_units
-    y_units = proteins[0].y_units
-    y2_units = proteins[0].y2_units
-    y3_units = proteins[0].y3_units
-    for protein in proteins:
-        if protein.x_units != x_units or protein.y_units != y_units or protein.y2_units != y2_units or protein.y3_units != y3_units:
-            messages.info(request, 'Multi-graph failed: graphs have different axes')
-            return HttpResponseRedirect('/')
-
-    #Send the models and all of the data points (presented as a list of x, list of y, list of y2, list of y3) to the corresponding template
-    output_object = [];
-    for protein in proteins:
-        output_object.append({'run_title' : protein.run_title, 'model' : protein, 'x' : graph_format(protein.data, 0), 'y' : graph_format(protein.data, 1), 'y2' : graph_format(protein.data, 2), 'y3' : graph_format(protein.data, 3)});
-
-    return render(request, 'cdspec/multi.html', {'proteins': output_object, 'pks': pks, 'first': proteins[0]})
-
-#
-# HERE IS BODY OF DEPLOYED VERSION
-#
-"""
 
     user = request.user
 
     if pks == "":
        messages.info(request, "Select table rows to use the Multi-Graph function")
        return HttpResponseRedirect('/cdspec/')
+
     proteins = []
     for pk in pks.split('/')[:-1]:
-        obj = get_object_or_404(SpecRun, pk=pk)       
+        obj = get_object_or_404(SpecRun, pk=pk)
+        
         #view all spec runs
         if user.has_perm('cdspec.can_view_all'):
-           proteins.append(obj)         
+           proteins.append(obj)
+           
         #view spec runs only if visible to student or public
         elif user.has_perm('cdspec.can_view_student'):
            if obj.visible_student or obj.visible_public:
@@ -229,14 +178,11 @@ def multi(request, pks):
         'y3' : (graph_format(protein.data, 3) if protein.y3_units is not None else None)});
 
     return render(request, 'cdspec/multi.html', {'proteins': output_object, 'pks': pks, 'first': proteins[0]})
-"""
+
 # Table List View
 class SpecRunJson(BaseDatatableView):
     model = SpecRun
-
-# DISCREPANCY
-# ALL OF THIS IN SPECRUNJSON CLASS IN DEPLOYED, BUT NOT HERE
-"""
+    
     #filter out models based on logged in user and model visibility
     def get_initial_queryset(self):
         user = self.request.user
@@ -255,25 +201,11 @@ class SpecRunJson(BaseDatatableView):
         #only view spec runs visible to public
         else:
            return q.filter(visible_public=True)
-"""
-
-# ONCE AGAIN, MORE DISCREPANCY
+        
+    
 #Delete view
 @require_http_methods(["POST"])
-def delete(request, pk): 
-    # fetch the object related to passed id 
-    obj = get_object_or_404(SpecRun, id = pk) 
-  
-  
-    if request.method =="POST": 
-        # delete object 
-        obj.delete() 
-        # after deleting redirect to  
-        # home page 
-        return HttpResponseRedirect("/") 
- #
- # AND HERE IS BODY OF DEPLOYED:
-"""
+def delete(request, pk):
     user = request.user 
     
     # fetch the object related to passed id 
@@ -292,5 +224,4 @@ def delete(request, pk):
         
         # after deleting redirect to home page 
         return HttpResponseRedirect("/cdspec/") 
-"""
   

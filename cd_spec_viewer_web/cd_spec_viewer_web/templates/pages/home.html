@@ -1,13 +1,31 @@
 {% extends "base.html" %}
 <html>
-    <head>
-        <title>CD Spec Viewer</title>
-    </head>
-    <body>
-        <h1>Welcome To CD Spectrometer Collaboration!</h1>
-        <h2>Brought to you by Dr. Sherres</h2>
-        <a href="https://cdspeccollab.smcm.edu/">Continue to Website</a>
-    </body>
-    
+
+{% block content %}
+<head>
+    <title>CD Spec Viewer</title>
+</head>
+
+<body>
+
+    <h1>CD Spec Viewer</h1>
+    <h2>Welcome to Dr. Sherrer's CD Spec Viewer</h2>
+
+    <p><b>Description:</b> The Circular Dichroism Spectrometer (CD Spec) application is an online database created for research
+        and education purposes. This application shall be utilized by both the instructors and students to monitor
+        spectral changes in structure between protein-DNA interactions.</p>
+
+    <p><b>Project Leads:</b> Alex De La Paz, Caleb Shankle</p>
+
+    <p><b>R&D Contributors:</b> Alexander White, Cooper Rice, Benjamin Bowering, Braden Clough, Edmund Sherman, Jim Toledo,
+        Jordan Dixon, Kathryn Li, Patrick Romero, Thomas Walker</p>
+
+    <p><b>Q&A Contributors:</b> Annette Orr, Braden Clough, Cameron Carpenter, Christopher Beatrez, Edward Park, Faith Meyer
+    </p>
+
+    <a href="https://cdspeccollab.smcm.edu/cdspec/">Continue to Website</a>
+
+</body>
 
 </html>
+{% endblock content %}

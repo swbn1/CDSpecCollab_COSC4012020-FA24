@@ -10,8 +10,8 @@ from django.apps import AppConfig
 
 #'CDspecConfig' is a subclass of classs 'AppConfig'
 class CdspecConfig(AppConfig):
-    
-    """Configures the CDspece app""" 
-# DISCREPANCY NOTED: Deployed Folder has name = 'cdspec'     
-    name = 'cd_spec_viewer_web.cdspec'
+
+   """Configures the CDspece app""" 
+
+   name = 'cdspec'
 
