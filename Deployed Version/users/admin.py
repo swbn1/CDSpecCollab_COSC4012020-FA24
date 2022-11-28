@@ -1,13 +1,14 @@
 """Configures the automatic admin interface
 Globals:
     User (Also defined in forms.py, Duplicate?)
+Depends on:
+    users/forms.py
 
 Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
 
 This file and all contributions herin are covered by the GPL 3.0 License 
 https://www.gnu.org/licenses/gpl-3.0.html
 """
-#Commented by Andrew Kivrak
 #Django
 from django.contrib import admin
 from django.contrib.auth import admin as auth_admin

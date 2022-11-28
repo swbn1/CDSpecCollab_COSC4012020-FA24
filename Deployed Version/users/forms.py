@@ -1,7 +1,8 @@
 """Implements generic user creation and change forms
 Globals:
     User
-    
+Included by:
+    admin.py
 Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
 
 This file and all contributions herin are covered by the GPL 3.0 License 
