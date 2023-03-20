@@ -1,28 +1,32 @@
 {% extends "base.html" %}
+{% block content %}
 <html>
 
-{% block content %}
 <head>
     <title>CD Spec Viewer</title>
 </head>
 
 <body>
 
+    <!--Edits: Marjon -->
     <h1>CD Spec Viewer</h1>
+    <hr>
     <h2>Welcome to Dr. Sherrer's CD Spec Viewer</h2>
 
     <p><b>Description:</b> The Circular Dichroism Spectrometer (CD Spec) application is an online database created for research
         and education purposes. This application shall be utilized by both the instructors and students to monitor
         spectral changes in structure between protein-DNA interactions.</p>
 
-    <p><b>Project Leads:</b> Alex De La Paz, Caleb Shankle</p>
+    <!-- M: Updated the list of contributors and Project Leads. Might need to update the description. Jordan advised to show every contributor for the site,
+    so I think it would be good to show just our current team on the homepage, but have everyone else from past semesters on the Credits page.-->
+    <p><b>2023 Project Lead(s):</b> Jordan Golden</p>
 
-    <p><b>R&D Contributors:</b> Alexander White, Cooper Rice, Benjamin Bowering, Braden Clough, Edmund Sherman, Jim Toledo,
-        Jordan Dixon, Kathryn Li, Patrick Romero, Thomas Walker</p>
+    <p><b>2023 R&D Contributors:</b> William Capon, Ariat Ojulu, Shameer Rao, Adam Shaw, Sosan Wahid, Marjon Ward</p>
 
-    <p><b>Q&A Contributors:</b> Annette Orr, Braden Clough, Cameron Carpenter, Christopher Beatrez, Edward Park, Faith Meyer
-    </p>
+    <p><b>2023 Q&A Contributors:</b> Matt Boddicker, Gavin McDonald, Liam Pratt, Jordan Reece, Isabella Stephens</p>
 
+    <!-- M: This seems pointless as it just leads to the Index page, which is already on the navbar. Perhaps this can be replaced with the Upload Button that is
+    on the Index page and have the most recent (top 3) uploads below.-->
     <a href="https://cdspeccollab.smcm.edu/cdspec/">Continue to Website</a>
 
 </body>

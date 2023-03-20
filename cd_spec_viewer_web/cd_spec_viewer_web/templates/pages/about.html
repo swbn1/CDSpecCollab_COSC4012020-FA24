@@ -2,8 +2,10 @@
 
 {% block content %}
 <html>
+
+    <!--M: Might change this page to talk about the CD Spec Viewer in more detail and act as an FAQ page.-->
     <head>
-    <title>CD Spec Viewer About Page</title>
+    <title>CD Spec Viewer About and FAQ Page</title>
     <style>
     .Instruction {
         text-align: justify;
@@ -12,9 +14,10 @@
     </style>
     </head>
     <body>
-        <h1 sytle ="text-align:center">CD Spec Viewer About Page</h1>
-        <p sytle ="text-align:center">This is a spectrometer project by Dr. Sherrer.</p>
-        <p sytle ="text-align:center">This project was developed by students taking the COSC Capstone course at St. Mary's College of Maryland during the Fall 2020 and Spring 2021 semesters. We have created this website for people to upload and view their CD Spectrometer runs.</p>
+        <h1 style ="text-align:center">About CD Spec Viewer</h1>
+        <p style ="text-align:center">This is a spectrometer project by Dr. Sherrer.</p>
+        <p style ="text-align:center">This project was developed by students taking the COSC Capstone course at St. Mary's College of Maryland during the Fall 2020,
+        Spring 2021, and Spring 2023 semesters. We have created this website for people to upload and view their CD Spectrometer runs.</p>
         <div class ="Instruction">
             <h3 style ="font-size:18px">Viewing CD Spectrometer runs:</h3>
             <p>A table view listing all of the runs can be found by clicking on the <a href="{% url 'cdspec:index' %}">Index</a> tab on the top of the page.</p>
