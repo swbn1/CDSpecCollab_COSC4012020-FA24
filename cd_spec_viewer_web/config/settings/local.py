@@ -43,9 +43,9 @@ EMAIL_SUBJECT_PREFIX = "[CD Spec Viewer Web]"
 
 
 
-GMAIL_API_CLIENT_ID =""
-GMAIL_API_CLIENT_SECRET = ""
-GMAIL_API_REFRESH_TOKEN = ""
+GMAIL_API_CLIENT_ID ="330482126497-0ibvnsl7bogpldkipgo2qr96f80k0i54.apps.googleusercontent.com"
+GMAIL_API_CLIENT_SECRET = "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"
+GMAIL_API_REFRESH_TOKEN = "1//0dnItHjULNF-hCgYIARAAGA0SNwF-L9IrjOU-jR8JoT3pw8vmGVLTVdC9uf32qwh0241qVj5aeVA3_1AQa1XPHfYA7r2Mpv_3EVQ"
 
 # WhiteNoise
 # ------------------------------------------------------------------------------
