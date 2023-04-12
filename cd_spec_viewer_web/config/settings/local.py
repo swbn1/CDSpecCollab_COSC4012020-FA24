@@ -25,13 +25,13 @@ CACHES = {
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-#EMAIL_BACKEND = env(
-    #"DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
-#)
+EMAIL_BACKEND = env(
+    "DJANGO_EMAIL_BACKEND", default="django.core.mail.backends.console.EmailBackend"
+)
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = "gmailapi_backend.mail.GmailBackend"
+#EMAIL_BACKEND = "gmailapi_backend.mail.GmailBackend"
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
