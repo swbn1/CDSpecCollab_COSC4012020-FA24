@@ -14,9 +14,10 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path("users/", include("cd_spec_viewer_web.users.urls", namespace="users")),
+    
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    path('', include('cdspec.urls', namespace="cdspec")),
+    path('cdspec/', include('cdspec.urls', namespace="cdspec")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
