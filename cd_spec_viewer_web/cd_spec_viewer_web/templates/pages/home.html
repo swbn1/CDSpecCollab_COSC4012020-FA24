@@ -1,8 +1,12 @@
+<!-- Do NOT remove any of the "extends" and "block" Django tags. They're essential for what the Home page contains, such as the navigation bar. -->
 {% extends "base.html" %}
 {% block content %}
 <html>
 
 <head>
+
+<!-- The style tags apply some of the cosmetics for the features on the Home page,
+mainly the "Continue to Website" button (and when the cursor hovers on the button) and the NSF Logo. -->
 <style>
     .continue{
         display:inline-block;
@@ -36,8 +40,7 @@
 </head>
 
 <body>
-
-    <!--Edits: Marjon -->
+    <!-- Headers with the horizantal line separating them. -->
     <h1>CD Spec Viewer</h1>
     <hr>
     <h2>Welcome to Dr. Sherrer's CD Spec Viewer</h2>
@@ -56,10 +59,12 @@
     <p>The CD Spec Viewer was developed by Dr.Shanen M. Sherrer and collaborators with financial support from
     the National Science Foundation (NSF MRI grant#1919581). Copyright for the design and implementation of this
     site are retained by the Dr. Sherrer and St. Mary's College of Maryland.</p>
-    
+
+    <!-- The "Continue to Website" button. The inline style tag prevents the aesethics of the button from being overridden
+    by the outer style tags in home.html (this file) and base.html. -->
     <a href="https://cdspeccollab.smcm.edu/cdspec/" class="continue" style="text-decoration:none; color:white;">Continue to Website</a>
 
-    <!-- Make sure to add the actual image into the folders for CDSpec(Needs to be Centered)-->
+    <!-- The NSF (National Science Foundation) Logo. Uses Django tags so it can appear in production. -->
     <div class="nsfLogo">
         {%load static%}
       <img src={%static "images/National_Science_Foundation_Logo.png" %} alt="National Science Foundation (NSF) Logo">

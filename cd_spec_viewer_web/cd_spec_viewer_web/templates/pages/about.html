@@ -1,10 +1,12 @@
+<!-- Do NOT remove any of the "extends" and "block" Django tags. They're essential for what the Home page contains, such as the navigation bar. -->
 {% extends "base.html" %}
-
 {% block content %}
-<html>
 
+<html>
     <head>
     <title>CD Spec Viewer About and FAQ Page</title>
+
+    <!-- The style tags in this context align the text (in combination with base.html). -->
     <style>
     .Instruction {
         text-align: justify;
@@ -13,11 +15,10 @@
     .projectAbout{
         text-align: justify;
     }
-
     </style>
     </head>
     <body>
-
+        <!-- The About portion of the page. -->
         <div class = "projectAbout">
             <h1>About CD Spec Viewer</h1>
             <hr>
@@ -28,6 +29,7 @@
             <p>Frenquently Asked Questions about the site are featured below. To get more information, please refer to the <a href="">User Manual</a>.</p>
         </div>
 
+        <!-- The FAQ portion of the page. Some of the Django tags help link to other pages and some of the information is dependent is the user is an Admin. -->
         <div class ="Instruction">
 
             <h3 style ="font-size:18px">How do I view CD spectrometer runs?</h3>
