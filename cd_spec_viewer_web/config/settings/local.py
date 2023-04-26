@@ -31,11 +31,11 @@ EMAIL_BACKEND = env(
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-#EMAIL_BACKEND = "gmailapi_backend.mail.GmailBackend"
+EMAIL_BACKEND = "gmailapi_backend.mail.GmailBackend"
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
-DEFAULT_FROM_EMAIL = "CD Spec Viewer Web <noreply@example.com>"
+DEFAULT_FROM_EMAIL = "CD Spec Viewer Web"
 # https://docs.djangoproject.com/en/dev/ref/settings/#server-email
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
@@ -43,9 +43,6 @@ EMAIL_SUBJECT_PREFIX = "[CD Spec Viewer Web]"
 
 
 
-GMAIL_API_CLIENT_ID ="330482126497-0ibvnsl7bogpldkipgo2qr96f80k0i54.apps.googleusercontent.com"
-GMAIL_API_CLIENT_SECRET = "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"
-GMAIL_API_REFRESH_TOKEN = "1//0dnItHjULNF-hCgYIARAAGA0SNwF-L9IrjOU-jR8JoT3pw8vmGVLTVdC9uf32qwh0241qVj5aeVA3_1AQa1XPHfYA7r2Mpv_3EVQ"
 
 # WhiteNoise
 # ------------------------------------------------------------------------------

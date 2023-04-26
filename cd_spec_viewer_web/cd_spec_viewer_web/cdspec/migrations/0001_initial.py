@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('run_user', models.CharField(max_length=64, verbose_name='Run by:')),
                 ('run_title', models.CharField(max_length=64, verbose_name='Title')),
                 ('run_description', models.TextField(max_length=2000, verbose_name='Description (Character Limit: 2000)')),
-                ('data', django.contrib.postgres.fields.jsonb.JSONField(verbose_name='Raw Data')),
+                ('data', models.JSONField(verbose_name='Raw Data')),
                 ('data_points', models.IntegerField(verbose_name='Data Points')),
                 ('visible_student', models.BooleanField(default=False, verbose_name='Visible to Students')),
                 ('visible_public', models.BooleanField(default=False, verbose_name='Visible to Public')),
