@@ -1,14 +1,46 @@
+<!-- Do NOT remove any of the "extends" and "block" Django tags. They're essential for what the Home page contains, such as the navigation bar. -->
 {% extends "base.html" %}
 {% block content %}
 <html>
 
 <head>
-    <title>CD Spec Viewer</title>
+
+<!-- The style tags apply some of the cosmetics for the features on the Home page,
+mainly the "Continue to Website" button (and when the cursor hovers on the button) and the NSF Logo. -->
+<style>
+    .continue{
+        display:inline-block;
+        text-align:center;
+        background-color:#0E3663;
+        border:none;
+        border-radius:2px;
+        color:white;
+        text-decoration:none;
+        font-size:20px;
+        margin:15px 5px;
+        padding:10px 32px;
+        transition-duration:0.3s;
+        cursor:pointer;
+    }
+
+    .continue:hover{
+        background-color:#5978A9;
+    }
+
+    .nsfLogo{
+        display:block;
+        position:relative;
+        width:232px;
+        height:218px;
+        margin-left:auto;
+        margin-right:auto;
+    }
+</style>
+<title>CD Spec Viewer</title>
 </head>
 
 <body>
-
-    <!--Edits: Marjon -->
+    <!-- Headers with the horizantal line separating them. -->
     <h1>CD Spec Viewer</h1>
     <hr>
     <h2>Welcome to Dr. Sherrer's CD Spec Viewer</h2>
@@ -17,18 +49,26 @@
         and education purposes. This application shall be utilized by both the instructors and students to monitor
         spectral changes in structure between protein-DNA interactions.</p>
 
-    <!-- M: Updated the list of contributors and Project Leads. Might need to update the description. Jordan advised to show every contributor for the site,
-    so I think it would be good to show just our current team on the homepage, but have everyone else from past semesters on the Credits page.-->
-    <p><b>2023 Project Lead(s):</b> Jordan Golden</p>
+    <p><b>Disclosures:</b> A condition for use of the data in this website is that any publication or presentation using
+    any data from the CD Spec Viewer database must cite both the original reference for any externally
+    listed data (noted in the individual records) plus the CD Spec Viewer reference below:</p>
+    
+    <p>Shanen M. Sherrer (2021). CD Spec Viewer [Database]. Circular Dichroism Spectral Data Access from 
+    CD spectrometers. Retrieved from <a href="https://cdspeccollab.smcm.edu/">https://cdspeccollab.smcm.edu</a>.</p>
 
-    <p><b>2023 R&D Contributors:</b> William Capon, Ariat Ojulu, Shameer Rao, Adam Shaw, Sosan Wahid, Marjon Ward</p>
+    <p>The CD Spec Viewer was developed by Dr.Shanen M. Sherrer and collaborators with financial support from
+    the National Science Foundation (NSF MRI grant#1919581). Copyright for the design and implementation of this
+    site are retained by the Dr. Sherrer and St. Mary's College of Maryland.</p>
 
-    <p><b>2023 Q&A Contributors:</b> Matt Boddicker, Gavin McDonald, Liam Pratt, Jordan Reece, Isabella Stephens</p>
+    <!-- The "Continue to Website" button. The inline style tag prevents the aesethics of the button from being overridden
+    by the outer style tags in home.html (this file) and base.html. -->
+    <a href="https://cdspeccollab.smcm.edu/cdspec/" class="continue" style="text-decoration:none; color:white;">Continue to Website</a>
 
-    <!-- M: This seems pointless as it just leads to the Index page, which is already on the navbar. Perhaps this can be replaced with the Upload Button that is
-    on the Index page and have the most recent (top 3) uploads below.-->
-    <a href="https://cdspeccollab.smcm.edu/cdspec/">Continue to Website</a>
-
+    <!-- The NSF (National Science Foundation) Logo. Uses Django tags so it can appear in production. -->
+    <div class="nsfLogo">
+        {%load static%}
+      <img src={%static "images/National_Science_Foundation_Logo.png" %} alt="National Science Foundation (NSF) Logo">
+    </div>
 </body>
 
 </html>

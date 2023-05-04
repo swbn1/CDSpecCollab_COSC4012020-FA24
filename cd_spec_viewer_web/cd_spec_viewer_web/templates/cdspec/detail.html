@@ -6,7 +6,7 @@
 <li><b>Uploaded:</b> {{specrun.upload_date}}
 {% if specrun.upload_user_string != "" %} by <a href="/cdspec/uploadedby={{specrun.upload_user_string}}">{{specrun.upload_user_string}}</a> {% endif %}</li>
 <li><b>Ran:</b> {{specrun.run_date}} by {{specrun.run_user}}</li>
-<li><b>File:</b> <a href="{{MEDIA_URL}}/{{specrun.source_file.name}}">{{specrun.source_file}}</a></li>
+<li><b>File:</b> <a href="{{MEDIA_URL}}{{specrun.source_file.name}}">{{specrun.source_file}}</a></li>
 <li><b>Description:</b> <textarea style="width: 100%; max-width: 100%;" readonly>{{specrun.run_description}}</textarea></li>
 <li><b>{{specrun.data_points}} Datapoints:</b> <textarea style="width: 100%; max-width: 100%;" readonly>{{specrun.data}}</textarea></li>
 <li><b>Protein Concentration:</b> {{specrun.protein_concentration|stringformat:".3G"}} mg/mL</li>

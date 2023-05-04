@@ -19,10 +19,9 @@ Including another URLconf
     https://www.gnu.org/licenses/gpl-3.0.html
 """
 #Django
-from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import include
+from django.urls import include, re_path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from django.conf import settings
@@ -35,6 +34,12 @@ urlpatterns = [
     path("accounts/", include('allauth.urls')), #Configure urls from AllAuth
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
+    ),
+     path(
+        "credits/", TemplateView.as_view(template_name="pages/credits.html"), name="credits"
+    ),
+    path(
+        "credits/", TemplateView.as_view(template_name="pages/credits.html"), name="credits"
     ),
     path(
         "", TemplateView.as_view(template_name="pages/home.html"), name="home"

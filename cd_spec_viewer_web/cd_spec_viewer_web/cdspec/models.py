@@ -7,7 +7,6 @@ https://www.gnu.org/licenses/gpl-3.0.html
 """
 #Django
 from django.db import models
-from django.contrib.postgres.fields import JSONField
 from django.core.validators import FileExtensionValidator
 from django.contrib.auth import get_user_model
 
@@ -25,7 +24,7 @@ class SpecRun(models.Model):
     run_user = models.CharField("Run by:", max_length=64)
     run_title = models.CharField("Title", max_length=64)
     run_description = models.TextField("Description (Character Limit: 2000)", max_length=2000)
-    data = JSONField("Raw Data")
+    data = models.JSONField("Raw Data")
     data_points = models.IntegerField("Data Points")
     visible_student = models.BooleanField("Visible to Students", default=False)
     visible_public = models.BooleanField("Visible to Public", default=False)
