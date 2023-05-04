@@ -31,7 +31,22 @@ EMAIL_BACKEND = env(
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = "gmailapi_backend.mail.GmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = "smtp.gmail.com"
+
+EMAIL_PORT = 465
+
+EMAIL_HOST_USER = "cdspeccollab"
+EMAIL_HOST_PASSWORD = "Seahawks2823"
+
+EMAIL_USE_SSL = True
+
+
+
+
+
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
@@ -40,9 +55,6 @@ DEFAULT_FROM_EMAIL = "CD Spec Viewer Web"
 SERVER_EMAIL = DEFAULT_FROM_EMAIL
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-subject-prefix
 EMAIL_SUBJECT_PREFIX = "[CD Spec Viewer Web]"
-
-
-
 
 # WhiteNoise
 # ------------------------------------------------------------------------------

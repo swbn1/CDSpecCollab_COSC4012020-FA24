@@ -32,5 +32,5 @@ if __name__ == "__main__":
     # FOLLOWING 2 LINES NOT FOUND IN "DEPLOYED" VERSION
     current_path = Path(__file__).parent.resolve()
     sys.path.append(str(current_path / "cd_spec_viewer_web"))
-
+    
     execute_from_command_line(sys.argv)

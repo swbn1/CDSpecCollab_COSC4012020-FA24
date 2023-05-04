@@ -42,7 +42,7 @@
 					title: 'Molecule Name',
 					data: 'run_title',
 					render: function (data, type, row) {
-    					var url = '{% url "cdspec" pk= row.pk %}';
+    					var url='{% url "cdspec" pk= row.pk %}';
     					return '<a href="' + url.replace('pk=', 'pk=' + row.pk) + '">' + row.run_title + '</a>';
 						}					
 				},
