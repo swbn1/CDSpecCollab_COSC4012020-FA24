@@ -2,3 +2,6 @@
 # ------------------------------------------------------------------------------
 USE_DOCKER=yes
 IPYTHONDIR=/app/.ipython
+GMAIL_API_CLIENT_ID= 330482126497-0ibvnsl7bogpldkipgo2qr96f80k0i54.apps.googleusercontent.com
+GMAIL_API_CLIENT_SECRET = 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
+GMAIL_API_REFRESH_TOKEN = 1//0dHCMf774B7U3CgYIARAAGA0SNwF-L9IrGMcPWXBn9Qk1qpxodyMCOwrD4sczzzWKj0EJstrsZTkZOA07yYaXrBW3TJovRFrrbzs

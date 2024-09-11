@@ -1,0 +1,35 @@
+FA2022-- CD Spectrometer Legacy Code Maintenance and Upgrade   
+   Migrations are SUPER important within Django. In this text file, I am going to explain to you
+their importance, how they are created, and some additional resources where you can find more info.
+
+   Basically, Django works in conjunction with a database, like SQL. In this case, the capstone class which started this
+project used Django with PostgresSQL. They created models for the cdspec and users via models.py files within Django. 
+These models hold all of the attributes that the cdspec, or user would have. We want these models and their 
+attributes to be fillable with data. So how do we get these models into a database? With migrations!
+
+   Our administrative .py file, manage.py, will be responsible for migrating contents. It will use two commands:
+
+python manage.py makemigrations
+
+This first command makes a migration file. That file tracks the attributes of a model, by looking into the models.py file. 
+It also tracks the attributes we change. So, if we were to add more data fields to the cdspec or to a user model 
+via their models.py, we would need to rerun this command to create an updated migration file.
+
+python manage.py migrate
+
+This second command will migrate the contents of our migration file, into the postgresSQL database. Therefore, it will
+allow for the creation of data tables representing all of the fields for cd spectrometers, as well as users.
+
+   Migrations are advantageous due to their autonomy. Instead of having to enter our database, and create these tables, and update them
+anytime we have a change or new software requirement, we can instead just migrate. This means we can keep the postgresSQL relatively
+encapsulated, and not have to change things there; we just make changes in our models and migrate them over.
+
+*RESOURCES*
+   Here are some resources you will find helpful. Included is a 5-min video which I highly recommend. He explains migrations
+very concisely, and probably better than I can in this short text file!
+
+1) Django Tutorial #7 - Migrations
+   https://www.youtube.com/watch?v=aOLrEkpGWDg
+   
+2) Django Migrations: A Primer
+   https://realpython.com/django-migrations-a-primer/

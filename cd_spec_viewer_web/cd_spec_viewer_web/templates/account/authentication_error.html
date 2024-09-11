@@ -8,5 +8,10 @@
 <h1>{% trans "Authentication Error" %}</h1>
 
 <p>{% trans "There was an error logging in with your social account" %}</p>
+
+<p>
+Code: {{ auth_error.code }}, Error: {{ auth_error.exception }}
+</p>
+
 {% endblock %}
 

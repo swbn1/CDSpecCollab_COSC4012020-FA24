@@ -1,47 +1,79 @@
+<!-- Do NOT remove any of the "extends" and "block" Django tags. They're essential for what the Home page contains, such as the navigation bar. -->
 {% extends "base.html" %}
-
-{% block title %}About page{% endblock %}
-
 {% block content %}
-<h1>This is a spectrometer project by Dr. Sherrer.</h1>
-<h1>This project is collaborated with student taking computer science classes. 
-We have create a website for people to upload the results.</h1>
 
-<p>If you want to get to the website, open any web application first before you type in cdspecollab.smcm.edu.</p>
+<html>
+    <head>
+    <title>CD Spec Viewer About and FAQ Page</title>
 
-<h2>This is how to use the cdspeccollab.smcm.edu website:</h2>
-<p>If you want to upload a CVS file to that website, please click on the upload botton.</p>
-<p>This will lead you to a create page, which will ask you to type in a title for you CVS file, 
-what it is run by, you must type in a description for your file and the chractor limit: 2000, 
-protein concentration, curvette Pathlength, number of amino acids, you can choose make the CVS file visible to Students, 
-or Visible to public. You need to click on choose file button in create page to add the CVS file.
-</p>
-<p>Once you fill in all of the required info in the create page, you can then press summit button.</p>
-<p>The website will create a place in the table view in the CD Spectroscopic Collaboration page.</p>
- 
-<p>If you want to multigraph a graph, you must select the graph that match it data info first before you click on the multigraph button.</p>
+    <!-- The style tags in this context align the text (in combination with base.html). -->
+    <style>
+    .Instruction {
+        text-align: justify;
+        line-height: 1.8;
+    }
+    .projectAbout{
+        text-align: justify;
+    }
+    </style>
+    </head>
+    <body>
+        <!-- The About portion of the page. -->
+        <div class = "projectAbout">
+            <h1>About CD Spec Viewer</h1>
+            <hr>
+            <p>This is a spectrometer project by Dr. Sherrer.</p>
+            <p>This project was developed by students taking the COSC Capstone course at St. Mary's College of Maryland during the Fall 2020,
+            Spring 2021, and Spring 2023 semesters. We have created this website for people to upload and view their CD Spectrometer runs.</p>
+            <!--Waiting on the User Manual to be done, so I can add the link to it. -->
+            <p>Frenquently Asked Questions about the site are featured below. To get more information, please refer to the <a href="">User Manual</a>.</p>
+        </div>
 
-<p>If you want to create an account on the website click the Sign Up page in navagation bar.</p>
-<p>You must enter you email first, then you must enter you own created password this account in sign up page 
-after you finish filling al of the required info you can click on the sign up summit button.</p>
-<p>You must go in your email and click on the varification link in order to verify your account.</p>
+        <!-- The FAQ portion of the page. Some of the Django tags help link to other pages and some of the information is dependent is the user is an Admin. -->
+        <div class ="Instruction">
 
-<p>If you want login with your varify account, you must click the Sign In page in the navagation bar.</p>
-<p>Your login username will be the begin part of the email without email ending part.</p>
-<p>You need to enter the verifyed password you created for your account on the website.</p>
-<p>You can make the choice of allowing the website to remember your account if you like, this part is optional.</p>
+            <h3 style ="font-size:18px">How do I view CD spectrometer runs?</h3>
+            <p>A table view listing all of the runs can be found by clicking on the <a href="{% url 'cdspec:index' %}">Index</a> tab on the top of the page.<br>
+            You can see a detailed view of each run by clicking on the name on the first column of the table.<br>
+            If you want to graph multiple runs at once, you must select multiple runs by clicking on the rows of the table.</p>
+            {% if perms.cdspec.can_edit %}
+            <p>Additionally, as an Administrator, you have the ability to edit/delete individual runs. The Administrator controls are located at the bottom of the detailed view page.</p>
+            {% endif %}
 
-<p>if you forget your account password for this website click on the forgot password? 
-button at the bottom of the Sign In page. This will take to a password reset page where 
-you can reset your account password.</p>
-<p>Once you enter the password reset page, you need to enter the email address and press summit button 
-that can reset you password.</p>
-<p>You need to go to your email and click on the reset password link in order to change your account password.</p>
+            <h3 style ="font-size:18px">How do I upload runs to the database?</h3>
+            <p>If you want to upload a CD spectrometer run, click on the upload button on the table view page.<br>
+            This will lead you to the create page, where you will need to fill out various information and provide a properly formatted .csv file pertaining to the run.<br>
+            Once this is done, you can then click the submit button. You will be redirected to a detailed view of that run that includes an interactive graph.</p>
 
-<p>There is an search bar in CD Spectroscopic Collaboration page.</p>
-<p>You can go on the right side and on the top of the CD Spectroscopic Collaboration 
-page on the table view and type that exact file name you have given it during the create page.</p>
-<p>There is an previous button and next button for the table view at the bottom, so you see how many people 
-put entries with CVS file.</p>
+            <h3 style ="font-size:18px">How do I create an account?</h3>
+            <p>You can create an account by clicking on <a {% if not request.user.is_authenticated %} href="{% url 'account_signup' %}" {% endif %}> Sign Up</a> at the top of the page.<br>
+            This will lead you to a sign up page, where you will need to provide an email address and password.<br>
+            You must then go into your email and click on the verification link in order to verify your account before being authorized.<br>
+            Alternatively, if you have an SMCM email, you can go straight to the <a {% if not request.user.is_authenticated %} href="{% url 'account_login' %}" {% endif %}>Login</a> page and log in using your Google account.</p>
 
+            <h3 style ="font-size:18px">How do I sign in?</h3>
+            <p>You can sign in to your account by clicking on <a {% if not request.user.is_authenticated %} href="{% url 'account_login' %}" {% endif %}>Sign In</a> at the top of the page.<br>
+            If you have an SMCM email, then you can simply sign in with Google.</br>
+            Otherwise, your login username will be the beginning part of the your email preceding "@example.com".<br>
+            You need to enter the verified password that you created for your account on the website.<br>
+            You can allow the website to remember your account if you like; this part is optional.</p>
+
+            <h3 style ="font-size:18px">How can I manage my account?</h3>
+            <p>If you are logged in, you can go to <a {% if request.user.is_authenticated %} href="{% url 'users:detail' request.user.username  %}" {% endif %}>My Profile</a> to manage your account.<br>
+            You have the option of adding/removing/verifying your email address(es) as well as changing your primary email.<br>
+            If you have not already done so, you can also connect your existing account to your SMCM account.</p>
+
+            {% if request.user.is_staff %}
+            <h3 style ="font-size:18px">Admin Site Information: </h3>
+            <p>You can visit the admin site by clicking on <a href="/admin/">Admin</a> at the top of the page.<br>
+            This will take you to the Admin Site where you can view database information about the CD spectrometer runs as well as all of the users and their connected emails.<br>
+            You also have the ability to go to each individual user and change their group.<br>
+            Currently, you can set a user as an Administrator and Student (if you see this block, you are a Master Administrator with staff status).<br>
+            An Administrator has the power to view all runs in the database as well as the ability to upload, edit, and delete any run.<br>
+            A student can upload runs and view any non-public runs marked "Visible to Student". However, they cannot edit or delete runs.</p>
+            {% endif %}
+
+        </div>
+    </body>
+</html>
 {% endblock %}

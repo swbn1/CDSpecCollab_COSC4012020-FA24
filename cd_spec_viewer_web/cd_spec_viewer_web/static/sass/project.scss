@@ -8,6 +8,13 @@
 		//Variables//
 ////////////////////////////////
 
+ul.no-bullets {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
 body {
   color: #fff;
   background: #171F30;
@@ -53,7 +60,6 @@ body {
     color: MediumSlateBlue;
   }
 }
-
 // Alert colors
 
 $white: #fff;

@@ -2,31 +2,29 @@
 {% block content %}
 
 <h1>{{specrun.run_title}}</h1>
-<ul>
-<li>Uploaded: {{specrun.upload_date}}</li>
-<li>Ran: {{specrun.run_date}} by {{specrun.run_user}}</li>
-<li>File: <a href="{{specrun.source_file.url}}">{{specrun.source_file}}</li></a>
-<li>Description: <textarea>{{specrun.run_description}}</textarea></li>
-<li>{{specrun.data_points}} Datapoints: <textarea>{{specrun.data}}</textarea><br>
+<ul style="list-style-type:none; margin:0; padding:0;">
+<li><b>Uploaded:</b> {{specrun.upload_date}}
+{% if specrun.upload_user_string != "" %} by <a href="/cdspec/uploadedby={{specrun.upload_user_string}}">{{specrun.upload_user_string}}</a> {% endif %}</li>
+<li><b>Ran:</b> {{specrun.run_date}} by {{specrun.run_user}}</li>
+<li><b>File:</b> <a href="{{MEDIA_URL}}{{specrun.source_file.name}}">{{specrun.source_file}}</a></li>
+<li><b>Description:</b> <textarea style="width: 100%; max-width: 100%;" readonly>{{specrun.run_description}}</textarea></li>
+<li><b>{{specrun.data_points}} Datapoints:</b> <textarea style="width: 100%; max-width: 100%;" readonly>{{specrun.data}}</textarea></li>
+<li><b>Protein Concentration:</b> {{specrun.protein_concentration|stringformat:".3G"}} mg/mL</li>
+<li><b>Pathlength:</b> {{specrun.pathlength|stringformat:".3G"}} cm</li>
+<li><b># of Amino Acids:</b> {{specrun.number_of_amino_acids}}</li>
 </ul>
 
-<form action="{% url 'cdspec:edit' specrun.id %}">
-    {% csrf_token %}
-    <input type="submit" name="edit" value="Edit" />
-</form>
-
-<form action="{%url 'cdspec:delete' specrun.id%}" method="post">
-    {% csrf_token %}
-    <input type="submit" name="delete" value="Delete" />
-</form>
-
 {# create a div to display the graph #}
-<div id="graph" width="400" height="200"> </div>
+<div id="graph" width="100%" height="100%"> </div>
 
 {# button for each funtions in the python script #}
 <button onClick = "changeY()">Display {{specrun.y_units}}</button>
+{% if specrun.y2_units != None %}
 <button onClick = "changeY2()">Display {{specrun.y2_units}}</button>
+{% endif %}
+{% if specrun.y3_units != None %}
 <button onClick = "changeY3()">Display {{specrun.y3_units}}</button>
+{% endif %}
 
 {# imported javascript data for the poltly app and the colorwheel #}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
@@ -38,8 +36,7 @@
  <div class="wrap">
       <div class="half">
         <div class="colorPicker"></div>
-        <span class="title">Drag the circle inside the color wheels.</span>
-        <span class="title">Drag the circle inside the opacity bar to change how vibrant the color is.</span>
+        <span class="title">Drag the circle inside the color wheels.</span> 
       </div>
       <div class="half readout">
         <span class="title">Selected Color:</span>
@@ -47,6 +44,25 @@
         <input id="hexInput"></input> 
       </div>
     </div>
+
+{% if perms.cdspec.can_edit %}
+<br>
+<h2>Admin Controls:</h2>
+<form action="{% url 'cdspec:edit' specrun.id %}">
+    {% csrf_token %}
+    <input class="btn btn-primary" type="submit" name="edit" value="Edit" />
+</form>
+<br>
+{% endif %}
+
+{% if perms.cdspec.can_delete %}
+<form action="{%url 'cdspec:delete' specrun.id%}" method="post">
+    {% csrf_token %}
+    <input class="btn btn-primary" type="submit" onclick="return confirm('Are you sure you want to remove this file?')" name="delete" value="Delete" />
+</form>
+<br>
+{% endif %}
+
 
 <script>
 // blank canvas creation
@@ -79,12 +95,17 @@ colorPicker.on(["color:init", "color:change"], function(color){
   ].join("<br>");
   
   hexInput.value = color.hexString;
+});
 
+//change color of plot only when color wheel changes (not on init)
+colorPicker.on(["color:change"], function(color) {
+   changePlotColor();
 });
 
 // color wheel methods for user to manual add a hex value for a particular color
 hexInput.addEventListener('change', function() {
   colorPicker.color.hexString = this.value;
+  changePlotColor();
 });
 
 
@@ -125,6 +146,15 @@ var layout = {
 
 // main graph without latout change
 Plotly.newPlot(canvas, data, layout);
+
+//change plot color to current hex input
+function changePlotColor() {
+    var update = {
+        'marker.color': hexInput.value,
+        'line.color': hexInput.value
+    };
+    Plotly.update(canvas, update, {});
+}
 
 //change data/axes to (x, y)
 function changeY() {

@@ -1,3 +1,10 @@
+"""This file provides utility functions for other parts of the program
+
+Prepared by COSC 401 as part of the CDSpec Viewer project for Dr. Sherrer
+
+This file and all contributions herin are covered by the GPL 3.0 License 
+https://www.gnu.org/licenses/gpl-3.0.html
+"""
 import csv
 from enum import Enum
 from itertools import islice

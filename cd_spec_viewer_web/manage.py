@@ -1,3 +1,7 @@
+# Automatically generated for Django Projects;
+# Points to settings.py file;
+# Command-line utility for administrative tasks;
+
 #!/usr/bin/env python
 import os
 import sys
@@ -25,7 +29,8 @@ if __name__ == "__main__":
 
     # This allows easy placement of apps within the interior
     # cd_spec_viewer_web directory.
+    # FOLLOWING 2 LINES NOT FOUND IN "DEPLOYED" VERSION
     current_path = Path(__file__).parent.resolve()
     sys.path.append(str(current_path / "cd_spec_viewer_web"))
-
+    
     execute_from_command_line(sys.argv)
