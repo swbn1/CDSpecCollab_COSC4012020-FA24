@@ -97,13 +97,21 @@ WSGI_APPLICATION = 'cd_spec_viewer_web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cd_spec_viewer_web_database',
-	'USER': 'cosc402',
-	'PASSWORD': 'Capstonepw',
-	'HOST': '10.0.0.5',
+        'NAME': 'postgres',
+	'USER': 'postgres',
+	'PASSWORD': '0303',
+	'HOST': '127.0.0.1',
 	'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'db.sqlite3',
+#     }
+# }
+
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
