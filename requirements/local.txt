@@ -4,6 +4,13 @@ Werkzeug==2.3.0 # https://github.com/pallets/werkzeug
 ipdb==0.13.13  # https://github.com/gotcha/ipdb
 psycopg2==2.9.6  # https://github.com/psycopg/psycopg2
 
+mysqlclient==2.2.5  # You need to download the MariaDB C connector (I don't know what it does) from here
+                    # `https://downloads.mariadb.com/Connectors/c/connector-c-3.3.11/`
+                    # You then need to copy the contents, which automatically download to `C:\Program Files\MariaDB\MariaDB Connector C 64-bit`,
+                    # into a new folder named `mariadb-connector` located at `C:/mariadb-connector`. 
+                    # If that doesn't work, please take your pick from 
+                    # `https://stackoverflow.com/questions/51294268/pip-install-mysqlclient-returns-fatal-error-c1083-cannot-open-file-mysql-h/77485681`. 
+                    # Good luck, and may your god be with you.
 # Testing
 # ------------------------------------------------------------------------------
 mypy==0.782  # https://github.com/python/mypy

@@ -94,14 +94,26 @@ WSGI_APPLICATION = 'cd_spec_viewer_web.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+# 	'USER': 'postgres',
+# 	'PASSWORD': '0303',
+# 	'HOST': '127.0.0.1',
+# 	'PORT': '5432',
+#     }
+# }
+
+# `https://stackoverflow.com/a/77485681/8490044` I own this comment my life.
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-	'USER': 'postgres',
-	'PASSWORD': '0303',
-	'HOST': '127.0.0.1',
-	'PORT': '5432',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'cdspeccollab',
+        'USER': 'CDSpec',
+        'PASSWORD': '0303',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
