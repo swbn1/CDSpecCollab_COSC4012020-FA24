@@ -8,9 +8,16 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class SpecRun(models.Model):
+    # The user who uploads the file; gets set to null if the user is removed
     upload_user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
+
+    # Stores the username as a string for record keeping
     upload_user_string = models.CharField(default="", max_length=150)
+
+    #Date and time when the file is uploaded
     upload_date = models.DateTimeField("Upload Date", auto_now_add=True)
+
+    #Date and time when the run was executed
     run_date = models.DateTimeField("Run Date")
     run_user = models.CharField("Run by:", max_length=64)
     run_title = models.CharField("Title", max_length=64)
