@@ -60,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'cd_spec_viewer_web.urls'
@@ -93,15 +94,30 @@ WSGI_APPLICATION = 'cd_spec_viewer_web.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+#postgresql-x64-17
+
+#Installation Directory: C:\Program Files\PostgreSQL\17
+#Server Installation Directory: C:\Program Files\PostgreSQL\17
+#Data Directory: C:\Program Files\PostgreSQL\17\data
+#Database Port: 5432
+#Database Superuser: postgres
+#Operating System Account: NT AUTHORITY\NetworkService
+#Database Service: postgresql-x64-17
+#Command Line Tools Installation Directory: C:\Program Files\PostgreSQL\17
+#pgAdmin4 Installation Directory: C:\Program Files\PostgreSQL\17\pgAdmin 4
+#Stack Builder Installation Directory: C:\Program Files\PostgreSQL\17
+#Installation Log: C:\Users\gus\AppData\Local\Temp\install-postgresql.log
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'postgres',
-	'USER': 'postgres',
-	'PASSWORD': '0303',
-	'HOST': '127.0.0.1',
-	'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': 'PASS',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
