@@ -1,15 +1,9 @@
-# Automatically generated for Django Projects;
-# Points to settings.py file;
-# Command-line utility for administrative tasks;
-
 #!/usr/bin/env python
 import os
 import sys
-from pathlib import Path
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
-
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cd_spec_viewer_web.settings")
     try:
         from django.core.management import execute_from_command_line
     except ImportError:
@@ -17,20 +11,13 @@ if __name__ == "__main__":
         # issue is really that Django is missing to avoid masking other
         # exceptions on Python 2.
         try:
-            import django  # noqa
+            import django
         except ImportError:
             raise ImportError(
                 "Couldn't import Django. Are you sure it's installed and "
                 "available on your PYTHONPATH environment variable? Did you "
                 "forget to activate a virtual environment?"
             )
-
         raise
 
-    # This allows easy placement of apps within the interior
-    # cd_spec_viewer_web directory.
-    # FOLLOWING 2 LINES NOT FOUND IN "DEPLOYED" VERSION
-    current_path = Path(__file__).parent.resolve()
-    sys.path.append(str(current_path / "cd_spec_viewer_web"))
-    
     execute_from_command_line(sys.argv)
