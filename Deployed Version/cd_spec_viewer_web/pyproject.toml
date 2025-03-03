@@ -1,0 +1,51 @@
+[project]
+name = "cdspec"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "kiebo19", email = "kiebo@smcm.edu"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<4"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4"
+asgiref = "^3.8"
+cachetools = "^5.5"
+certifi = "*"
+cffi = "^1.17"
+charset-normalizer = "^3.4"
+cryptography = "^44.0"
+django = "^5.1" 
+django-allauth = "^65.1"
+django-crispy-forms = "^2.3"
+django-datatables-view = "^1.20"
+django-gmailapi-backend = "^0.3"
+google-api-core = "^2.24"
+google-api-python-client = "^2.160"
+google-auth = "^2.38"
+google-auth-httplib2 = "^0.2"
+googleapis-common-protos = "^1.68"
+httplib2 = "^0.22"
+idna = "^3.10"
+pillow = "^11.1"
+proto-plus = "^1.26"
+protobuf = "^5.29"
+psycopg2-binary = "^2.9"
+pyasn1 = "^0.6"
+pyasn1-modules = "^0.4"
+pycparser = "^2.22"
+pyjwt = "^2.10"
+pyparsing = "^3.2"
+requests = "^2.32"
+rsa = "^4.9"
+setuptools = "^75.8"
+sqlparse = "^0.5"
+tzdata = "^2025.1"
+uritemplate = "^4.1"
+urllib3 = "^2.3"
+wheel = "^0.45"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
