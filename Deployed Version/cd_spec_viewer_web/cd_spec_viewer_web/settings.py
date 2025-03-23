@@ -40,13 +40,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.forms',
-    'users.apps.UsersConfig',
+    #'users.apps.UsersConfig',
     "crispy_forms",
-    "allauth",
-    "allauth.account",
-    "allauth.socialaccount",
-    "allauth.socialaccount.providers.google",
     "gmailapi_backend",
+
+
+    # Google Auth Apps
+    'users',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
 ]
 
 MIDDLEWARE = [
@@ -139,15 +144,18 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:redirect"
+# LOGIN_REDIRECT_URL = "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-LOGIN_URL = "account_login"
+#LOGIN_URL = "account_login"
 ACCOUNT_USERNAME_REQUIRED = False
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
-LOGIN_REDIRECT_URL = "/"
 
-SITE_ID = 1
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_url = "/"
+LOGOUT_REDIRECT_url = "/"
+
+SITE_ID = 2
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -284,7 +292,6 @@ USE_L10N = True
 USE_TZ = True
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
-SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
