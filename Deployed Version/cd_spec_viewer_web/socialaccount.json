@@ -1,0 +1,44 @@
+[
+{
+  "model": "socialaccount.socialapp",
+  "pk": 1,
+  "fields": {
+    "provider": "google",
+    "provider_id": "",
+    "name": "Google",
+    "client_id": "394722912613-ahve6qtqj9taid26445g8c97ml1uqei9.apps.googleusercontent.com",
+    "secret": "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",
+    "key": "",
+    "settings": {},
+    "sites": [
+      2
+    ]
+  }
+},
+{
+  "model": "socialaccount.socialaccount",
+  "pk": 3,
+  "fields": {
+    "user": 8,
+    "provider": "google",
+    "uid": "105007548820163221937",
+    "last_login": "2025-03-24T16:17:05.693Z",
+    "date_joined": "2025-03-24T16:16:41.858Z",
+    "extra_data": {
+      "aud": "394722912613-ahve6qtqj9taid26445g8c97ml1uqei9.apps.googleusercontent.com",
+      "azp": "394722912613-ahve6qtqj9taid26445g8c97ml1uqei9.apps.googleusercontent.com",
+      "exp": 1742836625,
+      "iat": 1742833025,
+      "iss": "https://accounts.google.com",
+      "sub": "105007548820163221937",
+      "name": "Blake E",
+      "email": "blake.edinger.1@gmail.com",
+      "at_hash": "_WMvmVnxfWxHUoD_JMJfog",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocL04Gz2vpl-bGMgNiqvc4FrgTD2zSkxLW-I6yNMN6PdFlWmvw=s96-c",
+      "given_name": "Blake",
+      "family_name": "E",
+      "email_verified": true
+    }
+  }
+}
+]
