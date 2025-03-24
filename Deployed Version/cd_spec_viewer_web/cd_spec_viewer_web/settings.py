@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ph-&s1k#-+=8-%a!7muzl)xou1^88!318fau6=hde)9lvasyts'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['cdspeccollab.smcm.edu', 'localhost', '127.0.0.1', '*']
 
@@ -155,17 +155,16 @@ LOGIN_URL = "/login/"
 LOGIN_REDIRECT_url = "/"
 LOGOUT_REDIRECT_url = "/"
 
-SITE_ID = 2
+SITE_ID = 1
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
 PASSWORD_HASHERS = [
-    # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
-    "django.contrib.auth.hashers.Argon2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
-    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
-    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.ScryptPasswordHasher',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
 AUTH_PASSWORD_VALIDATORS = [
@@ -216,7 +215,10 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 # EMAIL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = "gmailapi_backend.mail.GmailBackend"
+#EMAIL_BACKEND = "gmailapi_backend.mail.GmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#Test Email Backend for Testing
+
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-timeout
 EMAIL_TIMEOUT = 5
 # https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email

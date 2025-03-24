@@ -63,20 +63,16 @@
               </li>
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link {% if request.path|slice:":9" == "/accounts" %} active {% endif %}" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
+                <a class="nav-link {% if request.path|slice:":9" == "/accounts" %} active {% endif %}" href="{% url 'logout' %}">{% trans "Sign Out" %}</a>
               </li>
 
             {% else %}
               <li class="nav-item">
-                {# URL provided by django-allauth/account/urls.py #}
-                {% url 'account_signup' as account_signup %}
-                <a id="sign-up-link" class="nav-link {% if request.path == account_signup %} active {% endif %}" href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a>
+                <a id="log-in-link" class="nav-link {% if request.path == '/register/' %} active {% endif %}" href="{% url 'register' %}">{% trans "Sign Up" %}</a>
               </li>
               
               <li class="nav-item">
-                <a id="log-in-link" class="nav-link {% if request.path == '/login/' %} active {% endif %}" href="{% url 'login' %}">
-                  {% trans "Sign In" %}
-                </a>
+                <a id="log-in-link" class="nav-link {% if request.path == '/login/' %} active {% endif %}" href="{% url 'login' %}">{% trans "Sign In" %}</a>
               </li>
 
             {% endif %}
