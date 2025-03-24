@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.forms',
     #'users.apps.UsersConfig',
     "crispy_forms",
+    "crispy_bootstrap4",
     "gmailapi_backend",
 
 
