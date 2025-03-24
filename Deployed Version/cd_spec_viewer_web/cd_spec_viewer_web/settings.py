@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ph-&s1k#-+=8-%a!7muzl)xou1^88!318fau6=hde)9lvasyts'
+SECRET_KEY = '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'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -54,6 +54,16 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
 ]
+
+SOCIALACCOUNT_PROVIDERS = { 
+    "google": {
+        "SCOPE": [
+            "profile",
+            "email"
+        ],
+        "AUTH_PARAMS": {"access_type": "online"}
+    }
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -152,11 +162,10 @@ ACCOUNT_USERNAME_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-LOGIN_URL = "/login/"
 LOGIN_REDIRECT_url = "/"
 LOGOUT_REDIRECT_url = "/"
 
-SITE_ID = 1
+SITE_ID = 2
 
 # PASSWORDS
 # ------------------------------------------------------------------------------

@@ -63,7 +63,7 @@
               </li>
               <li class="nav-item">
                 {# URL provided by django-allauth/account/urls.py #}
-                <a class="nav-link {% if request.path|slice:":9" == "/accounts" %} active {% endif %}" href="{% url 'logout' %}">{% trans "Sign Out" %}</a>
+                <a class="nav-link {% if request.path|slice:":9" == "/accounts" %} active {% endif %}" href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a>
               </li>
 
             {% else %}
