@@ -157,10 +157,11 @@ AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
 # LOGIN_REDIRECT_URL = "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-#LOGIN_URL = "account_login"
+LOGIN_URL = "account_login"
 ACCOUNT_USERNAME_REQUIRED = True
 SOCIALACCOUNT_QUERY_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_url = '/'
@@ -289,6 +290,11 @@ ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
 
+SOCIALACCOUNT_AUTO_SIGNUP = True  # Automatically create a social account if an email matches
+SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"  # Optional: Disable email verification
+ACCOUNT_SIGNUP_REDIRECT_URL = "/accounts/login/"  # Redirect users after signing up
+ACCOUNT_AUTHENTICATION_METHOD = "email"  # Allow email login
+ACCOUNT_USERNAME_REQUIRED = True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
