@@ -106,23 +106,6 @@ TEMPLATES = [
 # Python standard for website server integration
 WSGI_APPLICATION = 'cd_spec_viewer_web.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-#postgresql-x64-17
-
-#Installation Directory: C:\Program Files\PostgreSQL\17
-#Server Installation Directory: C:\Program Files\PostgreSQL\17
-#Data Directory: C:\Program Files\PostgreSQL\17\data
-#Database Port: 5432
-#Database Superuser: postgres
-#Operating System Account: NT AUTHORITY\NetworkService
-#Database Service: postgresql-x64-17
-#Command Line Tools Installation Directory: C:\Program Files\PostgreSQL\17
-#pgAdmin4 Installation Directory: C:\Program Files\PostgreSQL\17\pgAdmin 4
-#Stack Builder Installation Directory: C:\Program Files\PostgreSQL\17
-#Installation Log: C:\Users\gus\AppData\Local\Temp\install-postgresql.log
-
 # Used for incrementing BIGINTS inside of databases
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -151,22 +134,9 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 # How the website authenticates users 
 AUTH_USER_MODEL = "users.User"
-# https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-# Where when logging in the user is directed to, forces them to use
-# A username is creating an account, and querery the email server
-# the social account is located on if it is used to login, like the 
-# google server
-LOGIN_URL = "account_login"
-ACCOUNT_USERNAME_REQUIRED = True
-SOCIALACCOUNT_QUERY_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = "none"
-
-# When the user logs out or logs in, redirect them to '/' which is the homepage
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_url = '/'
 
 # The site ID the site these settings apply to in the django admin
-SITE_ID = 2
+SITE_ID = 2 # (UPDATE ON RELEASE), likely needs changed to 3
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -179,6 +149,7 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.ScryptPasswordHasher',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
+# How django allauth will verify passwords and accounts
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
@@ -189,9 +160,11 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer
+# How django renders the cripsy forms for login
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 # http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
+# The template used for account creation and logging in
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # SECURITY
@@ -235,8 +208,8 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "bedinger@smcm.edu" # What email sends the confirmation email
-EMAIL_HOST_PASSWORD = "pnnvmfrufmpbwcxh" # Needs to be gotten from host user email
+EMAIL_HOST_USER = "bedinger@smcm.edu" # What email sends the confirmation email (UPDATE ON RELEASE)
+EMAIL_HOST_PASSWORD = "pnnvmfrufmpbwcxh" # Needs to be gotten from host user email (UPDATE ON RELEASE)
 # Do NOT use your email password, get an email app password from google security
 # https://itsupport.umd.edu/itsupport?id=kb_article_view&sysparm_article=KB0015112
 DEFAULT_FROM_EMAIL = "CD Spec Viewer Web <noreply@example.com>" # Email address the
@@ -279,7 +252,7 @@ LOGGING = {
     "root": {"level": "INFO", "handlers": ["console"]},
 }
 
-# django-allauth
+# django-allauth / user logging in settings
 # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
@@ -294,10 +267,16 @@ ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
 SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
 
 SOCIALACCOUNT_AUTO_SIGNUP = True  # Automatically create a social account if an email matches
-SOCIALACCOUNT_EMAIL_VERIFICATION = "mandatory"  # Optional: Disable email verification
-ACCOUNT_SIGNUP_REDIRECT_URL = "/accounts/login/"  # Redirect users after signing up
-ACCOUNT_AUTHENTICATION_METHOD = "email"  # Allow email login
-ACCOUNT_USERNAME_REQUIRED = True
+ACCOUNT_AUTHENTICATION_METHOD = "email"  # Makes account authentication use email, confirmation email
+ACCOUNT_USERNAME_REQUIRED = True # When you sign up for an account, it requires you to make a username
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#login-url
+# Where when logging in the user is directed to
+LOGIN_URL = "account_login"
+
+# When the user logs out or logs in, redirect them to '/' which is the homepage
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_url = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
