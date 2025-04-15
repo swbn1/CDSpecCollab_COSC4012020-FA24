@@ -272,6 +272,9 @@ cd_spec_viewer_web/media/
 
 
 .ipython/
-.env
-.envs/*
-!.envs/.local/
+.env
+
+.envs/*
+
+!.envs/.local/
+
